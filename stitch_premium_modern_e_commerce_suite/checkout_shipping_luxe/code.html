@@ -1,0 +1,370 @@
+<!DOCTYPE html><html class="light" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Checkout | LUXE INTERNATIONALE</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;family=Metropolis:wght@600;700;900&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-low": "#f6f3f4",
+                        "on-surface-variant": "#45464c",
+                        "on-primary-fixed-variant": "#404758",
+                        "secondary-container": "#dee0e2",
+                        "on-error": "#ffffff",
+                        "primary-fixed-dim": "#c0c6db",
+                        "secondary-fixed-dim": "#c5c6c8",
+                        "tertiary": "#000000",
+                        "on-surface": "#1b1b1d",
+                        "on-secondary-fixed-variant": "#444749",
+                        "inverse-on-surface": "#f3f0f1",
+                        "tertiary-fixed-dim": "#c6c6c7",
+                        "surface-variant": "#e5e2e3",
+                        "surface-bright": "#fcf8fa",
+                        "primary-container": "#141b2b",
+                        "secondary-fixed": "#e1e2e4",
+                        "on-tertiary": "#ffffff",
+                        "tertiary-container": "#1a1c1c",
+                        "outline": "#76777d",
+                        "on-secondary-fixed": "#191c1e",
+                        "inverse-primary": "#c0c6db",
+                        "surface-container-high": "#eae7e9",
+                        "on-background": "#1b1b1d",
+                        "surface-container-lowest": "#ffffff",
+                        "tertiary-fixed": "#e2e2e2",
+                        "primary": "#000000",
+                        "on-secondary": "#ffffff",
+                        "surface-tint": "#575e70",
+                        "primary-fixed": "#dce2f7",
+                        "surface": "#fcf8fa",
+                        "on-primary-fixed": "#141b2b",
+                        "outline-variant": "#c6c6cd",
+                        "surface-dim": "#dcd9db",
+                        "secondary": "#5c5f60",
+                        "on-tertiary-fixed-variant": "#454747",
+                        "error-container": "#ffdad6",
+                        "inverse-surface": "#303031",
+                        "on-tertiary-container": "#838484",
+                        "error": "#ba1a1a",
+                        "surface-container-highest": "#e5e2e3",
+                        "on-primary-container": "#7d8497",
+                        "on-tertiary-fixed": "#1a1c1c",
+                        "on-secondary-container": "#606365",
+                        "on-error-container": "#93000a",
+                        "surface-container": "#f0edee",
+                        "on-primary": "#ffffff",
+                        "background": "#fcf8fa"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "section-gap": "80px",
+                        "gutter": "24px",
+                        "unit": "4px",
+                        "container-max": "1280px",
+                        "margin-mobile": "20px",
+                        "margin-desktop": "64px"
+                    },
+                    "fontFamily": {
+                        "headline-sm": ["Metropolis"],
+                        "body-md": ["Inter"],
+                        "display-lg": ["Metropolis"],
+                        "body-sm": ["Inter"],
+                        "headline-md": ["Metropolis"],
+                        "label-caps": ["Inter"],
+                        "body-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        input:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+        }
+        .step-active::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: #000000;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md selection:bg-primary-fixed selection:text-primary" style="background-image: linear-gradient(rgba(252, 248, 250, 0.9), rgba(252, 248, 250, 0.9)), url(&quot;https://lh3.googleusercontent.com/aida-public/AB6AXuDDl6P-YvVRUdRlnUxXH_6vKoX50gSibsA9k76lfs3pRFqJSFARg7ux_z3EkbaPPzxKU_Gh0ErLbvloF8l3cNS4KWDIyIXxoTxh6_NBR_2ef5dlEIMqk-CYXU7JyXo_w8kU-paMZBD7v4Rry1F5VHi4T6fJiYRcAvuLIpn6n4y3F4tAJQ5Jzk9HcIBwCUQt8_Z_cVMuu36qV7Nln0b8OGf2uR2xmVq9ti8tVk2Z4EtS4HQEE8CcTCKncx7EhGKKmiGrr89YIIO0CNQ&quot;); background-size: cover; background-attachment: fixed; background-position: center center;">
+<!-- TopNavBar (Suppressed for focused checkout experience per mandate, using a simplified logo-only header) -->
+<header class="fixed top-0 left-0 w-full z-50 h-20 bg-surface/80 backdrop-blur-xl border-b border-outline-variant/20">
+<div class="flex justify-between items-center px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto w-full h-full">
+<div class="font-display-lg text-display-lg tracking-tighter text-primary uppercase">LUXE</div>
+<div class="flex items-center gap-4 text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="lock">lock</span>
+<span class="font-label-caps text-label-caps">Secure Checkout</span>
+</div>
+</div>
+</header>
+<main class="pt-32 pb-section-gap px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
+<!-- Progress Indicator -->
+<nav class="flex items-center justify-center mb-16 space-x-8 md:space-x-12">
+<div class="flex items-center text-on-surface-variant/50">
+<span class="font-label-caps text-label-caps mr-2">01</span>
+<span class="font-label-caps text-label-caps">Cart</span>
+</div>
+<div class="h-px w-8 bg-outline-variant/30"></div>
+<div class="flex items-center text-primary relative pb-1 border-b-2 border-primary">
+<span class="font-label-caps text-label-caps mr-2">02</span>
+<span class="font-label-caps text-label-caps">Shipping</span>
+</div>
+<div class="h-px w-8 bg-outline-variant/30"></div>
+<div class="flex items-center text-on-surface-variant/50">
+<span class="font-label-caps text-label-caps mr-2">03</span>
+<span class="font-label-caps text-label-caps">Payment</span>
+</div>
+</nav>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter items-start">
+<!-- Left Column: Shipping Form -->
+<section class="lg:col-span-7 space-y-12 bg-white p-8 rounded-xl shadow-sm border border-outline-variant/10">
+<!-- Contact Info -->
+<div class="space-y-6">
+<h2 class="font-headline-md text-headline-md">Contact Information</h2>
+<div class="space-y-4">
+<div class="relative">
+<label class="font-label-caps text-label-caps mb-2 block text-on-surface-variant">Email Address</label>
+<input class="w-full px-4 py-4 bg-surface-container-low border-none rounded-lg focus:bg-surface-container-lowest focus:ring-1 focus:ring-primary transition-all duration-300" placeholder="alex@example.com" type="email">
+</div>
+</div>
+</div>
+<!-- Shipping Address -->
+<div class="space-y-6">
+<h2 class="font-headline-md text-headline-md">Shipping Address</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="space-y-2">
+<label class="font-label-caps text-label-caps block text-on-surface-variant">First Name</label>
+<input class="w-full px-4 py-4 bg-surface-container-low border-none rounded-lg focus:bg-surface-container-lowest focus:ring-1 focus:ring-primary transition-all duration-300" type="text">
+</div>
+<div class="space-y-2">
+<label class="font-label-caps text-label-caps block text-on-surface-variant">Last Name</label>
+<input class="w-full px-4 py-4 bg-surface-container-low border-none rounded-lg focus:bg-surface-container-lowest focus:ring-1 focus:ring-primary transition-all duration-300" type="text">
+</div>
+<div class="md:col-span-2 space-y-2">
+<label class="font-label-caps text-label-caps block text-on-surface-variant">Address</label>
+<input class="w-full px-4 py-4 bg-surface-container-low border-none rounded-lg focus:bg-surface-container-lowest focus:ring-1 focus:ring-primary transition-all duration-300" placeholder="123 Avenue Montaigne" type="text">
+</div>
+<div class="md:col-span-2 space-y-2">
+<label class="font-label-caps text-label-caps block text-on-surface-variant">Apartment, Suite (Optional)</label>
+<input class="w-full px-4 py-4 bg-surface-container-low border-none rounded-lg focus:bg-surface-container-lowest focus:ring-1 focus:ring-primary transition-all duration-300" type="text">
+</div>
+<div class="space-y-2">
+<label class="font-label-caps text-label-caps block text-on-surface-variant">City</label>
+<input class="w-full px-4 py-4 bg-surface-container-low border-none rounded-lg focus:bg-surface-container-lowest focus:ring-1 focus:ring-primary transition-all duration-300" type="text">
+</div>
+<div class="space-y-2">
+<label class="font-label-caps text-label-caps block text-on-surface-variant">Postal Code</label>
+<input class="w-full px-4 py-4 bg-surface-container-low border-none rounded-lg focus:bg-surface-container-lowest focus:ring-1 focus:ring-primary transition-all duration-300" type="text">
+</div>
+</div>
+</div>
+<!-- Delivery Method -->
+<div class="space-y-6">
+<h2 class="font-headline-md text-headline-md">Delivery Method</h2>
+<div class="space-y-4">
+<label class="group relative flex items-center justify-between p-6 bg-surface-container-lowest border-2 border-primary rounded-xl cursor-pointer transition-all hover:shadow-lg">
+<input checked="" class="hidden" name="delivery" type="radio">
+<div class="flex items-center gap-4">
+<div class="w-6 h-6 rounded-full border-2 border-primary flex items-center justify-center">
+<div class="w-2.5 h-2.5 bg-primary rounded-full"></div>
+</div>
+<div>
+<p class="font-body-md font-bold">Standard Delivery</p>
+<p class="font-body-sm text-on-surface-variant">3-5 Business Days</p>
+</div>
+</div>
+<span class="font-body-md font-bold">Free</span>
+</label>
+<label class="group relative flex items-center justify-between p-6 bg-surface-container-lowest border-2 border-outline-variant/30 rounded-xl cursor-pointer transition-all hover:border-primary/50 hover:shadow-md">
+<input class="hidden" name="delivery" type="radio">
+<div class="flex items-center gap-4">
+<div class="w-6 h-6 rounded-full border-2 border-outline-variant flex items-center justify-center">
+<div class="w-2.5 h-2.5 bg-transparent rounded-full"></div>
+</div>
+<div>
+<p class="font-body-md font-bold">Express Delivery</p>
+<p class="font-body-sm text-on-surface-variant">Next Day Guaranteed</p>
+</div>
+</div>
+<span class="font-body-md font-bold">$35.00</span>
+</label>
+</div>
+</div>
+<div class="pt-8">
+<button class="w-full md:w-auto px-12 py-5 bg-primary text-on-primary font-label-caps text-label-caps tracking-widest hover:bg-on-surface-variant transition-all duration-300 active:scale-95 shadow-xl">
+                        CONTINUE TO PAYMENT
+                    </button>
+</div>
+</section>
+<!-- Right Column: Order Summary -->
+<aside class="lg:col-span-5 sticky top-32">
+<div class="bg-surface-container-lowest p-8 rounded-xl shadow-sm border border-outline-variant/10">
+<h3 class="font-headline-sm text-headline-sm mb-8 pb-4 border-b border-outline-variant/20">Order Summary</h3>
+<!-- Item List -->
+<div class="space-y-6 mb-8">
+<div class="flex gap-4">
+<div class="w-20 h-24 bg-surface-container-low flex-shrink-0 rounded-lg overflow-hidden relative">
+<img class="w-full h-full object-cover" data-alt="A premium black tailored blazer for men, presented in a high-fashion editorial style. The garment is draped elegantly against a minimalist, warm-toned architectural background with soft natural light creating subtle shadows. The atmosphere is one of luxury, refinement, and sophisticated modern style, perfectly capturing the essence of the LUXE brand." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC3F9axH3SZmq6o-UXTR7sPUqjYFMPNqmc77CUZPo4VzsU1lwKfZXoh0b-NcIPEGZw3Jh0_jbddcdrr7ROHTAgPrhhFHL3W2V2sv2-zcxv79drPOo7HZ2Rw0WJdvK_Rm0bFWuVDf--SEBawzN2x6GRFlEBF8qrIsOG_RDMdrFc9KGV0npKoxcj_Xyx7QfwD8-8_PMQh6UjJCXiHaCeweCUzfvSrH37bwqlsNdnaWI8NRArAORSxGXHlq3irWYZvylq2-bIqc79yVSw">
+</div>
+<div class="flex-grow flex flex-col justify-between py-1">
+<div>
+<p class="font-body-md font-bold">Signature Wool Blazer</p>
+<p class="font-body-sm text-on-surface-variant">Midnight Black / Size 48</p>
+</div>
+<div class="flex justify-between items-end">
+<span class="font-body-sm">Qty: 1</span>
+<span class="font-body-md font-bold">$1,250.00</span>
+</div>
+</div>
+</div>
+<div class="flex gap-4">
+<div class="w-20 h-24 bg-surface-container-low flex-shrink-0 rounded-lg overflow-hidden relative">
+<img class="w-full h-full object-cover" data-alt="High-end leather designer shoes in deep mahogany brown, captured from a low angle on a polished marble floor. The lighting is dramatic, high-contrast, highlighting the exquisite texture of the grain and the craftsmanship of the stitching. The background is a blurred, luxury interior, maintaining a sense of quiet exclusivity and premium quality." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAwL5VqaIZuKwfCpWJ0zfGRRyZGsAmDN9bsOTUSOK8_5OEVwRkHUs8kLMmIHqAMY5YwmhXpk7eaH4UzvJBd_Fh8ImZN32gBzAI10s_q8NYIlAkAlzVw76afLnU8kBeOk6MpG829oZdvAbC2o_yC7CQ2sVVUgHmXB-22HnGtpC9W27Uz39d9glEyl3xvV0b5oUcgIf8UjmCt729h0C1_j9pdubojH6vzij13FYUOMaKawO5jf1cc1xha-MmILjDKuzYY1fNRzi9oJyg">
+</div>
+<div class="flex-grow flex flex-col justify-between py-1">
+<div>
+<p class="font-body-md font-bold">Oxford Calfskin Loafers</p>
+<p class="font-body-sm text-on-surface-variant">Mahogany / Size 10</p>
+</div>
+<div class="flex justify-between items-end">
+<span class="font-body-sm">Qty: 1</span>
+<span class="font-body-md font-bold">$840.00</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Totals -->
+<div class="space-y-4 pt-6 border-t border-outline-variant/20">
+<div class="flex justify-between text-on-surface-variant">
+<span class="font-body-sm">Subtotal</span>
+<span class="font-body-sm">$2,090.00</span>
+</div>
+<div class="flex justify-between text-on-surface-variant">
+<span class="font-body-sm">Shipping</span>
+<span class="font-body-sm">Calculated at next step</span>
+</div>
+<div class="flex justify-between text-on-surface-variant">
+<span class="font-body-sm">Estimated Taxes</span>
+<span class="font-body-sm">$167.20</span>
+</div>
+<div class="flex justify-between text-primary pt-4">
+<span class="font-headline-sm text-headline-sm">Total</span>
+<span class="font-headline-sm text-headline-sm">$2,257.20</span>
+</div>
+</div>
+<!-- Promo Code -->
+<div class="mt-8 flex gap-2">
+<input class="flex-grow px-4 py-3 bg-surface border border-outline-variant/30 rounded-lg text-body-sm" placeholder="Promo Code" type="text">
+<button class="px-6 py-3 bg-secondary text-on-secondary font-label-caps text-label-caps">Apply</button>
+</div>
+</div>
+</aside>
+</div>
+</main>
+<!-- Footer -->
+<footer class="w-full py-section-gap bg-surface-container-lowest border-t border-outline-variant/30">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
+<div class="md:col-span-1">
+<div class="font-headline-sm text-headline-sm font-black tracking-widest text-primary uppercase mb-6">LUXE</div>
+<p class="font-body-sm text-on-surface-variant/70 leading-relaxed">
+                    Crafting timeless elegance for the modern individual. Our pursuit of perfection is reflected in every stitch.
+                </p>
+</div>
+<div class="space-y-4">
+<p class="font-label-caps text-label-caps text-primary">Assistance</p>
+<ul class="space-y-2">
+<li class=""><a class="font-body-sm text-on-surface-variant/70 hover:text-primary underline transition-all" href="#">Contact Us</a></li>
+<li class=""><a class="font-body-sm text-on-surface-variant/70 hover:text-primary underline transition-all" href="#">Shipping &amp; Returns</a></li>
+<li class=""><a class="font-body-sm text-on-surface-variant/70 hover:text-primary underline transition-all" href="#">FAQs</a></li>
+</ul>
+</div>
+<div class="space-y-4">
+<p class="font-label-caps text-label-caps text-primary">Legal</p>
+<ul class="space-y-2">
+<li class=""><a class="font-body-sm text-on-surface-variant/70 hover:text-primary underline transition-all" href="#">Privacy Policy</a></li>
+<li class=""><a class="font-body-sm text-on-surface-variant/70 hover:text-primary underline transition-all" href="#">Terms of Service</a></li>
+</ul>
+</div>
+<div class="space-y-4">
+<p class="font-label-caps text-label-caps text-primary">Connect</p>
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-on-surface-variant hover:text-primary cursor-pointer transition-colors" data-icon="share">share</span>
+<span class="material-symbols-outlined text-on-surface-variant hover:text-primary cursor-pointer transition-colors" data-icon="mail">mail</span>
+</div>
+<p class="font-label-caps text-[10px] text-on-surface-variant/50 pt-8">
+                    © 2024 LUXE INTERNATIONALE. ALL RIGHTS RESERVED.
+                </p>
+</div>
+</div>
+</footer>
+<script>
+        // Micro-interactions for Radio Buttons
+        const radios = document.querySelectorAll('input[name="delivery"]');
+        radios.forEach(radio => {
+            radio.addEventListener('change', (e) => {
+                // Reset all containers
+                radios.forEach(r => {
+                    const container = r.closest('label');
+                    container.classList.remove('border-primary');
+                    container.classList.add('border-outline-variant/30');
+                    const dot = container.querySelector('.bg-primary, .bg-transparent');
+                    dot.classList.remove('bg-primary');
+                    dot.classList.add('bg-transparent');
+                    const dotOuter = container.querySelector('.border-primary, .border-outline-variant');
+                    dotOuter.classList.remove('border-primary');
+                    dotOuter.classList.add('border-outline-variant');
+                });
+
+                // Set active container
+                if (e.target.checked) {
+                    const activeContainer = e.target.closest('label');
+                    activeContainer.classList.add('border-primary');
+                    activeContainer.classList.remove('border-outline-variant/30');
+                    const activeDot = activeContainer.querySelector('.bg-transparent');
+                    activeDot.classList.add('bg-primary');
+                    activeDot.classList.remove('bg-transparent');
+                    const activeDotOuter = activeContainer.querySelector('.border-outline-variant');
+                    activeDotOuter.classList.add('border-primary');
+                    activeDotOuter.classList.remove('border-outline-variant');
+                }
+            });
+        });
+    </script>
+
+
+</body></html>

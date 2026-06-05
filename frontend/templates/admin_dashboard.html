@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LUXE | Executive Admin Dashboard</title>
+  
+  <!-- Fonts: Inter & Plus Jakarta Sans (Metropolis alternative) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Tabler Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+  
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <!-- Tailwind CSS CDN (Optional for structural utilities, but all visual overrides inline via Ethereal system) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    /* Ethereal Commerce Design System Tokens */
+    :root {
+      --background: #fcf8fa;
+      --surface: #ffffff;
+      --surface-container: #f0edee;
+      --surface-container-low: #f6f3f4;
+      --surface-container-high: #eae7e9;
+      --surface-container-highest: #e5e2e3;
+      --text: #1b1b1d;
+      --muted: #76777d;
+      --border: #e5e2e3;
+      --primary: #000000;
+      
+      --accent-blue: #3b82f6;
+      --accent-green: #10b981;
+      --accent-purple: #8b5cf6;
+      --accent-orange: #f59e0b;
+      
+      --font-ui: 'Inter', sans-serif;
+      --font-heading: 'Plus Jakarta Sans', 'Metropolis', system-ui, sans-serif;
+    }
+
+    body {
+      background-color: var(--background);
+      color: var(--text);
+      font-family: var(--font-ui);
+      margin: 0;
+      padding: 0;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      font-family: var(--font-heading);
+    }
+
+    /* Fixed Sidebar (180px wide) */
+    .dashboard-sidebar {
+      width: 180px;
+      height: 100vh;
+      position: fixed;
+      top: 0;
+      left: 0;
+      background-color: var(--surface);
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      z-index: 100;
+    }
+
+    .sidebar-logo {
+      padding: 24px 16px;
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      border-bottom: 1px solid var(--border);
+      font-family: var(--font-heading);
+    }
+
+    .sidebar-nav {
+      padding: 16px 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      flex: 1;
+    }
+
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 16px;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text);
+      text-decoration: none;
+      border-radius: 8px;
+      transition: all 0.2s ease;
+    }
+
+    .nav-item:hover {
+      background-color: #f0edee;
+    }
+
+    .nav-item.active {
+      background-color: var(--primary);
+      color: #ffffff;
+    }
+
+    .sidebar-footer {
+      padding: 16px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .avatar-circle {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background-color: var(--primary);
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 13px;
+    }
+
+    /* Main Dashboard Layout */
+    .dashboard-main {
+      margin-left: 180px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Top bar */
+    .top-bar {
+      height: 64px;
+      background-color: var(--surface);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 32px;
+      position: sticky;
+      top: 0;
+      z-index: 90;
+    }
+
+    .search-input {
+      background-color: #f0edee;
+      border: 1px solid transparent;
+      border-radius: 6px;
+      padding: 8px 14px;
+      font-size: 13px;
+      outline: none;
+      transition: all 0.2s ease;
+      width: 240px;
+    }
+
+    .search-input:focus {
+      background-color: var(--surface);
+      border-color: var(--accent-blue);
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+    }
+
+    .new-entry-btn {
+      background-color: var(--primary);
+      color: #ffffff;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 8px 16px;
+      border-radius: 6px;
+      transition: all 0.15s ease;
+    }
+
+    .new-entry-btn:hover {
+      opacity: 0.9;
+    }
+
+    /* Metric Cards */
+    .metric-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      padding: 24px 32px;
+    }
+
+    .metric-card {
+      background-color: var(--surface);
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .metric-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 24px rgba(0, 0, 0, 0.06);
+    }
+
+    .metric-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .metric-icon-circle {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+    }
+
+    .trend-pill {
+      font-size: 11px;
+      font-weight: 600;
+      padding: 3px 8px;
+      border-radius: 50px;
+    }
+
+    .trend-up {
+      background-color: rgba(16, 185, 129, 0.1);
+      color: var(--accent-green);
+    }
+
+    .trend-down {
+      background-color: rgba(239, 68, 68, 0.1);
+      color: #ef4444;
+    }
+
+    /* Charts Layout */
+    .charts-grid {
+      display: grid;
+      grid-template-columns: 6.5fr 3.5fr;
+      gap: 16px;
+      padding: 0 32px 24px;
+    }
+
+    .chart-card {
+      background-color: var(--surface);
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    /* Recent Orders Table */
+    .orders-section {
+      padding: 0 32px 48px;
+    }
+
+    .orders-card {
+      background-color: var(--surface);
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+      padding: 24px 0 0 0;
+      overflow: hidden;
+    }
+
+    .table-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 24px 16px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .luxe-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+    }
+
+    .luxe-table th {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--muted);
+      padding: 14px 24px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .luxe-table td {
+      padding: 14px 24px;
+      font-size: 13px;
+      border-bottom: 1px solid #f0edee;
+      vertical-align: middle;
+    }
+
+    .luxe-table tr:hover {
+      background-color: #fafafa;
+    }
+
+    .status-badge {
+      font-size: 11px;
+      font-weight: 700;
+      border-radius: 20px;
+      padding: 3px 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      display: inline-block;
+    }
+
+    .status-delivered {
+      background-color: rgba(16, 185, 129, 0.1);
+      color: var(--accent-green);
+    }
+
+    .status-shipped {
+      background-color: rgba(59, 130, 246, 0.1);
+      color: var(--accent-blue);
+    }
+
+    .status-pending {
+      background-color: rgba(245, 158, 11, 0.1);
+      color: var(--accent-orange);
+    }
+
+    /* Footer Grid */
+    .premium-footer {
+      background-color: var(--surface);
+      border-top: 1px solid var(--border);
+      padding: 48px 32px 32px;
+      margin-top: auto;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      margin-bottom: 32px;
+    }
+
+    .footer-title {
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 16px;
+      color: var(--text);
+    }
+
+    .footer-links {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .footer-link {
+      font-size: 13px;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.15s ease;
+    }
+
+    .footer-link:hover {
+      color: var(--primary);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- FIXED SIDEBAR -->
+  <aside class="dashboard-sidebar">
+    <div>
+      <div class="sidebar-logo">
+        <span class="text-black">LUXE</span>
+      </div>
+      <nav class="sidebar-nav">
+        <a href="#" class="nav-item active">
+          <i class="ti ti-dashboard"></i>
+          <span>Dashboard</span>
+        </a>
+        <a href="#" class="nav-item">
+          <i class="ti ti-shopping-bag"></i>
+          <span>Orders</span>
+        </a>
+        <a href="#" class="nav-item">
+          <i class="ti ti-box"></i>
+          <span>Inventory</span>
+        </a>
+        <a href="#" class="nav-item">
+          <i class="ti ti-users"></i>
+          <span>Customers</span>
+        </a>
+        <a href="#" class="nav-item">
+          <i class="ti ti-chart-bar"></i>
+          <span>Analytics</span>
+        </a>
+        <a href="#" class="nav-item">
+          <i class="ti ti-settings"></i>
+          <span>Settings</span>
+        </a>
+      </nav>
+    </div>
+    
+    <div class="sidebar-footer">
+      <div class="avatar-circle">JD</div>
+      <div class="flex flex-col truncate">
+        <span class="text-xs font-bold text-slate-800 leading-tight">John Doe</span>
+        <span class="text-[10px] text-slate-400 font-extrabold tracking-widest uppercase mt-0.5">ADMIN</span>
+      </div>
+    </div>
+  </aside>
+
+  <!-- MAIN CANVAS -->
+  <div class="dashboard-main">
+    
+    <!-- TOP BAR -->
+    <header class="top-bar">
+      <div class="flex items-center">
+        <h1 class="text-xl font-bold text-slate-900 tracking-tight">Executive Overview</h1>
+      </div>
+      <div class="flex items-center gap-6">
+        <div class="relative">
+          <i class="ti ti-search absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
+          <input type="text" placeholder="Global search..." class="search-input pl-9">
+        </div>
+        
+        <button class="relative p-2 text-slate-500 hover:text-black transition-colors" title="Notifications">
+          <i class="ti ti-bell text-lg"></i>
+          <span class="absolute top-1.5 right-1.5 w-1.5 h-1.5 bg-red-500 rounded-full"></span>
+        </button>
+        
+        <button class="new-entry-btn flex items-center gap-1.5">
+          <i class="ti ti-plus text-xs"></i> New Entry
+        </button>
+      </div>
+    </header>
+
+    <!-- METRIC CARDS -->
+    <section class="metric-grid">
+      <!-- Card 1 -->
+      <div class="metric-card">
+        <div class="metric-header">
+          <div class="metric-icon-circle bg-blue-50 text-blue-500">
+            <i class="ti ti-currency-dollar"></i>
+          </div>
+          <span class="trend-pill trend-up">+12.5%</span>
+        </div>
+        <span class="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Total Sales</span>
+        <span class="text-2xl font-bold text-slate-900 mt-1">$124,592.00</span>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="metric-card">
+        <div class="metric-header">
+          <div class="metric-icon-circle bg-emerald-50 text-emerald-500">
+            <i class="ti ti-shopping-cart"></i>
+          </div>
+          <span class="trend-pill trend-up">+5.2%</span>
+        </div>
+        <span class="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Total Orders</span>
+        <span class="text-2xl font-bold text-slate-900 mt-1">1,284</span>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="metric-card">
+        <div class="metric-header">
+          <div class="metric-icon-circle bg-purple-50 text-purple-500">
+            <i class="ti ti-chart-line"></i>
+          </div>
+          <span class="trend-pill trend-down">-2.1%</span>
+        </div>
+        <span class="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Net Revenue</span>
+        <span class="text-2xl font-bold text-slate-900 mt-1">$84,320.50</span>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="metric-card">
+        <div class="metric-header">
+          <div class="metric-icon-circle bg-amber-50 text-amber-500">
+            <i class="ti ti-user-plus"></i>
+          </div>
+          <span class="trend-pill trend-up">+18.3%</span>
+        </div>
+        <span class="text-[11px] font-bold text-slate-400 uppercase tracking-wider">New Customers</span>
+        <span class="text-2xl font-bold text-slate-900 mt-1">412</span>
+      </div>
+    </section>
+
+    <!-- CHARTS SECTION -->
+    <section class="charts-grid">
+      <!-- Sales trends chart -->
+      <div class="chart-card">
+        <div class="flex justify-between items-center mb-6">
+          <div class="flex flex-col">
+            <span class="text-[13px] font-bold text-slate-800">Sales Trends</span>
+            <span class="text-[11px] text-slate-400 font-semibold mt-0.5">Performance over the last 30 days</span>
+          </div>
+          <select class="bg-slate-100 hover:bg-slate-200 border-none rounded-lg text-[11px] font-bold uppercase tracking-wider px-3 py-1.5 outline-none cursor-pointer">
+            <option>Last 30 Days</option>
+            <option>Last 6 Months</option>
+          </select>
+        </div>
+        <div class="flex-1 min-h-[220px]">
+          <canvas id="salesTrendsChart"></canvas>
+        </div>
+      </div>
+
+      <!-- Inventory distribution chart -->
+      <div class="chart-card items-center justify-between">
+        <div class="w-full text-left flex flex-col mb-4">
+          <span class="text-[13px] font-bold text-slate-800">Inventory Split</span>
+          <span class="text-[11px] text-slate-400 font-semibold mt-0.5">Stock value distribution</span>
+        </div>
+        <div class="relative w-40 h-40 flex items-center justify-center">
+          <canvas id="inventoryDonutChart"></canvas>
+          <div class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none mt-1">
+            <span class="text-2xl font-bold text-slate-900 leading-none">70%</span>
+            <span class="text-[9px] text-slate-400 font-bold uppercase tracking-widest mt-1">Electronics</span>
+          </div>
+        </div>
+        
+        <div class="grid grid-cols-2 gap-x-6 gap-y-1.5 w-full mt-4 text-xs font-semibold text-slate-500 border-t border-slate-100 pt-4">
+          <div class="flex items-center gap-2">
+            <span class="w-2.5 h-2.5 rounded-full bg-slate-800"></span>
+            <span>Electronics</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="w-2.5 h-2.5 rounded-full bg-indigo-400"></span>
+            <span>Fashion</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="w-2.5 h-2.5 rounded-full bg-purple-400"></span>
+            <span>Beauty</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="w-2.5 h-2.5 rounded-full bg-amber-400"></span>
+            <span>Home</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- RECENT ORDERS TABLE -->
+    <section class="orders-section">
+      <div class="orders-card">
+        <div class="table-header">
+          <span class="text-sm font-bold text-slate-800">Recent Orders</span>
+          <a href="#" class="text-xs font-bold text-slate-500 hover:text-black uppercase tracking-wider transition-colors">View All Orders</a>
+        </div>
+        <div class="w-full overflow-x-auto">
+          <table class="luxe-table">
+            <thead>
+              <tr>
+                <th>Order ID</th>
+                <th>Customer</th>
+                <th>Product</th>
+                <th>Date</th>
+                <th>Amount</th>
+                <th class="text-right">Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="font-bold text-slate-900">#LX-8821</td>
+                <td class="flex items-center gap-3">
+                  <div class="w-8 h-8 rounded-full bg-indigo-50 text-indigo-600 flex items-center justify-center font-bold text-[11px]">SR</div>
+                  <span class="font-semibold text-slate-800">Sophia Reed</span>
+                </td>
+                <td class="text-slate-500 font-semibold">Premium Wireless Earbuds</td>
+                <td class="text-slate-400 font-medium">24 May, 2024</td>
+                <td class="font-bold text-slate-900">$249.00</td>
+                <td class="text-right">
+                  <span class="status-badge status-delivered">Delivered</span>
+                </td>
+              </tr>
+              <tr>
+                <td class="font-bold text-slate-900">#LX-8820</td>
+                <td class="flex items-center gap-3">
+                  <div class="w-8 h-8 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center font-bold text-[11px]">MB</div>
+                  <span class="font-semibold text-slate-800">Marcus Bennett</span>
+                </td>
+                <td class="text-slate-500 font-semibold">Leather Weekend Bag</td>
+                <td class="text-slate-400 font-medium">23 May, 2024</td>
+                <td class="font-bold text-slate-900">$380.00</td>
+                <td class="text-right">
+                  <span class="status-badge status-shipped">Shipped</span>
+                </td>
+              </tr>
+              <tr>
+                <td class="font-bold text-slate-900">#LX-8819</td>
+                <td class="flex items-center gap-3">
+                  <div class="w-8 h-8 rounded-full bg-amber-50 text-amber-600 flex items-center justify-center font-bold text-[11px]">EK</div>
+                  <span class="font-semibold text-slate-800">Elena Kuznetsov</span>
+                </td>
+                <td class="text-slate-500 font-semibold">Silk Lounge Set</td>
+                <td class="text-slate-400 font-medium">23 May, 2024</td>
+                <td class="font-bold text-slate-900">$195.00</td>
+                <td class="text-right">
+                  <span class="status-badge status-pending">Pending</span>
+                </td>
+              </tr>
+              <tr>
+                <td class="font-bold text-slate-900">#LX-8818</td>
+                <td class="flex items-center gap-3">
+                  <div class="w-8 h-8 rounded-full bg-slate-100 text-slate-600 flex items-center justify-center font-bold text-[11px]">TB</div>
+                  <span class="font-semibold text-slate-800">Tom Barker</span>
+                </td>
+                <td class="text-slate-500 font-semibold">Minimalist Watch</td>
+                <td class="text-slate-400 font-medium">22 May, 2024</td>
+                <td class="font-bold text-slate-900">$520.00</td>
+                <td class="text-right">
+                  <span class="status-badge status-delivered">Delivered</span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- PREMIUM FOOTER -->
+    <footer class="premium-footer">
+      <div class="footer-grid">
+        <div>
+          <span class="text-base font-extrabold tracking-tight uppercase">LUXE</span>
+          <p class="mt-4 text-xs font-semibold text-slate-400 leading-relaxed max-w-[200px]">Advanced Commerce Management Intelligence.</p>
+        </div>
+        <div>
+          <h4 class="footer-title">Operations</h4>
+          <ul class="footer-links">
+            <li><a href="#" class="footer-link">Shipment Logs</a></li>
+            <li><a href="#" class="footer-link">Inventory Audit</a></li>
+            <li><a href="#" class="footer-link">Supplier Portal</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="footer-title">Support</h4>
+          <ul class="footer-links">
+            <li><a href="#" class="footer-link">Documentation</a></li>
+            <li><a href="#" class="footer-link">API Access</a></li>
+            <li><a href="#" class="footer-link">Help Center</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="footer-title">Company</h4>
+          <ul class="footer-links">
+            <li><a href="#" class="footer-link">Privacy Policy</a></li>
+            <li><a href="#" class="footer-link">Terms of Use</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="border-t border-slate-100 pt-8 flex justify-between items-center text-xs font-bold text-slate-450 uppercase tracking-wider">
+        <span>© 2026 LUXE Premium Retailers. All rights reserved.</span>
+        <div class="flex gap-4">
+          <a href="#" class="text-slate-400 hover:text-black transition-colors"><i class="ti ti-brand-twitter"></i></a>
+          <a href="#" class="text-slate-400 hover:text-black transition-colors"><i class="ti ti-brand-instagram"></i></a>
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <script>
+    // Sales Trends Chart
+    const ctxSales = document.getElementById('salesTrendsChart').getContext('2d');
+    new Chart(ctxSales, {
+      type: 'bar',
+      data: {
+        labels: Array.from({length: 30}, (_, i) => String(i + 1).padStart(2, '0') + ' MAY'),
+        datasets: [{
+          label: 'Sales ($)',
+          data: [12000, 15000, 11000, 18000, 14000, 16000, 17500, 19000, 13000, 15000, 21000, 22000, 18500, 19000, 23000, 24000, 25000, 26000, 20000, 21000, 24500, 26000, 27000, 28000, 24000, 23000, 25500, 26000, 29000, 31000],
+          backgroundColor: '#eae7e9',
+          hoverBackgroundColor: '#000000',
+          borderRadius: 4,
+          borderSkipped: false,
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { display: false }
+        },
+        scales: {
+          x: {
+            grid: { display: false },
+            ticks: {
+              maxTicksLimit: 6,
+              font: { family: 'Inter', size: 10, weight: 'bold' },
+              color: '#76777d'
+            }
+          },
+          y: {
+            grid: { color: '#eae7e9' },
+            ticks: {
+              font: { family: 'Inter', size: 10, weight: 'bold' },
+              color: '#76777d',
+              callback: value => '$' + value / 1000 + 'k'
+            }
+          }
+        }
+      }
+    });
+
+    // Inventory Split Chart
+    const ctxInv = document.getElementById('inventoryDonutChart').getContext('2d');
+    new Chart(ctxInv, {
+      type: 'doughnut',
+      data: {
+        labels: ['Electronics', 'Fashion', 'Beauty', 'Home'],
+        datasets: [{
+          data: [70, 15, 10, 5],
+          backgroundColor: ['#000000', '#8b5cf6', '#a855f7', '#f59e0b'],
+          borderWidth: 0,
+          weight: 0.5
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        cutout: '76%',
+        plugins: {
+          legend: { display: false }
+        }
+      }
+    });
+
+    // Sidebar navigation active state toggle
+    const navItems = document.querySelectorAll('.nav-item');
+    navItems.forEach(item => {
+      item.addEventListener('click', (e) => {
+        e.preventDefault();
+        navItems.forEach(i => i.classList.remove('active'));
+        item.classList.add('active');
+      });
+    });
+  </script>
+</body>
+</html>

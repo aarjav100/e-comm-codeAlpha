@@ -1,0 +1,494 @@
+[
+  {
+    "name": "Heritage Cashmere Trench",
+    "description": "A high-end double-breasted premium trench coat draped elegantly. Soft, warm, and structured tailoring for modern outerwear curations.",
+    "price": 1450,
+    "originalPrice": 1600,
+    "category": "Fashion",
+    "subcategory": "Outerwear",
+    "brand": "LUXE",
+    "image": "https://lh3.googleusercontent.com/aida-public/AB6AXuCIGxMCVLQrbwYVSCpLtAPHYkPFy_4sEau82qwcWSl6QYBkBds0jLKf25y7zYW9-CFlxEvCfHrLJEchOuPZxs7LV5MHo_SEJXCIxPQK1ePYBLrRVISsLHm3DGDM-DR1i7wBPTosnB-xZViBiNCOIBcORNkLIO4G7cmqYqvUNut5RdgGgASwADBoHkIBpiOPRzGcvPjuJPzlPhYF2LBOn6yggGXAZYvUuod7CXC1_WTxw6XerpwkMD6KKP8CUa5Z7YYt1rH4dJYixbA",
+    "rating": 4.9,
+    "numReviews": 142,
+    "stock": 12,
+    "features": [
+      "100% Mongolian Cashmere",
+      "Double-Breasted Classic Cut",
+      "Horn Buttons Accent",
+      "Satin Lining"
+    ],
+    "deliveryEstimate": "2-3 business days",
+    "aiSummary": "Outstanding cashmere coat highly praised for its rich, heavy texture, meticulous double-breasted tailoring, and supreme warmth. A signature investment piece.",
+    "specifications": [
+      {
+        "name": "Material",
+        "value": "Premium Cashmere"
+      },
+      {
+        "name": "Fit",
+        "value": "Relaxed Tailored"
+      },
+      {
+        "name": "Warranty",
+        "value": "Lifetime Stitching Warranty"
+      }
+    ],
+    "tags": [
+      "fashion",
+      "outerwear",
+      "limited",
+      "trench"
+    ]
+  },
+  {
+    "name": "Architectural Silk Midi",
+    "description": "Flowing silk midi skirt with a deep obsidian black sheen. Set against a clean architectural silhouette focusing on material excellence.",
+    "price": 890,
+    "originalPrice": 950,
+    "category": "Fashion",
+    "subcategory": "Knitwear",
+    "brand": "LUXE",
+    "image": "https://lh3.googleusercontent.com/aida-public/AB6AXuAsYJ9TdnOhmop4xRHkV0f44NivapTLjbKexM0TiPUQBC-7SbyeKuVG6pAFByp9joKm_PEAyU2gvwaYafQzZsSfgwxJGfbsvtYDaqbXBo3d1TmWPdg9sXuLA0KBqzhQpyuXt9WlOuc3tLGzb09F6tZtUO_p-g0bbaAGKP_R3tD1zKqsN5hb6HxgHGUyV-JFTqotmkU1b6g7NxLBgjK_N7LLblcYMS5sCwLpraBZxhMHxZSlbwLKJLxbKJ8Sv1FLq0o3yJH8GIAjo1k",
+    "rating": 4.8,
+    "numReviews": 98,
+    "stock": 8,
+    "features": [
+      "100% Organic Mulberry Silk",
+      "Obsidian Black Sheen",
+      "Hidden Zip Closure",
+      "Flowing Architectural Cut"
+    ],
+    "deliveryEstimate": "2-4 business days",
+    "aiSummary": "This mulberry silk midi skirt is praised for its luxurious hand-feel and dramatic, fluid drape. Elevates any seasonal collection.",
+    "specifications": [
+      {
+        "name": "Material",
+        "value": "Mulberry Silk"
+      },
+      {
+        "name": "Dry Clean Only",
+        "value": "Yes"
+      },
+      {
+        "name": "Warranty",
+        "value": "2 Year Fabric Guarantee"
+      }
+    ],
+    "tags": [
+      "fashion",
+      "knitwear",
+      "silk",
+      "midi"
+    ]
+  },
+  {
+    "name": "Sculpted Tote in Bone",
+    "description": "Structured handbag in premium bone white leather resting on reflective styling. technical gold hardware accents.",
+    "price": 2100,
+    "originalPrice": 2400,
+    "category": "Fashion",
+    "subcategory": "Bags",
+    "brand": "LUXE",
+    "image": "https://lh3.googleusercontent.com/aida-public/AB6AXuDS8pMyzrWBvz60Xyv-zMiSHym4C581PpjeFwUu8nTVKHvqaxKg89nfYqBIbIM_aFNYQdw3rm1TiHhDQ86RpNqIZuy5f14ndo0xNrpVZR5Qsc6Sd_2lp9ucTurju8zyAOeL5Ojr0_1quOyaY7wSkvYKaZ49c9QjM39Nutch-v2y-fGfilTQRCwH3m8EEJ2PIF5GLTmKNWRwGiAXlzBkgxWnOtf6qhkIjqO93y046C-EYx2snYqJhGtx1rv55azgZGwWOwr7FVXqTZ8",
+    "rating": 4.9,
+    "numReviews": 104,
+    "stock": 15,
+    "features": [
+      "Full-Grain Calfskin Leather",
+      "Polished Gold Hardware",
+      "Structured Double Handles",
+      "Suede Interior Lining"
+    ],
+    "deliveryEstimate": "3-5 business days",
+    "aiSummary": "Highly structured leather handbag. Users commend the flawless stitching, robust metal hardware, and scratch-resistant bone leather coating.",
+    "specifications": [
+      {
+        "name": "Leather",
+        "value": "Grade-A Calfskin"
+      },
+      {
+        "name": "Hardware",
+        "value": "Solid Brass Gold-Plated"
+      },
+      {
+        "name": "Warranty",
+        "value": "5 Year Hardware Warranty"
+      }
+    ],
+    "tags": [
+      "fashion",
+      "bags",
+      "leather",
+      "white"
+    ]
+  },
+  {
+    "name": "Rib Knit Band Turtleneck",
+    "description": "A fine-knit merino wool turtleneck in soft sand beige, designed for a clean, expensive visual styling and quiet luxury layering.",
+    "price": 420,
+    "originalPrice": 480,
+    "category": "Fashion",
+    "subcategory": "Knitwear",
+    "brand": "LUXE",
+    "image": "https://lh3.googleusercontent.com/aida-public/AB6AXuBwStLlqbjv4qHBHB62uZu7Va06r7P6JcyvfJL8Uwomo2QGuJcoD_v5vE8xx9uk8yrg-GKYVzg1zb3Zoq2qCCfqbYnow5WHF_z55AWVJ3t-VzByCxXVTrtozc20SzYNAM-Gac7tgCZXaqrrMxRl5ICWQI_507wzB6xTsPzXBG03BMabvYaKLlIFtS7n2BpoWmgAIsypZfRuapy1DIfZfE6ZdYc-PjrsCuotGnSCXLBt_RMhrdFfE4Qvit_OB92SSwECjgS3M94Ygic",
+    "rating": 4.7,
+    "numReviews": 88,
+    "stock": 20,
+    "features": [
+      "100% Fine Merino Wool",
+      "Breathable Knit Structure",
+      "Ribbed Collar and Cuffs",
+      "Sand Beige Hue"
+    ],
+    "deliveryEstimate": "2-3 business days",
+    "aiSummary": "The rib knit merino turtleneck is celebrated for its lightweight yet exceptionally warm fibers and elegant classic fit.",
+    "specifications": [
+      {
+        "name": "Wool",
+        "value": "Merino Extra-Fine"
+      },
+      {
+        "name": "Origin",
+        "value": "Italy"
+      },
+      {
+        "name": "Warranty",
+        "value": "2 Year Quality Seal"
+      }
+    ],
+    "tags": [
+      "fashion",
+      "knitwear",
+      "wool",
+      "turtleneck"
+    ]
+  },
+  {
+    "name": "Aurelius Leather Tote",
+    "description": "Midnight Espresso full-grain calfskin leather bag. Handcrafted luxury tote designed for premium day-to-day curations.",
+    "price": 2450,
+    "originalPrice": 2700,
+    "category": "Fashion",
+    "subcategory": "Bags",
+    "brand": "LUXE",
+    "image": "https://lh3.googleusercontent.com/aida-public/AB6AXuC8kFh8syYuP3f4WteAIwuXTZUEb71XdDZc3BTOyZ8y4ba14XyxKEt8oO2KslzHmzGLNZuRgGeaXg0qNLSMJJ3PHJCLGo8Tpg5GvwsvAmiDBU036DwJB1UER5Ns0HRfW9049knblxpcRv_Y6L7ZLR51Lf1OxSfKpVeLoRf4npanSkJ9NBe0GSPPklsCBSQcUyjNDVVYca4wDbgdzi9u_Mo8iiz_eB-J-IJm-Ql0BTPOM_0aYbhg_AeboG6h-xaCq1CJgyuKrIKfpNI",
+    "rating": 4.9,
+    "numReviews": 215,
+    "stock": 5,
+    "features": [
+      "Espresso Toned Calfskin",
+      "Spacious Interior Compartments",
+      "Reinforced Shoulder Straps",
+      "Protective Brass Feet"
+    ],
+    "deliveryEstimate": "1-2 business days",
+    "aiSummary": "Exquisite hand-finished leather bag. Known for its spacious, durable interior compartments and premium espresso leather grain.",
+    "specifications": [
+      {
+        "name": "Leather",
+        "value": "Espresso Full-Grain"
+      },
+      {
+        "name": "Dimensions",
+        "value": "40cm x 30cm x 15cm"
+      },
+      {
+        "name": "Warranty",
+        "value": "5 Year Leather Warranty"
+      }
+    ],
+    "tags": [
+      "fashion",
+      "bags",
+      "leather",
+      "espresso"
+    ]
+  },
+  {
+    "name": "Vertex Titanium Chrono",
+    "description": "Slate grey titanium chronograph watch with a grade 5 titanium strap, minimalist hands, and Swiss mechanical movements.",
+    "price": 8900,
+    "originalPrice": 9500,
+    "category": "Fashion",
+    "subcategory": "Watches",
+    "brand": "LUXE",
+    "image": "https://lh3.googleusercontent.com/aida-public/AB6AXuAgoFcdAp2Nbduw1HCw9VRv4T5MFvRcuj7eSO72KYyF9l6PHO-iboJYJKfl7gWYXqLc0gVYnXfuVs6a8wvhxe7rBhIieCeE7xiTr5Pj0v6WG4pA1shBE2EHk15IAvi5LMYSojh5FIpu8hHrvRi5_clQf5_hK0heqF1Idqov8delEyg-hApQR-MPAlTrm6lfJoRexQWCBfhKMYTbxrQ7DIjLNM3lBPzlPgi-k3AG9nP50tZ9xRnDtxs3AtKgT_KcUz-aomiaSI2Aa9I",
+    "rating": 5,
+    "numReviews": 74,
+    "stock": 4,
+    "features": [
+      "Grade 5 Aerospace Titanium Casing",
+      "Scratch-Resistant Sapphire Crystal Face",
+      "Caliber 12 Swiss Automatic Movement",
+      "10 ATM Depth Water Resistance"
+    ],
+    "deliveryEstimate": "2-4 business days",
+    "aiSummary": "The ultimate timepiece blending extreme structural resilience with delicate mechanical clockwork. Highly recommended by watch curators.",
+    "specifications": [
+      {
+        "name": "Casing",
+        "value": "Aerospace Titanium"
+      },
+      {
+        "name": "Glass",
+        "value": "Sapphire Crystal"
+      },
+      {
+        "name": "Warranty",
+        "value": "5 Year Global Warranty"
+      }
+    ],
+    "tags": [
+      "fashion",
+      "watches",
+      "titanium",
+      "swiss"
+    ]
+  },
+  {
+    "name": "Signature Wool Blazer",
+    "description": "Premium tailored black blazer made from fine wool blends. Sophisticated tailoring draped elegantly for formal or luxury wear.",
+    "price": 1250,
+    "originalPrice": 1400,
+    "category": "Fashion",
+    "subcategory": "Outerwear",
+    "brand": "LUXE",
+    "image": "https://lh3.googleusercontent.com/aida-public/AB6AXuC3F9axH3SZmq6o-UXTR7sPUqjYFMPNqmc77CUZPo4VzsU1lwKfZXoh0b-NcIPEGZw3Jh0_jbddcdrr7ROHTAgPrhhFHL3W2V2sv2-zcxv79drPOo7HZ2Rw0WJdvK_Rm0bFWuVDf--SEBawzN2x6GRFlEBF8qrIsOG_RDMdrFc9KGV0npKoxcj_Xyx7QfwD8-8_PMQh6UjJCXiHaCeweCUzfvSrH37bwqlsNdnaWI8NRArAORSxGXHlq3irWYZvylq2-bIqc79yVSw",
+    "rating": 4.8,
+    "numReviews": 110,
+    "stock": 10,
+    "features": [
+      "Fine Virgin Wool Blend",
+      "Slim Tailored Cut",
+      "Structured Shoulders",
+      "Silk Collar Accents"
+    ],
+    "deliveryEstimate": "3-5 business days",
+    "aiSummary": "A masterpiece blazer praised for its immaculate structural fit, wrinkle-resistant wool fibers, and sleek modern collar line.",
+    "specifications": [
+      {
+        "name": "Fabric",
+        "value": "Virgin Wool & Silk"
+      },
+      {
+        "name": "Buttons",
+        "value": "Engraved Resin"
+      },
+      {
+        "name": "Warranty",
+        "value": "2 Year Premium Stitch Guarantee"
+      }
+    ],
+    "tags": [
+      "fashion",
+      "outerwear",
+      "wool",
+      "blazer"
+    ]
+  },
+  {
+    "name": "Oxford Calfskin Loafers",
+    "description": "Premium mahogany Italian leather shoes with dramatic highlights, focus grain stitching, and robust leather outsoles.",
+    "price": 840,
+    "originalPrice": 900,
+    "category": "Fashion",
+    "subcategory": "Shoes",
+    "brand": "LUXE",
+    "image": "https://lh3.googleusercontent.com/aida-public/AB6AXuAwL5VqaIZuKwfCpWJ0zfGRRyZGsAmDN9bsOTUSOK8_5OEVwRkHUs8kLMmIHqAMY5YwmhXpk7eaH4UzvJBd_Fh8ImZN32gBzAI10s_q8NYIlAkAlzVw76afLnU8kBeOk6MpG829oZdvAbC2o_yC7CQ2sVVUgHmXB-22HnGtpC9W27Uz39d9glEyl3xvV0b5oUcgIf8UjmCt729h0C1_j9pdubojH6vzij13FYUOMaKawO5jf1cc1xha-MmILjDKuzYY1fNRzi9oJyg",
+    "rating": 4.7,
+    "numReviews": 52,
+    "stock": 15,
+    "features": [
+      "Premium Mahogany Calfskin",
+      "Hand-Stitched Goodyear Welt",
+      "Memory-foam Cushion Insole",
+      "Genuine Leather Outsole"
+    ],
+    "deliveryEstimate": "2-4 business days",
+    "aiSummary": "Goodyear welted loafers featuring deep mahogany hand-finished shading. Users praise the break-in comfort and pristine visual grain.",
+    "specifications": [
+      {
+        "name": "Welt",
+        "value": "Goodyear Welted"
+      },
+      {
+        "name": "Leather",
+        "value": "Full-Grain Italian Calfskin"
+      },
+      {
+        "name": "Warranty",
+        "value": "2 Year Sole Guarantee"
+      }
+    ],
+    "tags": [
+      "fashion",
+      "shoes",
+      "leather",
+      "loafers"
+    ]
+  },
+  {
+    "name": "Zenith X1 Pro Ultrabook",
+    "description": "Super thin high-performance laptop featuring a 14-inch OLED display, custom magnesium chassis, and silent vapor chamber cooling.",
+    "price": 85000,
+    "originalPrice": 95000,
+    "category": "Electronics",
+    "subcategory": "Laptops",
+    "brand": "Zenith",
+    "image": "https://images.unsplash.com/photo-1603302576837-37561b2e2302?auto=format&fit=crop&w=400&q=80",
+    "rating": 4.9,
+    "numReviews": 72,
+    "stock": 7,
+    "features": [
+      "Intel Evo Core Ultra 7",
+      "32GB LPDDR5X RAM",
+      "1TB PCIe 4.0 NVMe SSD",
+      "Magnesium Casing"
+    ],
+    "deliveryEstimate": "2-3 business days",
+    "aiSummary": "Praised as the benchmark laptop for creative professionals due to its vibrant OLED display and silent cooling index.",
+    "specifications": [
+      {
+        "name": "Processor",
+        "value": "Intel Ultra 7"
+      },
+      {
+        "name": "Display",
+        "value": "14-inch OLED 120Hz"
+      },
+      {
+        "name": "Warranty",
+        "value": "2 Year Global Warranty"
+      }
+    ],
+    "tags": [
+      "electronics",
+      "laptops",
+      "premium",
+      "zenith"
+    ]
+  },
+  {
+    "name": "SoundWave ANC Headphones",
+    "description": "Audiophile-grade wireless active noise-cancelling headphones featuring 40mm bio-cellulose drivers and Alcantara earcups.",
+    "price": 8000,
+    "originalPrice": 9500,
+    "category": "Electronics",
+    "subcategory": "Headphones",
+    "brand": "SoundWave",
+    "image": "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=400&q=80",
+    "rating": 4.8,
+    "numReviews": 120,
+    "stock": 25,
+    "features": [
+      "Custom Active Noise Cancelling",
+      "Alcantara Cushion comfort",
+      "40 Hours Battery Life",
+      "High-Resolution Spatial Audio"
+    ],
+    "deliveryEstimate": "2-3 business days",
+    "aiSummary": "Stunning wireless audio system delivering rich soundscapes and high isolation performance.",
+    "specifications": [
+      {
+        "name": "Drivers",
+        "value": "40mm Bio-Cellulose"
+      },
+      {
+        "name": "Weight",
+        "value": "250g"
+      },
+      {
+        "name": "Warranty",
+        "value": "2 Year Warranty"
+      }
+    ],
+    "tags": [
+      "electronics",
+      "headphones",
+      "anc",
+      "audio"
+    ]
+  },
+  {
+    "name": "Nebula Ambient Table Lamp",
+    "description": "Ambient touch-sensitive walnut base lamp that dynamically pulses color palettes to match ambient music or custom APIs.",
+    "price": 4500,
+    "originalPrice": 5500,
+    "category": "Home & Living",
+    "subcategory": "Lamps",
+    "brand": "Nebula",
+    "image": "https://images.unsplash.com/photo-1507473885765-e6ed057f782c?auto=format&fit=crop&w=400&q=80",
+    "rating": 4.7,
+    "numReviews": 45,
+    "stock": 14,
+    "features": [
+      "Solid American Walnut Base",
+      "Frosted Glass Diffuser",
+      "Touch Slide Dimming Control",
+      "Smart RGB API controller"
+    ],
+    "deliveryEstimate": "3-5 business days",
+    "aiSummary": "The Nebula desk lamp adds a refined ambient glow. Its walnut design feels authentic and premium.",
+    "specifications": [
+      {
+        "name": "Base",
+        "value": "Solid Walnut"
+      },
+      {
+        "name": "Power",
+        "value": "USB-C Powered"
+      },
+      {
+        "name": "Warranty",
+        "value": "2 Year Warranty"
+      }
+    ],
+    "tags": [
+      "home",
+      "living",
+      "decor",
+      "lamps"
+    ]
+  },
+  {
+    "name": "Lumina Therapy Serum",
+    "description": "Dermatologically certified hydration repair therapy serum formulated with natural botanical extracts and botanical oils.",
+    "price": 3200,
+    "originalPrice": 3800,
+    "category": "Beauty",
+    "subcategory": "Skincare",
+    "brand": "Lumina",
+    "image": "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&w=400&q=80",
+    "rating": 4.8,
+    "numReviews": 230,
+    "stock": 50,
+    "features": [
+      "Deep Hydration Therapy",
+      "100% Organic Extracts",
+      "Dermatologically Approved",
+      "Fragrance-Free"
+    ],
+    "deliveryEstimate": "2-3 business days",
+    "aiSummary": "Skincare elixir widely praised for its lightweight absorption and quick repair of dry or sensitive skins.",
+    "specifications": [
+      {
+        "name": "Volume",
+        "value": "50ml"
+      },
+      {
+        "name": "Type",
+        "value": "All skin types"
+      },
+      {
+        "name": "Warranty",
+        "value": "Expiry: 24 Months"
+      }
+    ],
+    "tags": [
+      "beauty",
+      "skincare",
+      "serum",
+      "therapy"
+    ]
+  }
+]

@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LUXE | Secure Checkout & Shipping Address</title>
+  
+  <!-- Fonts: Inter & Plus Jakarta Sans (Metropolis alternative) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Tabler Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    /* Ethereal Commerce Design System Tokens */
+    :root {
+      --background: #fcf8fa;
+      --surface: #ffffff;
+      --surface-container: #f0edee;
+      --text: #1b1b1d;
+      --muted: #76777d;
+      --border: #e5e2e3;
+      --primary: #000000;
+      
+      --accent-blue: #3b82f6;
+      --accent-green: #10b981;
+      
+      --font-ui: 'Inter', sans-serif;
+      --font-heading: 'Plus Jakarta Sans', 'Metropolis', system-ui, sans-serif;
+    }
+
+    body {
+      background-color: var(--background);
+      color: var(--text);
+      font-family: var(--font-ui);
+      margin: 0;
+      padding: 0;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: var(--font-heading);
+    }
+
+    /* Minimal Navbar */
+    .minimal-navbar {
+      height: 56px;
+      background-color: var(--surface);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 64px;
+    }
+
+    .luxe-logo {
+      font-size: 20px;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      text-decoration: none;
+      color: var(--primary);
+    }
+
+    .secure-checkout-label {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+    }
+
+    /* Horizontal Stepper */
+    .stepper-container {
+      display: flex;
+      justify-content: center;
+      gap: 32px;
+      margin: 32px 0 40px;
+    }
+
+    .step-text {
+      font-size: 12px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--muted);
+      cursor: pointer;
+    }
+
+    .step-text.active {
+      color: var(--primary);
+      font-weight: 700;
+      border-bottom: 1.5px solid var(--primary);
+      padding-bottom: 2px;
+    }
+
+    /* Main Grid layout */
+    .checkout-grid {
+      max-width: 6xl;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 40px;
+    }
+
+    .shipping-card {
+      background-color: var(--surface);
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      padding: 32px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.02);
+    }
+
+    .form-section-title {
+      font-size: 14px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text);
+      margin-bottom: 16px;
+    }
+
+    /* Inputs fields Ethereal style */
+    .premium-input {
+      width: 100%;
+      background-color: #f3f4f6;
+      border: 1px solid transparent;
+      border-radius: 4px;
+      padding: 12px 14px;
+      font-size: 14px;
+      outline: none;
+      transition: all 0.2s ease;
+    }
+
+    .premium-input:focus {
+      background-color: var(--surface);
+      border-color: #3b82f6;
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+    }
+
+    /* Delivery Option Cards */
+    .delivery-card {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 16px 20px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .delivery-card.selected {
+      border-color: var(--primary);
+      background-color: rgba(0, 0, 0, 0.005);
+    }
+
+    .continue-btn {
+      width: 100%;
+      background-color: var(--primary);
+      color: #ffffff;
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 14px;
+      border-radius: 6px;
+      transition: all 0.15s ease;
+    }
+
+    .continue-btn:hover {
+      background-color: #222222;
+    }
+
+    .thumb-placeholder {
+      width: 60px;
+      height: 72px;
+      border-radius: 6px;
+      background: linear-gradient(135deg, #eae7e9 0%, #dcd9db 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Promo code elements */
+    .apply-btn {
+      background-color: var(--primary);
+      color: #ffffff;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 10px 16px;
+      border-radius: 4px;
+      transition: all 0.15s ease;
+    }
+
+    .apply-btn:hover {
+      opacity: 0.9;
+    }
+
+    /* Compact Footer */
+    .compact-footer {
+      border-top: 1px solid var(--border);
+      padding: 32px 64px;
+      margin-top: 64px;
+      background-color: var(--surface);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- MINIMAL NAVBAR -->
+  <nav class="minimal-navbar">
+    <a href="#" class="luxe-logo">LUXE</a>
+    <div class="secure-checkout-label">
+      <i class="ti ti-lock"></i>
+      <span>Secure Checkout</span>
+    </div>
+  </nav>
+
+  <!-- PROGRESS STEPPER -->
+  <div class="stepper-container">
+    <span class="step-text" onclick="window.location.href='shopping_bag.html'">01 Cart</span>
+    <span class="step-text active">02 Shipping</span>
+    <span class="step-text" onclick="window.location.href='checkout_payment.html'">03 Payment</span>
+  </div>
+
+  <!-- MAIN COLUMN LAYOUT -->
+  <main class="max-w-6xl mx-auto px-6 pb-24 grid grid-cols-12 gap-10">
+    
+    <!-- LEFT CARD - Contact & Address (55%) -->
+    <div class="col-span-12 lg:col-span-7 shipping-card flex flex-col gap-8">
+      
+      <!-- Contact Info Section -->
+      <div>
+        <h2 class="form-section-title">Contact Information</h2>
+        <div class="flex flex-col gap-1.5">
+          <label class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Email Address</label>
+          <input type="email" value="alex@example.com" class="premium-input">
+        </div>
+      </div>
+
+      <!-- Shipping Address Section -->
+      <div class="flex flex-col gap-4">
+        <h2 class="form-section-title">Shipping Address</h2>
+        
+        <div class="grid grid-cols-2 gap-4">
+          <div class="flex flex-col gap-1.5">
+            <label class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">First Name</label>
+            <input type="text" placeholder="Alex" class="premium-input">
+          </div>
+          <div class="flex flex-col gap-1.5">
+            <label class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Last Name</label>
+            <input type="text" placeholder="Vane" class="premium-input">
+          </div>
+        </div>
+
+        <div class="flex flex-col gap-1.5">
+          <label class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Address</label>
+          <input type="text" value="123 Avenue Montaigne" class="premium-input">
+        </div>
+
+        <div class="flex flex-col gap-1.5">
+          <label class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Apartment, Suite, Unit (Optional)</label>
+          <input type="text" placeholder="Apt 4B" class="premium-input">
+        </div>
+
+        <div class="grid grid-cols-2 gap-4">
+          <div class="flex flex-col gap-1.5">
+            <label class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">City</label>
+            <input type="text" placeholder="Paris" class="premium-input">
+          </div>
+          <div class="flex flex-col gap-1.5">
+            <label class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Postal Code</label>
+            <input type="text" placeholder="75008" class="premium-input">
+          </div>
+        </div>
+
+        <div class="flex flex-col gap-1.5">
+          <label class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Country</label>
+          <select class="premium-input">
+            <option value="France">France</option>
+            <option value="United States">United States</option>
+            <option value="United Kingdom">United Kingdom</option>
+            <option value="India">India</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Delivery Method Section -->
+      <div class="flex flex-col gap-4">
+        <h2 class="form-section-title">Delivery Method</h2>
+        
+        <div class="flex flex-col gap-3">
+          <!-- Standard -->
+          <div class="delivery-card selected" id="dev-standard" onclick="selectDelivery('dev-standard')">
+            <div class="flex gap-4 items-center">
+              <input type="radio" name="dev_method" id="radio-standard" checked class="accent-black w-4 h-4 cursor-pointer">
+              <div class="flex flex-col">
+                <span class="text-sm font-bold text-slate-800">Standard Delivery</span>
+                <span class="text-xs text-slate-400 font-semibold mt-0.5">3-5 Business Days</span>
+              </div>
+            </div>
+            <span class="text-xs font-bold text-emerald-500 uppercase tracking-wider">Free</span>
+          </div>
+
+          <!-- Express -->
+          <div class="delivery-card" id="dev-express" onclick="selectDelivery('dev-express')">
+            <div class="flex gap-4 items-center">
+              <input type="radio" name="dev_method" id="radio-express" class="accent-black w-4 h-4 cursor-pointer">
+              <div class="flex flex-col">
+                <span class="text-sm font-bold text-slate-800">Express Delivery</span>
+                <span class="text-xs text-slate-400 font-semibold mt-0.5">Next Day Guaranteed</span>
+              </div>
+            </div>
+            <span class="text-xs font-bold text-slate-900">$35.00</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Submit Button -->
+      <button onclick="window.location.href='checkout_payment.html'" class="continue-btn mt-4">
+        CONTINUE TO PAYMENT
+      </button>
+
+    </div>
+
+    <!-- RIGHT CARD - Order Summary (40%) -->
+    <div class="col-span-12 lg:col-span-5 shipping-card flex flex-col gap-6 h-fit">
+      <h2 class="text-sm font-bold uppercase tracking-wider text-slate-800 border-b border-slate-100 pb-4">Order Summary</h2>
+      
+      <!-- Product items -->
+      <div class="flex flex-col gap-4">
+        <!-- Item 1 -->
+        <div class="flex gap-4 items-center">
+          <div class="thumb-placeholder relative overflow-hidden">
+            <span class="absolute inset-0 bg-gradient-to-br from-indigo-500 to-purple-500 opacity-20"></span>
+            <i class="ti ti-watch text-slate-400 text-xl z-10"></i>
+          </div>
+          <div class="flex flex-col truncate flex-1">
+            <span class="text-xs font-bold truncate text-slate-800">Aurelius Leather Tote</span>
+            <span class="text-[11px] text-slate-400 font-semibold mt-0.5">Classic Black / Qty: 1</span>
+          </div>
+          <span class="text-xs font-bold text-slate-900">$2,450.00</span>
+        </div>
+
+        <!-- Item 2 -->
+        <div class="flex gap-4 items-center">
+          <div class="thumb-placeholder relative overflow-hidden">
+            <span class="absolute inset-0 bg-gradient-to-br from-amber-400 to-orange-500 opacity-20"></span>
+            <i class="ti ti-watch text-slate-400 text-xl z-10"></i>
+          </div>
+          <div class="flex flex-col truncate flex-1">
+            <span class="text-xs font-bold truncate text-slate-800">Vertex Titanium Chrono</span>
+            <span class="text-[11px] text-slate-400 font-semibold mt-0.5">Titanium Edition / Qty: 1</span>
+          </div>
+          <span class="text-xs font-bold text-slate-900">$8,900.00</span>
+        </div>
+      </div>
+
+      <!-- Pricing lines -->
+      <div class="flex flex-col gap-2.5 border-t border-slate-100 pt-5 text-xs font-semibold text-slate-450">
+        <div class="flex justify-between">
+          <span>Subtotal</span>
+          <span class="text-slate-800">$11,350.00</span>
+        </div>
+        <div class="flex justify-between">
+          <span>Shipping</span>
+          <span class="text-slate-400">Calculated at next step</span>
+        </div>
+        <div class="flex justify-between">
+          <span>Estimated Taxes</span>
+          <span class="text-slate-800">$908.00</span>
+        </div>
+      </div>
+
+      <div class="flex justify-between items-center border-t border-slate-100 pt-4 text-sm font-extrabold text-slate-900">
+        <span>Total Balance Due</span>
+        <span class="text-base">$12,258.00</span>
+      </div>
+
+      <!-- Promo Code input row -->
+      <div class="flex gap-2 border-t border-slate-100 pt-5">
+        <input type="text" placeholder="Promo Code" class="premium-input py-2 text-xs flex-1">
+        <button class="apply-btn">Apply</button>
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- COMPACT FOOTER -->
+  <footer class="compact-footer">
+    <div class="flex flex-col">
+      <span class="text-sm font-extrabold tracking-tight uppercase">LUXE</span>
+      <span class="text-[10px] font-semibold text-slate-400 mt-1 max-w-[200px]">Advanced Commerce, Elevated Experience.</span>
+    </div>
+    
+    <div class="flex gap-6 text-xs font-semibold text-slate-400">
+      <a href="#" class="hover:text-black transition-colors">Assistance</a>
+      <a href="#" class="hover:text-black transition-colors">Privacy Policy</a>
+      <a href="#" class="hover:text-black transition-colors">Terms</a>
+    </div>
+
+    <div class="flex gap-4 text-slate-400 text-sm">
+      <a href="#" class="hover:text-black transition-colors"><i class="ti ti-brand-twitter"></i></a>
+      <a href="#" class="hover:text-black transition-colors"><i class="ti ti-brand-instagram"></i></a>
+    </div>
+  </footer>
+
+  <script>
+    // Selected delivery cards toggler
+    function selectDelivery(cardId) {
+      const cards = document.querySelectorAll('.delivery-card');
+      cards.forEach(c => c.classList.remove('selected'));
+
+      const selectedCard = document.getElementById(cardId);
+      selectedCard.classList.add('selected');
+
+      const radio = selectedCard.querySelector('input[type="radio"]');
+      if (radio) radio.checked = true;
+    }
+  </script>
+</body>
+</html>

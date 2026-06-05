@@ -1,0 +1,3158 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LUXE | Modern AI-Powered Premium E-Commerce</title>
+  
+  <!-- Google Fonts: Inter & Playfair Display -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            gold: {
+              DEFAULT: '#C9A84C',
+              50: '#fcfaf2',
+              100: '#faf6e5',
+              500: '#C9A84C',
+              600: '#b2913b',
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            serif: ['Playfair Display', 'serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Global Color Variable System */
+    :root {
+      --bg: #fff;
+      --surface: #f9f9f9;
+      --card: #fff;
+      --text: #111;
+      --muted: #777;
+      --border: #e8e8e8;
+      --border-card: #ebebeb;
+    }
+
+    [data-theme="dark"] {
+      --bg: #0a0a0a;
+      --surface: #111;
+      --card: #161616;
+      --text: #f0f0f0;
+      --muted: #666;
+      --border: #222;
+      --border-card: #2e2e2e;
+    }
+
+    /* Core Reset and Global Transitions */
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      transition: background-color 0.25s ease, color 0.25s ease;
+      overflow-x: hidden;
+    }
+
+    /* Dynamic UI Theming Utility Bindings */
+    .themed-card {
+      background-color: var(--card);
+      border: 1px solid var(--border-card);
+      color: var(--text);
+      transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease, box-shadow 0.2s ease, transform 0.2s ease;
+    }
+
+    .themed-surface {
+      background-color: var(--surface);
+      color: var(--text);
+      transition: background-color 0.25s ease, color 0.25s ease;
+    }
+
+    .themed-border {
+      border-color: var(--border);
+      transition: border-color 0.25s ease;
+    }
+
+    .themed-text-muted {
+      color: var(--muted);
+      transition: color 0.25s ease;
+    }
+
+    /* PREMIUM NAVBAR */
+    .premium-navbar {
+      background-color: var(--bg);
+      border-bottom: 1px solid var(--border);
+      padding: 0 48px;
+      height: 56px;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: background-color 0.25s ease, border-color 0.25s ease;
+    }
+    
+    .luxe-logo {
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      font-family: 'Inter', sans-serif;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+    }
+    .luxe-logo .logo-luxe {
+      color: var(--text);
+      font-weight: 900;
+    }
+    .luxe-logo .logo-cart {
+      color: #C9A84C;
+      font-weight: 900;
+    }
+    
+    .nav-catalog {
+      position: relative;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      color: var(--text);
+      text-decoration: none;
+      padding: 6px 0;
+      transition: color 0.2s ease;
+      cursor: pointer;
+    }
+    .nav-catalog::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: 0;
+      left: 0;
+      background-color: var(--text);
+      transition: width 0.2s ease;
+    }
+    .nav-catalog:hover::after {
+      width: 100%;
+    }
+    .nav-catalog.active::after {
+      width: 100% !important;
+    }
+    
+    .nav-hover-link {
+      position: relative;
+      font-size: 13px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      text-decoration: none;
+      padding: 6px 0;
+      transition: color 0.2s ease;
+    }
+    .nav-hover-link::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: 0;
+      left: 0;
+      background-color: var(--text);
+      transition: width 0.2s ease;
+    }
+    .nav-hover-link:hover::after {
+      width: 100%;
+    }
+    .nav-hover-link.active::after {
+      width: 100%;
+    }
+
+    /* Sun/Moon theme switcher circle */
+    .theme-toggle-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 1px solid var(--border);
+      background: transparent;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text);
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .theme-toggle-btn:hover {
+      background-color: var(--surface);
+    }
+    
+    /* Cart Button with badge styling */
+    .cart-btn {
+      position: relative;
+      background: transparent;
+      border: none;
+      color: var(--text);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 8px;
+      transition: all 0.15s ease;
+    }
+    .cart-badge {
+      position: absolute;
+      top: -2px;
+      right: -2px;
+      background-color: #ef4444; /* red pill */
+      color: white;
+      border-radius: 10px;
+      font-size: 10px;
+      font-weight: 800;
+      padding: 2px 6px;
+      min-width: 16px;
+      height: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.15s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    
+    .signin-btn {
+      background-color: var(--text);
+      color: var(--bg);
+      border: none;
+      border-radius: 6px;
+      padding: 8px 20px;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .signin-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    /* PREMIUM HERO BANNER - CHARCOAL & AMBER GLOW */
+    .premium-hero {
+      background: #0f0f0f;
+      background-image: radial-gradient(circle at 10% 10%, rgba(201, 168, 76, 0.05) 0%, transparent 60%);
+      border-radius: 16px;
+      margin: 16px 24px 0;
+      padding: 52px 48px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      border: 1px solid #2e2e2e;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .hero-top-label {
+      color: #C9A84C;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      font-weight: 700;
+      border-left: 3px solid #C9A84C;
+      padding-left: 10px;
+      display: inline-flex;
+      align-items: center;
+      line-height: 1;
+    }
+    
+    .hero-heading {
+      font-size: clamp(36px, 5vw, 58px);
+      color: #ffffff;
+      font-family: 'Playfair Display', Georgia, serif;
+      line-height: 1.15;
+      font-weight: 700;
+      margin: 8px 0 0;
+      text-shadow: 0 2px 20px rgba(201, 168, 76, 0.15);
+    }
+    
+    .hero-subtext {
+      font-size: 15px;
+      color: #a0a0a0;
+      max-width: 520px;
+      line-height: 1.7;
+      margin: 0;
+    }
+    
+    .hero-search-container {
+      display: flex;
+      flex-direction: row;
+      gap: 12px;
+      width: 100%;
+      max-width: 520px;
+      align-items: center;
+    }
+    
+    .hero-search-input-wrapper {
+      position: relative;
+      flex: 1;
+    }
+    
+    .hero-search-input {
+      width: 100%;
+      border-radius: 50px;
+      background: #1c1c1c;
+      border: 1px solid #2e2e2e;
+      padding: 14px 20px 14px 44px;
+      color: #ffffff;
+      font-size: 14px;
+      outline: none;
+      transition: all 0.15s ease;
+    }
+    
+    .hero-search-input::-moz-placeholder {
+      color: #777777;
+    }
+    
+    .hero-search-input::placeholder {
+      color: #777777;
+    }
+    
+    .hero-search-input:focus {
+      border-color: #C9A84C;
+      box-shadow: 0 0 0 3px rgba(201, 168, 76, 0.15);
+    }
+    
+    .ask-ai-btn {
+      background-color: #C9A84C;
+      color: #000000;
+      border: none;
+      border-radius: 50px;
+      padding: 13px 28px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.15s ease;
+      white-space: nowrap;
+    }
+    .ask-ai-btn:hover {
+      filter: brightness(110%);
+      transform: scale(1.02);
+    }
+    
+    .voice-mic-btn {
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      background-color: #C9A84C;
+      color: #000000;
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      font-size: 16px;
+      flex-shrink: 0;
+    }
+    .voice-mic-btn:hover {
+      filter: brightness(110%);
+      transform: scale(1.02);
+    }
+    
+    .ai-filter-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid #C9A84C;
+      color: #C9A84C;
+      background: rgba(201, 168, 76, 0.05);
+      border-radius: 20px;
+      font-size: 12px;
+      padding: 6px 14px;
+      width: -moz-fit-content;
+      width: fit-content;
+      margin-top: 4px;
+      animation: fadeIn 0.3s ease;
+    }
+    .ai-filter-chip button {
+      background: transparent;
+      border: none;
+      color: #C9A84C;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 14px;
+      line-height: 1;
+    }
+
+    /* CATALOG HEADER AND FILTER TABS */
+    .catalog-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 16px;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    
+    .catalog-title {
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .filter-tabs-group {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    
+    .premium-filter-tab {
+      padding: 8px 18px;
+      border-radius: 50px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+      border: 1px solid var(--border);
+      background-color: var(--bg);
+      color: var(--muted);
+    }
+    .premium-filter-tab:hover {
+      background-color: var(--surface);
+    }
+    .premium-filter-tab.active {
+      background-color: var(--text);
+      color: var(--bg);
+      border-color: var(--text);
+    }
+
+    /* ELEVATED SIDEBAR FEATURE PANELS */
+    .premium-sidebar-panel {
+      border-radius: 14px;
+      border: 1px solid var(--border-card);
+      padding: 20px;
+      background-color: var(--card);
+      margin-bottom: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.02);
+      transition: all 0.25s ease;
+    }
+    
+    .sidebar-panel-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .sidebar-panel-icon-gold {
+      color: #C9A84C;
+      font-size: 14px;
+      font-weight: bold;
+    }
+    
+    .sidebar-panel-title {
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text);
+      margin: 0;
+    }
+    
+    .sidebar-panel-desc {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.6;
+      margin: 0;
+    }
+    
+    .comparing-active-card {
+      border-color: #C9A84C !important;
+      box-shadow: 0 0 0 3px rgba(201, 168, 76, 0.15) !important;
+    }
+    
+    .generate-compare-btn {
+      width: 100%;
+      background-color: #C9A84C;
+      color: #000000;
+      border: none;
+      padding: 12px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      box-shadow: 0 0 0 0 rgba(201, 168, 76, 0.5);
+      animation: pulse-border 2s infinite;
+    }
+    .generate-compare-btn:hover {
+      filter: brightness(110%);
+    }
+    
+    @keyframes pulse-border {
+      0% {
+        box-shadow: 0 0 0 0 rgba(201, 168, 76, 0.7);
+      }
+      70% {
+        box-shadow: 0 0 0 8px rgba(201, 168, 76, 0);
+      }
+      100% {
+        box-shadow: 0 0 0 0 rgba(201, 168, 76, 0);
+      }
+    }
+    
+    .budget-input-wrapper {
+      position: relative;
+      width: 100%;
+    }
+    
+    .budget-prefix-indian-rupee {
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 600;
+    }
+    
+    .budget-input-field {
+      width: 100%;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      padding: 10px 14px 10px 28px;
+      font-size: 13px;
+      outline: none;
+      background-color: var(--surface);
+      color: var(--text);
+      transition: all 0.15s ease;
+    }
+    
+    .budget-input-field:focus {
+      border-color: #C9A84C;
+      box-shadow: 0 0 0 3px rgba(201, 168, 76, 0.15);
+      background-color: var(--card);
+    }
+    
+    .budget-optimize-btn {
+      background-color: var(--text);
+      color: var(--bg);
+      border: none;
+      border-radius: 8px;
+      padding: 10px 20px;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      white-space: nowrap;
+    }
+    .budget-optimize-btn:hover {
+      background-color: #C9A84C;
+      color: #000000;
+    }
+
+    /* PREMIUM DYNAMIC PRODUCT CARDS */
+    .products-grid-layout {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 20px;
+    }
+    
+    .premium-product-card {
+      border-radius: 14px;
+      border: 1px solid var(--border-card);
+      background-color: var(--card);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: all 0.2s ease;
+      position: relative;
+    }
+    
+    .premium-product-card:hover {
+      box-shadow: 0 8px 32px rgba(0,0,0,0.10);
+      transform: translateY(-3px);
+    }
+    
+    .card-image-area {
+      height: 220px;
+      background-color: #f5f5f5;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+    
+    .card-image-gradient {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.3s ease;
+    }
+    
+    .card-image-area:hover .card-image-gradient {
+      transform: scale(1.03);
+    }
+    
+    .card-category-badge {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      z-index: 10;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(4px);
+      color: #ffffff;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 11px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .card-body {
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      flex: 1;
+    }
+    
+    .card-info-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 8px;
+    }
+    
+    .card-product-title {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text);
+      margin: 0;
+      cursor: pointer;
+      transition: color 0.15s ease;
+      line-height: 1.4;
+    }
+    .card-product-title:hover {
+      color: #C9A84C;
+    }
+    
+    .card-product-price {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text);
+      white-space: nowrap;
+    }
+    
+    .card-description {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 6px;
+      line-height: 1.5;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    
+    .card-divider {
+      height: 1px;
+      background-color: #f0f0f0;
+      margin: 12px 0;
+    }
+
+    [data-theme="dark"] .card-divider {
+      background-color: var(--border);
+    }
+    
+    .card-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .compare-link {
+      font-size: 12px;
+      color: var(--muted);
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: color 0.15s ease;
+      font-weight: 500;
+    }
+    .compare-link:hover {
+      color: var(--text);
+    }
+    .compare-link.active {
+      color: #C9A84C;
+      font-weight: bold;
+    }
+    
+    .add-to-cart-btn {
+      background-color: var(--text);
+      color: var(--bg);
+      border: none;
+      border-radius: 8px;
+      padding: 9px 18px;
+      font-size: 12px;
+      font-weight: 750;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .add-to-cart-btn:hover {
+      background-color: #C9A84C;
+      color: #000000;
+    }
+
+    /* INTERACTIVE MICRO-ACTIONS & POLISH ANIMATIONS */
+    .stagger-card {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .fade-out-anim {
+      opacity: 0;
+      transition: opacity 100ms ease;
+    }
+
+    .fade-in-anim {
+      opacity: 1;
+      transition: opacity 150ms ease;
+    }
+
+    button, [role="button"], a {
+      cursor: pointer;
+    }
+
+    /* Custom scrollbar adjustments */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: var(--border);
+      border-radius: 99px;
+    }
+
+  </style>
+  <script type="module" crossorigin src="/assets/index-BpQuJ2Kz.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-D0aUAJmy.css">
+</head>
+<body class="min-h-screen flex flex-col antialiased">
+  <div id="vanilla-app-container" class="min-h-screen flex flex-col" style="display: none;">
+
+  <!-- NAVBAR -->
+  <header class="premium-navbar">
+    <div class="flex items-center gap-12">
+      <!-- Clickable brand redirecting back to home catalog -->
+      <a href="#" onclick="switchView('catalog')" class="luxe-logo flex items-center">
+        <span class="logo-luxe">LUXE</span><span class="text-[#C9A84C] font-extrabold font-sans">.</span>
+      </a>
+
+      <nav class="hidden md:flex items-center gap-8 text-[11px] font-black uppercase tracking-widest text-slate-500 dark:text-zinc-400">
+        <a href="#" onclick="switchView('catalog')" id="nav-catalog-link" class="nav-catalog active">
+          CATALOG
+        </a>
+        <a href="#" onclick="switchView('profile')" id="nav-profile-link" class="nav-hover-link py-1 text-slate-500 dark:text-zinc-400 hidden user-auth-visible">
+          Luxe Loyalty
+        </a>
+        <a href="#" onclick="switchView('admin')" id="nav-admin-link" class="nav-hover-link py-1 text-slate-500 dark:text-zinc-400 hidden admin-auth-visible">
+          Admin Console
+        </a>
+      </nav>
+    </div>
+
+    <div class="flex items-center gap-6">
+      <!-- Light / Dark theme toggler -->
+      <button id="theme-toggle" class="theme-toggle-btn" title="Toggle theme">
+        <i class="fa-solid fa-moon"></i>
+      </button>
+
+      <!-- Cart Button with Pill Badge -->
+      <button onclick="switchView('cart')" class="cart-btn" title="Cart Bag">
+        <i class="fa-solid fa-shopping-bag text-lg"></i>
+        <span id="cart-badge-counter" class="cart-badge scale-0">
+          0
+        </span>
+      </button>
+
+      <!-- Sign In actions -->
+      <div id="auth-header-block">
+        <button onclick="openAuthModal()" class="signin-btn">
+          SIGN IN
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- DYNAMIC VIEW SECTIONS -->
+
+  <!-- ==========================================
+       VIEW: CATALOG / MAIN SHEETS
+       ========================================== -->
+  <div id="view-catalog" class="view-section w-full flex flex-col gap-8 transition-opacity duration-200">
+    
+    <!-- HERO BANNER -->
+    <section class="premium-hero">
+      <div class="flex flex-col gap-2 max-w-xl z-10">
+        <div class="flex items-center">
+          <span class="hero-top-label">
+            ⚡ NEXT-GENERATION SHOPPING
+          </span>
+        </div>
+        <h1 class="hero-heading">Intelligent Luxury,
+Curated For You.</h1>
+        <p class="hero-subtext">
+          Search naturally, compare models automatically using AI, and earn premium reward Luxe Points with every purchase.
+        </p>
+      </div>
+
+      <!-- Natural Search Forms -->
+      <form id="ai-search-form" onsubmit="triggerAiSearch(event)" class="hero-search-container z-10 w-full">
+        <div class="hero-search-input-wrapper">
+          <input
+            id="ai-search-input"
+            type="text"
+            placeholder="Try typing: 'Show me gaming laptops under ₹70000'"
+            class="hero-search-input"
+            required
+          />
+          <i class="fa-solid fa-magnifying-glass absolute left-5 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
+        </div>
+        <button type="submit" class="ask-ai-btn">
+          <i class="fa-solid fa-wand-magic-sparkles animate-pulse"></i> ASK AI
+        </button>
+        <button type="button" onclick="triggerSpeechMic()" id="mic-trigger-btn" class="voice-mic-btn">
+          <i class="fa-solid fa-microphone"></i>
+        </button>
+      </form>
+
+      <!-- Active AI Filter Chip -->
+      <div id="ai-filter-chip-container" class="hidden">
+        <div class="ai-filter-chip">
+          <i class="fa-solid fa-wand-magic-sparkles"></i>
+          <span id="ai-filter-chip-text">AI Filter Active</span>
+          <button onclick="resetFilters(event)" class="font-extrabold">×</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Main Dual Columns Section -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 px-6 pb-12 items-start">
+      
+      <!-- Left Column: Catalog items (8 cols) -->
+      <main class="lg:col-span-8 flex flex-col gap-6">
+        <div class="catalog-header">
+          <div class="catalog-title">
+            <i class="fa-solid fa-shapes text-[#C9A84C] text-lg"></i>
+            <span>Catalog Collections</span>
+          </div>
+          
+          <!-- Category Tabs -->
+          <div class="filter-tabs-group" id="filter-tabs-container">
+            <button onclick="selectCategory('')" class="premium-filter-tab active" data-cat="">
+              ALL
+            </button>
+            <button onclick="selectCategory('Laptops')" class="premium-filter-tab" data-cat="Laptops">
+              LAPTOPS
+            </button>
+            <button onclick="selectCategory('Footwear')" class="premium-filter-tab" data-cat="Footwear">
+              FOOTWEAR
+            </button>
+            <button onclick="selectCategory('Mobiles')" class="premium-filter-tab" data-cat="Mobiles">
+              MOBILES
+            </button>
+            <button onclick="selectCategory('Apparel')" class="premium-filter-tab" data-cat="Apparel">
+              APPAREL
+            </button>
+          </div>
+        </div>
+
+        <!-- Products Grid Container -->
+        <div id="catalog-products-grid" class="products-grid-layout transition-all duration-200">
+          <!-- Loaded dynamically via javascript catalog lists -->
+        </div>
+      </main>
+
+      <!-- Right Column: AI Panels Sidebar (4 cols) -->
+      <aside class="lg:col-span-4 flex flex-col gap-6">
+        
+        <!-- AI Specifications Compare panel -->
+        <div class="premium-sidebar-panel">
+          <div class="sidebar-panel-header">
+            <span class="sidebar-panel-icon-gold">✦</span>
+            <h3 class="sidebar-panel-title">
+              AI COMPARE SPECS
+            </h3>
+          </div>
+          <p class="sidebar-panel-desc">
+            Toggle "Compare" links on product cards to select models. Gemini will auto-generate specs matrix, advantages, and purchase advises.
+          </p>
+
+          <div id="compare-selection-ledger" class="flex flex-col gap-2.5">
+            <!-- Selected items display -->
+          </div>
+
+          <div id="compare-trigger-block" class="hidden">
+            <button onclick="generateAiComparison()" id="btn-compare-trigger" class="generate-compare-btn">
+              <i class="fa-solid fa-layer-group"></i> GENERATE COMPARISON
+            </button>
+          </div>
+
+          <!-- Comparison output results display -->
+          <div id="compare-results-output" class="hidden border-t themed-border pt-4 flex flex-col gap-4">
+            <!-- Loaded dynamically -->
+          </div>
+        </div>
+
+        <!-- AI Budget Shopping panel -->
+        <div class="premium-sidebar-panel">
+          <div class="sidebar-panel-header">
+            <span class="sidebar-panel-icon-gold"><i class="fa-solid fa-wallet"></i></span>
+            <h3 class="sidebar-panel-title">
+              AI BUDGET SHOPPING
+            </h3>
+          </div>
+          <p class="sidebar-panel-desc">
+            Enter a total sum budget limit and let Gemini construct the most optimized shopping cart bundle fitting within your exact boundaries!
+          </p>
+
+          <form onsubmit="optimizeBudgetPlan(event)" class="flex gap-2 w-full">
+            <div class="budget-input-wrapper">
+              <span class="budget-prefix-indian-rupee">₹</span>
+              <input
+                id="budget-optimizer-input"
+                type="number"
+                placeholder="E.g. 50000"
+                class="budget-input-field"
+                required
+              />
+            </div>
+            <button type="submit" class="budget-optimize-btn">
+              OPTIMIZE
+            </button>
+          </form>
+
+          <div id="budget-results-output" class="hidden border-t themed-border pt-4 flex flex-col gap-3">
+            <!-- Loaded dynamically -->
+          </div>
+        </div>
+
+      </aside>
+
+    </div>
+
+  </div>
+
+  <!-- ==========================================
+       VIEW: SMART CART BAG
+       ========================================== -->
+  <div id="view-cart" class="view-section hidden w-full flex flex-col gap-8 px-12 pb-16 transition-opacity duration-200 animate-[fadeIn_0.3s_ease]">
+    <div class="flex items-center gap-2">
+      <i class="fa-solid fa-shopping-bag text-gold text-lg"></i>
+      <h2 class="text-xl font-bold tracking-tight">Your Shopping Bag</h2>
+    </div>
+
+    <!-- Free Delivery threshold progress bar -->
+    <section class="themed-card p-5 rounded-2xl shadow-sm flex flex-col gap-3 relative overflow-hidden group">
+      <div class="flex justify-between items-center text-xs font-bold">
+        <span class="flex items-center gap-1.5">
+          <i class="fa-solid fa-wand-magic-sparkles text-gold animate-pulse"></i> FREE DELIVERY PROGRESS METER
+        </span>
+        <span id="cart-limit-text">₹0 / ₹1000</span>
+      </div>
+      
+      <div class="w-full h-3 bg-slate-100 dark:bg-zinc-900 rounded-full overflow-hidden border themed-border p-[1px]">
+        <div id="cart-progress-fill" class="h-full bg-gradient-to-r from-gold to-amber-500 rounded-full transition-all duration-300" style="width: 0%"></div>
+      </div>
+
+      <div class="flex justify-between items-center text-[11px] font-semibold text-slate-500 mt-0.5">
+        <span id="cart-meter-subtext">Add items to qualify for complimentary premium shipping.</span>
+        <span class="text-gold font-bold uppercase tracking-wider">Free Delivery Limit: ₹1000</span>
+      </div>
+    </section>
+
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+      
+      <!-- Left Cart Items List (8 cols) -->
+      <main class="lg:col-span-8 flex flex-col gap-4">
+        <div id="cart-items-ledger-list" class="flex flex-col gap-4">
+          <!-- Loaded dynamically -->
+        </div>
+
+        <button onclick="clearShoppingBag()" class="text-[10px] uppercase font-black tracking-widest text-slate-400 hover:text-slate-650 transition-colors w-fit mt-2">
+          Clear Shopping Bag
+        </button>
+      </main>
+
+      <!-- Right Summary & Upsells (4 cols) -->
+      <aside class="lg:col-span-4 flex flex-col gap-6">
+        
+        <!-- Threshold Upsell items panel -->
+        <div id="cart-upsell-panel" class="themed-card p-5 rounded-2xl flex flex-col gap-4 shadow-sm hidden">
+          <span class="text-[10px] font-black uppercase text-gold tracking-wider flex items-center gap-1.5">
+            <i class="fa-solid fa-sparkles animate-pulse"></i> Add These to Reach Free Shipping
+          </span>
+          <div id="cart-upsells-list" class="flex flex-col gap-3">
+            <!-- Loaded dynamically -->
+          </div>
+        </div>
+
+        <!-- Price breakdown panel -->
+        <div class="themed-card p-5 rounded-2xl flex flex-col gap-4 shadow-sm">
+          <h3 class="text-xs font-black uppercase tracking-wider">Cart Invoice Sheet</h3>
+          
+          <div class="flex flex-col gap-2.5 border-b themed-border pb-4 text-xs font-medium themed-text-muted">
+            <div class="flex justify-between">
+              <span>Subtotal:</span>
+              <span id="cart-summary-subtotal" class="font-bold text-slate-800 dark:text-zinc-200">₹0</span>
+            </div>
+            <div class="flex justify-between">
+              <span>Shipping Delivery Fee:</span>
+              <span id="cart-summary-shipping" class="font-bold text-slate-800 dark:text-zinc-200">₹100</span>
+            </div>
+          </div>
+
+          <div class="flex justify-between items-center text-sm font-black">
+            <span>Total Price:</span>
+            <span id="cart-summary-total">₹100</span>
+          </div>
+
+          <button onclick="switchView('checkout')" class="w-full bg-black dark:bg-zinc-100 text-white dark:text-black py-3.5 rounded-xl text-xs font-extrabold uppercase tracking-wider hover:bg-gold hover:text-black transition-all flex items-center justify-center gap-1.5 shadow">
+            PROCEED TO SECURE CHECKOUT <i class="fa-solid fa-arrow-right text-xs"></i>
+          </button>
+        </div>
+
+      </aside>
+
+    </div>
+  </div>
+
+  <!-- ==========================================
+       VIEW: SECURE CHECKOUT PIPELINE
+       ========================================== -->
+  <div id="view-checkout" class="view-section hidden w-full flex flex-col gap-8 px-12 pb-16 max-w-4xl mx-auto transition-opacity duration-200 animate-[fadeIn_0.3s_ease]">
+    <div class="flex items-center gap-2">
+      <i class="fa-solid fa-credit-card text-gold text-lg"></i>
+      <h2 class="text-xl font-bold tracking-tight">Secure Payment Checkout</h2>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
+      
+      <!-- Left Checkout Form Sheet (7 cols) -->
+      <form onsubmit="submitSecurePurchase(event)" class="md:col-span-7 flex flex-col gap-6">
+        
+        <!-- Shipping details gathers -->
+        <div class="themed-card p-5 rounded-2xl flex flex-col gap-4">
+          <span class="text-[10px] font-black uppercase tracking-wider">
+            1. Delivery Dispatch Address
+          </span>
+
+          <div class="flex flex-col gap-3">
+            <div class="flex flex-col gap-1.5">
+              <label class="text-[10px] font-bold themed-text-muted uppercase">Street Address</label>
+              <input type="text" value="123 Luxury Avenue" class="w-full bg-slate-50 dark:bg-zinc-900 border themed-border rounded-lg py-2 px-3 text-xs font-semibold focus:outline-none focus:border-gold text-slate-800 dark:text-zinc-100" required />
+            </div>
+
+            <div class="grid grid-cols-2 gap-3">
+              <div class="flex flex-col gap-1.5">
+                <label class="text-[10px] font-bold themed-text-muted uppercase">City</label>
+                <input type="text" value="Mumbai" class="w-full bg-slate-50 dark:bg-zinc-900 border themed-border rounded-lg py-2 px-3 text-xs font-semibold focus:outline-none focus:border-gold text-slate-800 dark:text-zinc-100" required />
+              </div>
+              <div class="flex flex-col gap-1.5">
+                <label class="text-[10px] font-bold themed-text-muted uppercase">Zipcode</label>
+                <input type="text" value="400001" class="w-full bg-slate-50 dark:bg-zinc-900 border themed-border rounded-lg py-2 px-3 text-xs font-semibold focus:outline-none focus:border-gold text-slate-800 dark:text-zinc-100" required />
+              </div>
+            </div>
+
+            <div class="flex flex-col gap-1.5">
+              <label class="text-[10px] font-bold themed-text-muted uppercase">Phone Number</label>
+              <input type="text" value="+91 9876543210" class="w-full bg-slate-50 dark:bg-zinc-900 border themed-border rounded-lg py-2 px-3 text-xs font-semibold focus:outline-none focus:border-gold text-slate-800 dark:text-zinc-100" required />
+            </div>
+          </div>
+        </div>
+
+        <!-- Payment selections -->
+        <div class="themed-card p-5 rounded-2xl flex flex-col gap-4">
+          <span class="text-[10px] font-black uppercase tracking-wider">
+            2. Choose Payment Gateway
+          </span>
+          <div class="grid grid-cols-2 gap-3">
+            <button type="button" onclick="selectPayGate('UPI')" id="pay-upi-btn" class="p-3 rounded-lg border text-xs font-extrabold uppercase tracking-wider flex items-center justify-center transition-all border-gold bg-gold/5 font-extrabold">
+              UPI
+            </button>
+            <button type="button" onclick="selectPayGate('Card')" id="pay-card-btn" class="p-3 rounded-lg border text-xs font-extrabold uppercase tracking-wider flex items-center justify-center transition-all border-slate-200 dark:border-zinc-800 themed-text-muted hover:bg-slate-50 dark:hover:bg-zinc-900">
+              Credit / Debit Card
+            </button>
+          </div>
+        </div>
+
+        <!-- Points redemptions -->
+        <div class="themed-card p-5 rounded-2xl flex flex-col gap-4">
+          <span class="text-[10px] font-black uppercase tracking-wider flex items-center gap-1.5">
+            <i class="fa-solid fa-gift text-gold animate-bounce"></i> 3. Luxe Wallet Points Redemption
+          </span>
+          
+          <div id="checkout-points-redemption-body" class="flex flex-col gap-3">
+            <!-- Loaded dynamically based on auth status -->
+          </div>
+        </div>
+
+        <button type="submit" class="w-full bg-black dark:bg-zinc-100 text-white dark:text-black py-4 rounded-xl text-xs font-extrabold uppercase tracking-wider hover:bg-gold hover:text-black transition-all flex items-center justify-center gap-2 shadow">
+          PLACE SECURE ORDER
+        </button>
+      </form>
+
+      <!-- Right Summary Panel & AI Optimizers (5 cols) -->
+      <aside class="md:col-span-5 flex flex-col gap-6">
+        
+        <!-- AI Cashback Optimizer box -->
+        <div id="checkout-ai-optimizer-box" class="themed-card p-5 rounded-2xl flex flex-col gap-4 shadow-sm border border-gold/20 relative bg-gradient-to-r from-gold/10 to-transparent">
+          <div class="flex items-center gap-2">
+            <i class="fa-solid fa-wand-magic-sparkles text-gold animate-pulse"></i>
+            <h4 class="text-xs font-extrabold uppercase tracking-wider text-gold-600 dark:text-gold-500">
+              AI Cashback Optimizer
+            </h4>
+          </div>
+          <p id="checkout-optimizer-text" class="text-xs leading-relaxed font-semibold">
+            Use 300 points today and save the remaining points for higher-value future purchases.
+          </p>
+        </div>
+
+        <!-- Checkout Pricing Breakdown -->
+        <div class="themed-card p-5 rounded-2xl flex flex-col gap-4 shadow-sm">
+          <h3 class="text-xs font-black uppercase tracking-wider">Checkout Invoice Summary</h3>
+          
+          <div class="flex flex-col gap-2.5 border-b themed-border pb-4 text-xs font-medium themed-text-muted">
+            <div class="flex justify-between">
+              <span>Items Subtotal:</span>
+              <span id="checkout-summary-subtotal" class="font-bold text-slate-800 dark:text-zinc-200">₹0</span>
+            </div>
+            <div class="flex justify-between">
+              <span>Shipping Delivery Fee:</span>
+              <span id="checkout-summary-shipping" class="font-bold text-slate-800 dark:text-zinc-200">₹100</span>
+            </div>
+            <div id="checkout-summary-points-row" class="flex justify-between text-rose-600 font-semibold hidden">
+              <span>LuxePoints Wallet Discount:</span>
+              <span id="checkout-summary-points-val">-₹0</span>
+            </div>
+          </div>
+
+          <div class="flex justify-between items-center text-sm font-black">
+            <span>Final Amount Due:</span>
+            <span id="checkout-summary-total">₹100</span>
+          </div>
+        </div>
+
+      </aside>
+
+    </div>
+  </div>
+
+  <!-- ==========================================
+       VIEW: PRODUCT DETAILS SHEETS
+       ========================================== -->
+  <div id="view-product-detail" class="view-section hidden w-full flex flex-col gap-8 px-12 pb-16 transition-opacity duration-200 animate-[fadeIn_0.3s_ease]">
+    <div>
+      <button onclick="switchView('catalog')" class="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-slate-500 hover:text-slate-700 transition-colors">
+        <i class="fa-solid fa-arrow-left"></i> Back to Catalog
+      </button>
+    </div>
+
+    <!-- Product specification grids -->
+    <div id="detail-product-layout" class="grid grid-cols-1 md:grid-cols-2 gap-10 items-start">
+      <!-- Loaded dynamically -->
+    </div>
+
+    <!-- AI Sentiment Review summary block -->
+    <div id="detail-ai-summary-block" class="flex flex-col gap-3">
+      <!-- Loaded dynamically -->
+    </div>
+
+    <!-- Detailed Reviews lists -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+      
+      <!-- Submit review form (5 cols) -->
+      <div class="lg:col-span-5 themed-card p-6 rounded-2xl flex flex-col gap-4 shadow-sm">
+        <h3 class="text-xs font-black uppercase tracking-wider">
+          Submit Customer Review
+        </h3>
+        
+        <form onsubmit="submitProductReview(event)" class="flex flex-col gap-4">
+          <!-- Star ratings selection -->
+          <div class="flex flex-col gap-1.5">
+            <label class="text-[10px] font-bold themed-text-muted uppercase">Star Rating</label>
+            <div class="flex gap-1.5" id="review-stars-input-container">
+              <!-- Rendered dynamically -->
+            </div>
+          </div>
+
+          <div class="flex flex-col gap-1.5">
+            <label class="text-[10px] font-bold themed-text-muted uppercase">Written Comments</label>
+            <textarea id="review-comment-textarea" rows="3" placeholder="Describe build texture, speed, or performance..." class="w-full bg-slate-50 dark:bg-zinc-900 border themed-border rounded-xl p-3 text-xs font-semibold focus:outline-none focus:border-gold text-slate-800 dark:text-zinc-100" required></textarea>
+          </div>
+
+          <button type="submit" class="bg-black dark:bg-zinc-100 text-white dark:text-black py-3 rounded-xl text-xs font-extrabold uppercase tracking-wider hover:bg-gold hover:text-black transition-all flex items-center justify-center gap-1.5">
+            <i class="fa-solid fa-wand-magic-sparkles"></i> SUBMIT REVIEW
+          </button>
+        </form>
+      </div>
+
+      <!-- Invoices and comments logs (7 cols) -->
+      <div class="lg:col-span-7 flex flex-col gap-4">
+        <div class="flex justify-between items-center border-b pb-3 themed-border">
+          <h3 class="text-xs font-black uppercase tracking-wider">Verified Customer Ledger</h3>
+          <select id="review-sorting-select" onchange="resortProductReviews()" class="bg-transparent border themed-border text-[10px] font-bold uppercase tracking-wider rounded-lg p-1.5 focus:outline-none text-slate-700 dark:text-zinc-300">
+            <option value="newest">Newest Reviews</option>
+            <option value="helpful">Most Helpful</option>
+          </select>
+        </div>
+        
+        <div id="detail-reviews-list-container" class="flex flex-col gap-4">
+          <!-- Loaded dynamically -->
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ==========================================
+       VIEW: LUXE LOYALTY PROFILE
+       ========================================== -->
+  <div id="view-profile" class="view-section hidden w-full flex flex-col gap-8 px-12 pb-16 transition-opacity duration-200 animate-[fadeIn_0.3s_ease]">
+    <div class="flex justify-between items-center border-b pb-4 themed-border">
+      <div class="flex items-center gap-2">
+        <i class="fa-solid fa-award text-gold text-lg"></i>
+        <h2 class="text-xl font-bold tracking-tight">Luxe Loyalty Dashboard</h2>
+      </div>
+      <span class="text-[10px] font-bold text-slate-400">Offline Sandbox Status Active</span>
+    </div>
+
+    <!-- Core statistics panels -->
+    <section class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      
+      <!-- Wallet balance widget -->
+      <div class="themed-card p-5 rounded-2xl shadow-sm relative overflow-hidden flex flex-col justify-between h-36">
+        <div class="flex justify-between items-start">
+          <span class="text-[10px] font-bold themed-text-muted uppercase">Current Points Wallet</span>
+          <i class="fa-solid fa-wallet text-gold text-lg"></i>
+        </div>
+        <div class="flex flex-col gap-0.5">
+          <span class="text-3xl font-black text-slate-850 dark:text-zinc-150">
+            <span id="profile-wallet-balance">350</span> <span class="text-xs text-slate-400 font-semibold">pts</span>
+          </span>
+          <span class="text-[10px] font-bold text-slate-500">
+            Equivalent to ₹<span id="profile-wallet-balance-inr">350</span> savings discount
+          </span>
+        </div>
+      </div>
+
+      <!-- Membership Tiers Badges -->
+      <div id="profile-tier-gradient-card" class="p-5 rounded-2xl bg-gradient-to-br from-slate-400 to-slate-600 text-white shadow flex flex-col justify-between h-36 relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_bottom_left,_var(--tw-gradient-stops))] from-white to-transparent"></div>
+        <div class="flex justify-between items-start z-10">
+          <span class="text-[10px] font-bold uppercase opacity-80">Luxe Tiers Status</span>
+          <i class="fa-solid fa-award text-lg"></i>
+        </div>
+        
+        <div class="flex flex-col gap-1 z-10">
+          <span id="profile-tier-label" class="text-2xl font-black tracking-wide font-serif">
+            Silver Member
+          </span>
+          <span id="profile-tier-bonus-text" class="text-[9px] font-bold tracking-wider uppercase opacity-90 flex items-center gap-1">
+            ⚡ 2% Bonus Rewards base multiplier
+          </span>
+        </div>
+      </div>
+
+      <!-- Streaks count widget -->
+      <div class="themed-card p-5 rounded-2xl shadow-sm relative overflow-hidden flex flex-col justify-between h-36">
+        <div class="flex justify-between items-start">
+          <span class="text-[10px] font-bold themed-text-muted uppercase">Active Shopping Streak</span>
+          <span class="text-rose-500 text-lg">🔥</span>
+        </div>
+        <div class="flex flex-col gap-0.5">
+          <span class="text-3xl font-black text-slate-850 dark:text-zinc-150">
+            <span id="profile-streak-days">2</span> <span class="text-xs text-slate-400 font-semibold">Days</span>
+          </span>
+          <span class="text-[10px] font-bold text-slate-500">
+            Make purchases within 48 hours to extend multipliers!
+          </span>
+        </div>
+      </div>
+
+    </section>
+
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+      
+      {/* Wallet transactions ledger (7 cols) */}
+      <main class="lg:col-span-7 flex flex-col gap-6">
+        <h3 class="text-xs font-black uppercase tracking-widest text-slate-500">
+          Loyalty points ledger
+        </h3>
+        
+        <div class="themed-card rounded-2xl overflow-hidden shadow-sm">
+          <table class="w-full text-left text-xs font-medium border-collapse">
+            <thead>
+              <tr class="bg-slate-50 dark:bg-zinc-900 border-b themed-border text-[10px] text-slate-400 uppercase font-black tracking-wider">
+                <th class="p-4">Date</th>
+                <th className="p-4">Description</th>
+                <th className="p-4 text-right">Points</th>
+              </tr>
+            </thead>
+            <tbody id="profile-ledger-transactions-tbody">
+              <!-- Loaded dynamically -->
+            </tbody>
+          </table>
+        </div>
+      </main>
+
+      {/* Referrals code invites & milestones (5 cols) */}
+      <aside class="lg:col-span-5 flex flex-col gap-6">
+        
+        <!-- Milestones tracker -->
+        <div class="themed-card p-5 rounded-2xl flex flex-col gap-4 shadow-sm">
+          <span class="text-[10px] font-black uppercase tracking-wider flex items-center gap-1.5">
+            <i class="fa-solid fa-circle-check text-gold"></i> Milestones progress
+          </span>
+          <div id="profile-milestones-list" class="flex flex-col gap-3">
+            <!-- Loaded dynamically -->
+          </div>
+        </div>
+
+        <!-- Referral program invite cards -->
+        <div class="themed-card p-5 rounded-2xl flex flex-col gap-4 shadow-sm relative overflow-hidden bg-gradient-to-tr from-gold/5 to-transparent">
+          <span class="text-[10px] font-black uppercase tracking-wider flex items-center gap-1.5">
+            <i class="fa-solid fa-share-nodes text-gold"></i> Referral Code
+          </span>
+          <p class="text-xs themed-text-muted leading-relaxed font-semibold">
+            Invite friends. When they register using your code, **they get 100 extra Luxe Points**, and **you get 200 Luxe Points** instantly!
+          </p>
+
+          <div class="flex flex-col gap-1.5">
+            <label class="text-[10px] font-bold themed-text-muted uppercase">Your Invitation Code</label>
+            <div class="flex gap-2">
+              <input id="referral-code-input" type="text" value="SANDBOX" class="bg-slate-50 dark:bg-zinc-900 border themed-border rounded-lg py-2 px-3 text-xs font-black text-center text-slate-800 dark:text-zinc-150 flex-1 outline-none" readonly />
+              <button onclick="copyInvitationCode()" class="bg-black dark:bg-zinc-100 text-white dark:text-black py-2 px-4 rounded-lg text-[10px] font-black tracking-wider hover:bg-gold hover:text-black transition-colors shadow-sm">
+                COPY
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </aside>
+
+    </div>
+  </div>
+
+  <!-- ==========================================
+       VIEW: MVC ADMIN DASHBOARD
+       ========================================== -->
+  <div id="view-admin" class="view-section hidden w-full flex flex-col gap-8 px-12 pb-16 transition-opacity duration-200 animate-[fadeIn_0.3s_ease]">
+    <div class="flex items-center gap-2 border-b pb-4 themed-border">
+      <i class="fa-solid fa-shield-halved text-gold text-lg"></i>
+      <h2 class="text-xl font-bold tracking-tight">Admin Console Dashboard</h2>
+    </div>
+
+    <!-- Analytics totalizers dials -->
+    <section class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+      
+      {/* Revenue totalizer */}
+      <div class="themed-card p-5 rounded-2xl shadow-sm flex gap-4 items-center">
+        <div class="w-10 h-10 rounded-xl bg-emerald-100 dark:bg-emerald-950/20 text-emerald-600 dark:text-emerald-500 flex items-center justify-center flex-shrink-0">
+          <i class="fa-solid fa-dollar-sign text-lg"></i>
+        </div>
+        <div class="flex flex-col">
+          <span class="text-[10px] font-bold themed-text-muted uppercase">Sales Revenue</span>
+          <span id="admin-total-revenue" class="text-xl font-black text-slate-850 dark:text-zinc-150">₹154,250.00</span>
+        </div>
+      </div>
+
+      {/* Users count totalizer */}
+      <div class="themed-card p-5 rounded-2xl shadow-sm flex gap-4 items-center">
+        <div class="w-10 h-10 rounded-xl bg-indigo-100 dark:bg-indigo-950/20 text-indigo-600 dark:text-indigo-500 flex items-center justify-center flex-shrink-0">
+          <i class="fa-solid fa-users text-base"></i>
+        </div>
+        <div class="flex flex-col">
+          <span class="text-[10px] font-bold themed-text-muted uppercase">Active Customers</span>
+          <span id="admin-total-users" class="text-xl font-black text-slate-850 dark:text-zinc-150">142 users</span>
+        </div>
+      </div>
+
+      {/* Products count totalizer */}
+      <div class="themed-card p-5 rounded-2xl shadow-sm flex gap-4 items-center">
+        <div class="w-10 h-10 rounded-xl bg-amber-100 dark:bg-amber-950/20 text-amber-600 dark:text-amber-500 flex items-center justify-center flex-shrink-0">
+          <i class="fa-solid fa-box text-base"></i>
+        </div>
+        <div class="flex flex-col">
+          <span class="text-[10px] font-bold themed-text-muted uppercase">Catalog Items</span>
+          <span id="admin-total-products" class="text-xl font-black text-slate-850 dark:text-zinc-150">4 items</span>
+        </div>
+      </div>
+
+      {/* Invoices checkouts totalizer */}
+      <div class="themed-card p-5 rounded-2xl shadow-sm flex gap-4 items-center">
+        <div class="w-10 h-10 rounded-xl bg-rose-100 dark:bg-rose-950/20 text-rose-600 dark:text-rose-500 flex items-center justify-center flex-shrink-0">
+          <i class="fa-solid fa-shopping-bag text-base"></i>
+        </div>
+        <div class="flex flex-col">
+          <span class="text-[10px] font-bold themed-text-muted uppercase">Orders Gathers</span>
+          <span id="admin-total-orders" class="text-xl font-black text-slate-850 dark:text-zinc-150">32 orders</span>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- Products catalogs insertions and paid checkouts ledger -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+      
+      {/* Product insertion sheet (5 cols) */}
+      <div class="lg:col-span-5 themed-card p-6 rounded-2xl flex flex-col gap-4 shadow-sm">
+        <h3 class="text-xs font-black uppercase tracking-wider flex items-center gap-1.5">
+          <i class="fa-solid fa-plus-circle text-gold"></i> Insert New Product
+        </h3>
+        
+        <form onsubmit="adminAddNewProduct(event)" class="flex flex-col gap-4">
+          <div class="flex flex-col gap-1.5">
+            <label class="text-[10px] font-bold themed-text-muted uppercase">Product Title</label>
+            <input id="admin-add-name" type="text" placeholder="Zenith G2 Pro Headphones" class="w-full bg-slate-50 dark:bg-zinc-900 border themed-border rounded-xl py-2 px-3 text-xs font-semibold focus:outline-none focus:border-gold text-slate-800 dark:text-zinc-100" required />
+          </div>
+
+          <div class="grid grid-cols-2 gap-3">
+            <div class="flex flex-col gap-1.5">
+              <label class="text-[10px] font-bold themed-text-muted uppercase">Price (₹)</label>
+              <input id="admin-add-price" type="number" placeholder="4999" class="w-full bg-slate-50 dark:bg-zinc-900 border themed-border rounded-xl py-2 px-3 text-xs font-semibold focus:outline-none focus:border-gold text-slate-800 dark:text-zinc-100" required />
+            </div>
+            <div class="flex flex-col gap-1.5">
+              <label class="text-[10px] font-bold themed-text-muted uppercase">Stock Inventory</label>
+              <input id="admin-add-stock" type="number" placeholder="15" class="w-full bg-slate-50 dark:bg-zinc-900 border themed-border rounded-xl py-2 px-3 text-xs font-semibold focus:outline-none focus:border-gold text-slate-800 dark:text-zinc-100" required />
+            </div>
+          </div>
+
+          <div class="flex flex-col gap-1.5">
+            <label class="text-[10px] font-bold themed-text-muted uppercase">Product Category</label>
+            <select id="admin-add-category" class="w-full bg-slate-50 dark:bg-zinc-900 border themed-border rounded-xl py-2.5 px-3 text-xs font-semibold focus:outline-none focus:border-gold text-slate-800 dark:text-zinc-100">
+              <option value="Laptops">Laptops</option>
+              <option value="Footwear">Footwear</option>
+              <option value="Mobiles">Mobiles</option>
+              <option value="Apparel">Apparel</option>
+              <option value="Accessories">Accessories</option>
+            </select>
+          </div>
+
+          <div class="flex flex-col gap-1.5">
+            <label class="text-[10px] font-bold themed-text-muted uppercase">Description</label>
+            <textarea id="admin-add-desc" rows="2" placeholder="Briefly describe the product specs..." class="w-full bg-slate-50 dark:bg-zinc-900 border themed-border rounded-xl p-3 text-xs font-semibold focus:outline-none focus:border-gold text-slate-800 dark:text-zinc-100" required></textarea>
+          </div>
+
+          <button type="submit" class="w-full bg-black dark:bg-zinc-100 text-white dark:text-black py-3 rounded-xl text-xs font-extrabold uppercase tracking-wider hover:bg-gold hover:text-black transition-all">
+            CREATE PRODUCT
+          </button>
+        </form>
+      </div>
+
+      {/* Orders Invoices ledger logs (7 cols) */}
+      <div class="lg:col-span-7 flex flex-col gap-4">
+        <h3 class="text-xs font-black uppercase tracking-widest text-slate-500">
+          Recent Paid Sales Ledger
+        </h3>
+        
+        <div class="themed-card rounded-2xl overflow-hidden shadow-sm">
+          <table class="w-full text-left text-xs font-medium border-collapse">
+            <thead>
+              <tr class="bg-slate-50 dark:bg-zinc-900 border-b themed-border text-[10px] text-slate-450 uppercase font-black tracking-wider">
+                <th class="p-4">Invoice Ref</th>
+                <th className="p-4">Customer</th>
+                <th className="p-4">Amount Paid</th>
+                <th className="p-4 text-right">Status</th>
+              </tr>
+            </thead>
+            <tbody id="admin-sales-ledger-tbody">
+              <!-- Loaded dynamically -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- ==========================================
+       AUTHENTICATION MODAL DIALOG
+       ========================================== -->
+  <div id="auth-modal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 hidden">
+    <div class="themed-card p-6 rounded-3xl max-w-sm w-full flex flex-col gap-5 shadow-2xl relative animate-[fadeIn_0.2s_ease]">
+      <div class="flex flex-col gap-1">
+        <h3 id="auth-modal-title" class="text-lg font-black font-serif">Secure Account Login</h3>
+        <p id="auth-modal-desc" class="text-[10px] themed-text-muted font-bold leading-normal">
+          Sign in to access Luxe Wallet points, streaks milestones, and AI budget optimizers.
+        </p>
+      </div>
+
+      <form onsubmit="submitAuthForm(event)" class="flex flex-col gap-3">
+        <div id="auth-name-group" class="flex flex-col gap-1 hidden">
+          <input id="auth-name-input" type="text" placeholder="Full Name" class="bg-slate-50 dark:bg-zinc-900 border themed-border rounded-xl py-2 px-3 text-xs font-semibold focus:outline-none focus:border-gold text-slate-800 dark:text-zinc-100" />
+        </div>
+        
+        <input id="auth-email-input" type="email" placeholder="Email Address" class="bg-slate-50 dark:bg-zinc-900 border themed-border rounded-xl py-2 px-3 text-xs font-semibold focus:outline-none focus:border-gold text-slate-800 dark:text-zinc-100" required />
+        <input id="auth-password-input" type="password" placeholder="Password" class="bg-slate-50 dark:bg-zinc-900 border themed-border rounded-xl py-2 px-3 text-xs font-semibold focus:outline-none focus:border-gold text-slate-800 dark:text-zinc-100" required />
+        
+        <div id="auth-referral-group" class="flex flex-col gap-1 hidden">
+          <input id="auth-referral-input" type="text" placeholder="Referral Code (Optional)" class="bg-slate-50 dark:bg-zinc-900 border themed-border rounded-xl py-2 px-3 text-xs font-semibold focus:outline-none focus:border-gold text-slate-800 dark:text-zinc-100" />
+        </div>
+
+        <button type="submit" class="w-full bg-black dark:bg-zinc-100 text-white dark:text-black py-3 rounded-xl text-xs font-extrabold uppercase tracking-wider hover:bg-gold hover:text-black transition-colors mt-1 shadow">
+          ENTER PORTAL
+        </button>
+      </form>
+
+      {/* Google sandbox auth trigger */}
+      <div class="flex flex-col gap-3 border-t themed-border pt-4">
+        <button onclick="submitGoogleMockAuth()" class="w-full bg-slate-50 dark:bg-zinc-900/50 hover:bg-slate-100 dark:hover:bg-zinc-800 text-slate-700 dark:text-zinc-300 py-2.5 rounded-xl text-[10px] font-extrabold uppercase tracking-wider flex items-center justify-center gap-1.5 border themed-border transition-colors">
+          <i class="fa-brands fa-google text-red-500"></i> Continue with Google (Sandbox)
+        </button>
+
+        <div class="flex justify-between items-center text-[10px] font-extrabold uppercase tracking-wider text-slate-500">
+          <button onclick="toggleAuthModalMode()" id="auth-modal-mode-btn" class="hover:underline">
+            New User? Join
+          </button>
+          <button onclick="closeAuthModal()" class="hover:underline text-slate-400">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ==========================================
+       GAMIFIED LUCKY SPIN MODAL WHEEL
+       ========================================== -->
+  <div id="spin-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4 hidden">
+    <div class="themed-card p-8 rounded-3xl max-w-md w-full flex flex-col gap-6 shadow-2xl relative text-center">
+      <div class="flex flex-col gap-1.5">
+        <span class="text-gold text-[10px] font-black tracking-widest uppercase flex items-center gap-1 justify-center animate-pulse">
+          ✦ Post-Purchase Lucky Spin
+        </span>
+        <h2 class="text-xl md:text-2xl font-extrabold font-serif">Spin the Lucky Wheel!</h2>
+        <p class="text-xs themed-text-muted leading-relaxed">
+          Every transaction qualifies for a lucky spin wheel payout. Turn the wheel to earn dynamic bonus Luxe Points in your wallet!
+        </p>
+      </div>
+
+      {/* Graphical Rotating Wheel */}
+      <div class="relative w-48 h-48 mx-auto my-4 border-[6px] border-slate-900 rounded-full flex items-center justify-center shadow-lg bg-slate-100 overflow-hidden">
+        {/* Pointer indicator */}
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-4 h-4 bg-rose-500 rounded-b-md z-20 shadow"></div>
+
+        <div id="rotating-spin-wheel" class="w-full h-full rounded-full flex items-center justify-center relative bg-gradient-to-tr from-gold via-amber-500 to-yellow-400 transition-transform duration-[3s] ease-out">
+          {/* Segments values */}
+          <div class="absolute w-full h-full flex items-center justify-center text-[11px] font-black text-slate-900">
+            <span class="absolute rotate-0 translate-y-[-60px]">50</span>
+            <span class="absolute rotate-72 translate-y-[-60px]">100</span>
+            <span class="absolute rotate-144 translate-y-[-60px]">200</span>
+            <span class="absolute rotate-216 translate-y-[-60px]">500</span>
+            <span class="absolute rotate-288 translate-y-[-60px]">1000</span>
+          </div>
+        </div>
+        
+        {/* Spin trigger center */}
+        <button id="spin-wheel-trigger-btn" onclick="executeSpinWheelPayout()" class="absolute w-12 h-12 bg-slate-900 text-white rounded-full flex items-center justify-center text-[10px] font-black uppercase hover:scale-105 transition-transform z-10 border border-white/20 shadow-md">
+          SPIN
+        </button>
+      </div>
+
+      {/* Spin result box */}
+      <div id="spin-result-box" class="p-4 rounded-xl bg-emerald-50/20 dark:bg-emerald-950/5 border border-emerald-500/20 flex flex-col gap-1 items-center hidden">
+        <i class="fa-solid fa-circle-check text-emerald-500 text-xl mb-1"></i>
+        <span id="spin-result-text" class="text-sm font-extrabold text-slate-800 dark:text-zinc-100">
+          You won 200 Luxe Points!
+        </span>
+        <span class="text-[10px] text-slate-500">
+          Points have been credited successfully to your wallet balance.
+        </span>
+      </div>
+
+      <button onclick="closeSpinModal()" id="spin-modal-close-btn" class="w-full bg-black dark:bg-zinc-100 text-white dark:text-black py-3 rounded-xl text-xs font-black uppercase tracking-wider hover:bg-gold hover:text-black transition-all hidden">
+        CLOSE & RETRIEVE STATUS
+      </button>
+      <button onclick="closeSpinModal()" id="spin-modal-skip-btn" class="text-xs text-slate-450 hover:underline">
+        Skip Spin
+      </button>
+    </div>
+  </div>
+
+
+  <!-- FOOTER -->
+  <footer class="py-8 border-t themed-border text-center text-[10px] uppercase tracking-wider themed-text-muted font-bold mt-auto">
+    © 2026 LUXE Premium AI Systems. Served directly via MERN Sandbox fallbacks.
+  </footer>
+  </div> <!-- /vanilla-app-container -->
+
+  <div id="root"></div>
+
+
+  <!-- ==========================================
+       CORE CLIENT DATA & DYNAMIC SCRIPT LOGIC
+       ========================================== -->
+  <script>
+    // --------------------------------------------------
+    // DYNAMIC DATA MANIFEST
+    // --------------------------------------------------
+    let seedProducts = [];
+    let cart = [
+      {
+        product: "mock_prod_zenith",
+        name: "Zenith X1 Gaming Laptop",
+        price: 68900,
+        image: "linear-gradient(135deg, #6366f1 0%, #a855f7 100%)",
+        realImage: "https://images.unsplash.com/photo-1603302576837-37561b2e2302?auto=format&fit=crop&w=400&q=80",
+        qty: 1
+      },
+      {
+        product: "mock_prod_runners",
+        name: "AeroStratus Daily Runners",
+        price: 2499,
+        image: "linear-gradient(135deg, #f97316 0%, #ef4444 100%)",
+        realImage: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=400&q=80",
+        qty: 1
+      }
+    ];
+    let user = null;
+    let compareItems = [];
+    let activeCategory = '';
+    let selectedRating = 5;
+    let selectedPayGate = 'UPI';
+
+    // --------------------------------------------------
+    // APP VIEWS SWAPPER
+    // --------------------------------------------------
+    function switchView(viewId) {
+      const views = document.querySelectorAll('.view-section');
+      views.forEach(v => {
+        v.classList.add('hidden');
+        v.classList.remove('fade-in-anim');
+      });
+
+      const target = document.getElementById(`view-${viewId}`);
+      if (target) {
+        // Apply fade-out staggered effect
+        target.classList.remove('hidden');
+        setTimeout(() => {
+          target.classList.add('fade-in-anim');
+        }, 50);
+      }
+
+      // Sync active navbar tab status
+      const navLinks = document.querySelectorAll('.nav-hover-link');
+      navLinks.forEach(link => {
+        link.classList.remove('active', 'text-slate-900', 'dark:text-zinc-100');
+        link.classList.add('text-slate-500', 'dark:text-zinc-400');
+      });
+
+      const activeLink = document.getElementById(`nav-${viewId}-link`);
+      if (activeLink) {
+        activeLink.classList.add('active', 'text-slate-900', 'dark:text-zinc-100');
+        activeLink.classList.remove('text-slate-500', 'dark:text-zinc-400');
+      }
+
+      // Scroll back to top
+      window.scrollTo(0, 0);
+    }
+
+    // --------------------------------------------------
+    // API CATALOG AND SEARCH HANDLERS
+    // --------------------------------------------------
+    async function loadCatalog() {
+      try {
+        let url = '/api/products';
+        if (activeCategory) url += `?category=${activeCategory}`;
+        
+        const res = await fetch(url);
+        const data = await res.json();
+        seedProducts = data;
+        renderProducts(seedProducts);
+      } catch (err) {
+        console.error('Failed to query backend product collections.', err);
+      }
+    }
+
+    function renderProducts(productsList) {
+      const grid = document.getElementById('catalog-products-grid');
+      if (!grid) return;
+      grid.innerHTML = '';
+
+      productsList.forEach((prod, index) => {
+        const isCompared = compareItems.some(i => i._id === prod._id);
+        const comparedClass = isCompared ? 'comparing-active-card' : '';
+        
+        // Define beautiful custom CSS gradient colors based on product category
+        let gradientStr = 'linear-gradient(135deg, #475569 0%, #1e293b 100%)'; // fallback Slate
+        let badgeColor = '#64748b';
+
+        if (prod.category === 'Laptops') {
+          gradientStr = 'linear-gradient(135deg, #6366f1 0%, #a855f7 100%)'; // Indigo/Purple
+          badgeColor = '#6366f1';
+        } else if (prod.category === 'Footwear') {
+          gradientStr = 'linear-gradient(135deg, #f97316 0%, #ef4444 100%)'; // Orange/Red
+          badgeColor = '#f97316';
+        } else if (prod.category === 'Mobiles') {
+          gradientStr = 'linear-gradient(135deg, #06b6d4 0%, #3b82f6 100%)'; // Cyan/Blue
+          badgeColor = '#06b6d4';
+        } else if (prod.category === 'Apparel') {
+          gradientStr = 'linear-gradient(135deg, #10b981 0%, #14b8a6 100%)'; // Emerald/Teal
+          badgeColor = '#10b981';
+        }
+
+        const card = document.createElement('div');
+        card.className = `premium-product-card stagger-card ${comparedClass}`;
+        card.style.animationDelay = `${index * 80}ms`;
+
+        card.innerHTML = `
+          <!-- Category Badge -->
+          <div class="card-category-badge">
+            <span style="display:inline-block; width:8px; height:8px; border-radius:50%; background-color:${badgeColor};"></span>
+            <span>${prod.category.toUpperCase()}</span>
+          </div>
+
+          <!-- Product Image Area with Category Gradient Placeholder -->
+          <div class="card-image-area" onclick="viewProductDetails('${prod._id}')">
+            <div class="card-image-gradient flex items-center justify-center p-4 relative" style="background: ${gradientStr}">
+              ${prod.image ? `
+                <img src="${prod.image}" alt="${prod.name}" class="relative z-10 transition-transform duration-300 hover:scale-105" style="width: 80%; height: 80%; object-fit: contain; filter: drop-shadow(0 8px 16px rgba(0,0,0,0.3)); border-radius: 10px;" />
+              ` : `
+                <i class="fa-solid fa-crown text-white/20 text-5xl"></i>
+              `}
+            </div>
+          </div>
+
+          <!-- Body contents -->
+          <div class="card-body">
+            <div class="card-info-row">
+              <h4 class="card-product-title" onclick="viewProductDetails('${prod._id}')">
+                ${prod.name}
+              </h4>
+              <span class="card-product-price">₹${prod.price}</span>
+            </div>
+            <p class="card-description">
+              ${prod.description}
+            </p>
+            <div class="card-divider"></div>
+            <div class="card-footer">
+              <!-- Specs Compare select -->
+              <button onclick="toggleComparison('${prod._id}', event)" class="compare-link ${isCompared ? 'active' : ''}">
+                <i class="fa-solid fa-scale-unbalanced-flip"></i> COMPARE
+              </button>
+
+              <button onclick="addToBag('${prod._id}', '${prod.name}', ${prod.price}, '${gradientStr}', '${prod.image}')" class="add-to-cart-btn">
+                ADD TO CART
+              </button>
+            </div>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    // Toggle selected catalog link
+    function selectCategory(cat) {
+      activeCategory = cat;
+      const tabs = document.querySelectorAll('.premium-filter-tab');
+      tabs.forEach(t => {
+        t.classList.remove('active');
+      });
+
+      const activeTab = document.querySelector(`.premium-filter-tab[data-cat="${cat}"]`);
+      if (activeTab) {
+        activeTab.classList.add('active');
+      }
+
+      // Add fade out animation before loading new catalog
+      const grid = document.getElementById('catalog-products-grid');
+      grid.classList.add('fade-out-anim');
+      setTimeout(() => {
+        loadCatalog().then(() => {
+          grid.classList.remove('fade-out-anim');
+        });
+      }, 100);
+    }
+
+    // AI search execution
+    async function triggerAiSearch(e) {
+      e.preventDefault();
+      const input = document.getElementById('ai-search-input');
+      const val = input.value.trim();
+      if (!val) return;
+
+      try {
+        const res = await fetch('/api/products/search/ai', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ query: val })
+        });
+        const data = await res.json();
+        
+        // Show AI Chip
+        const chip = document.getElementById('ai-filter-chip-container');
+        const text = document.getElementById('ai-filter-chip-text');
+        text.textContent = `AI Search: "${val}"`;
+        chip.classList.remove('hidden');
+
+        seedProducts = data.products;
+        renderProducts(seedProducts);
+      } catch (err) {
+        console.error('AI Search failed', err);
+      }
+    }
+
+    function resetFilters(e) {
+      if (e) e.preventDefault();
+      document.getElementById('ai-search-input').value = '';
+      document.getElementById('ai-filter-chip-container').class = 'hidden';
+      document.getElementById('ai-filter-chip-container').classList.add('hidden');
+      loadCatalog();
+    }
+
+    // Voice Shopping speech-to-text simulation
+    function triggerSpeechMic() {
+      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+      if (!SpeechRecognition) {
+        alert('Voice recognition Speech API is not supported in this browser.');
+        return;
+      }
+
+      const rec = new SpeechRecognition();
+      rec.continuous = false;
+      rec.lang = 'en-US';
+      rec.interimResults = false;
+
+      const micBtn = document.getElementById('mic-trigger-btn');
+      
+      rec.onstart = () => {
+        micBtn.className = "w-11 h-11 bg-rose-500 text-white rounded-full flex items-center justify-center shadow-md animate-pulse active:scale-95 transition-all flex-shrink-0";
+        document.getElementById('ai-search-input').value = 'Listening...';
+      };
+
+      rec.onresult = (event) => {
+        const text = event.results[0][0].transcript;
+        document.getElementById('ai-search-input').value = text;
+        
+        // Automatically fire form submit to prompt Gemini AI parser
+        const form = document.getElementById('ai-search-form');
+        const submitEvent = new Event('submit', { cancelable: true });
+        form.dispatchEvent(submitEvent);
+      };
+
+      rec.onend = () => {
+        micBtn.className = "w-11 h-11 bg-gold text-black rounded-full flex items-center justify-center shadow-md active:scale-95 hover:brightness-110 transition-all flex-shrink-0";
+      };
+
+      rec.start();
+    }
+
+    // --------------------------------------------------
+    // AI COMPARISON SPECIFICATIONS
+    // --------------------------------------------------
+    function toggleComparison(productId, e) {
+      if (e) e.preventDefault();
+      const item = seedProducts.find(p => p._id === productId);
+      if (!item) return;
+
+      const idx = compareItems.findIndex(i => i._id === productId);
+      if (idx >= 0) {
+        compareItems = compareItems.filter(i => i._id !== productId);
+      } else {
+        if (compareItems.length >= 3) {
+          alert('You can select a maximum of 3 products to compare.');
+          return;
+        }
+        compareItems.push(item);
+      }
+      renderComparisonSidebar();
+      renderProducts(seedProducts); // Sync rings in catalog
+    }
+
+    function renderComparisonSidebar() {
+      const ledger = document.getElementById('compare-selection-ledger');
+      const trigger = document.getElementById('compare-trigger-block');
+      
+      ledger.innerHTML = '';
+      
+      if (compareItems.length === 0) {
+        trigger.classList.add('hidden');
+        return;
+      }
+
+      compareItems.forEach(item => {
+        const row = document.createElement('div');
+        row.className = "flex justify-between items-center bg-slate-50 dark:bg-zinc-900 p-2.5 rounded-xl border themed-border";
+        row.innerHTML = `
+          <span class="text-xs font-bold truncate max-w-[180px]">${item.name}</span>
+          <button onclick="toggleComparison('${item._id}')" class="text-[10px] text-rose-500 hover:underline">Remove</button>
+        `;
+        ledger.appendChild(row);
+      });
+
+      if (compareItems.length >= 2) {
+        trigger.classList.remove('hidden');
+      } else {
+        trigger.classList.add('hidden');
+      }
+    }
+
+    async function generateAiComparison() {
+      const resultsDiv = document.getElementById('compare-results-output');
+      resultsDiv.classList.remove('hidden');
+      resultsDiv.innerHTML = `<span class="text-xs font-semibold animate-pulse text-gold uppercase"><i class="fa-solid fa-spinner animate-spin"></i> Generating specs matrix...</span>`;
+
+      try {
+        const ids = compareItems.map(i => i._id);
+        const res = await fetch('/api/products/compare/ai', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ productIds: ids })
+        });
+        const data = await res.json();
+        
+        resultsDiv.innerHTML = `
+          <div class="flex flex-col gap-3">
+            <span class="text-[10px] font-black uppercase text-gold">AI Synthesis Verdict</span>
+            <p class="text-xs leading-relaxed p-3 rounded-xl bg-gold/5 border border-gold/15 text-slate-700 dark:text-zinc-300">
+              ${data.recommendation}
+            </p>
+
+            <div class="flex flex-col gap-2">
+              <span class="text-[10px] font-bold text-slate-500 uppercase">Specs comparison matrix</span>
+              <div class="flex flex-col gap-1.5 text-[11px] font-medium themed-text-muted">
+                ${data.specifications ? data.specifications.map(s => `
+                  <div class="flex justify-between border-b themed-border py-1">
+                    <span class="font-bold text-slate-700 dark:text-zinc-300">${s.feature}</span>
+                    <span class="text-right text-[10px]">${s.itemA} vs ${s.itemB}</span>
+                  </div>
+                `).join('') : ''}
+              </div>
+            </div>
+
+            <button onclick="clearComparisonTray()" class="text-[10px] text-slate-450 hover:text-slate-650 underline text-center">Clear Comparison</button>
+          </div>
+        `;
+      } catch (err) {
+        console.error(err);
+      }
+    }
+
+    function clearComparisonTray() {
+      compareItems = [];
+      document.getElementById('compare-results-output').classList.add('hidden');
+      renderComparisonSidebar();
+      renderProducts(seedProducts);
+    }
+
+    // --------------------------------------------------
+    // AI BUDGET SHOPPING OPTIMIZER
+    // --------------------------------------------------
+    async function optimizeBudgetPlan(e) {
+      e.preventDefault();
+      const budgetVal = document.getElementById('budget-optimizer-input').value;
+      if (!budgetVal || isNaN(budgetVal)) return;
+
+      const output = document.getElementById('budget-results-output');
+      output.classList.remove('hidden');
+      output.innerHTML = `<span class="text-xs font-semibold animate-pulse text-gold uppercase"><i class="fa-solid fa-spinner animate-spin"></i> Organizing optimal bundle...</span>`;
+
+      try {
+        const res = await fetch('/api/products/budget/ai', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ budget: Number(budgetVal) })
+        });
+        const data = await res.json();
+        
+        output.innerHTML = `
+          <div class="flex flex-col gap-3">
+            <div class="flex justify-between items-center text-[10px] font-black uppercase text-gold">
+              <span>Strategy:</span>
+              <span class="text-slate-800 dark:text-zinc-200">Est Total: ₹${data.totalEstimate}</span>
+            </div>
+            
+            <p class="text-xs leading-relaxed italic bg-gold/5 p-3 rounded-xl border border-gold/15 text-slate-700 dark:text-zinc-300">
+              "${data.strategy}"
+            </p>
+
+            <div class="flex flex-col gap-2">
+              <span class="text-[10px] font-bold text-slate-500 uppercase">Recommended Bundle</span>
+              <div class="flex flex-col gap-2">
+                ${data.itemsToSelect ? data.itemsToSelect.map((item, i) => `
+                  <div class="flex justify-between items-center bg-slate-50 dark:bg-zinc-900/50 p-2.5 rounded-xl border themed-border">
+                    <div class="flex flex-col truncate max-w-[180px]">
+                      <span class="text-xs font-bold truncate text-slate-700 dark:text-zinc-350">${item.name}</span>
+                      <span class="text-[10px] font-semibold text-slate-500">₹${item.price || item.estimatePrice}</span>
+                    </div>
+
+                    <button onclick="addToBag('${item._id || 'mock_bundle_' + i}', '${item.name}', ${item.price || item.estimatePrice}, '')" class="bg-gold text-black p-1.5 rounded-lg flex items-center justify-center transition-all hover:brightness-110 active:scale-95 shadow">
+                      <i class="fa-solid fa-plus text-[10px]"></i>
+                    </button>
+                  </div>
+                `).join('') : ''}
+              </div>
+            </div>
+          </div>
+        `;
+      } catch (err) {
+        console.error(err);
+      }
+    }
+
+    // --------------------------------------------------
+    // SMART CART & FREE DELIVERY SYSTEM
+    // --------------------------------------------------
+    function addToBag(id, name, price, gradient, realImg) {
+      const existing = cart.find(i => i.product === id);
+      if (existing) {
+        existing.qty += 1;
+      } else {
+        let grad = gradient;
+        let img = realImg;
+        // Dynamically resolve product metadata if they are missing
+        const item = seedProducts.find(p => p._id === id);
+        if (item) {
+          if (!grad) {
+            if (item.category === 'Laptops') grad = 'linear-gradient(135deg, #6366f1 0%, #a855f7 100%)';
+            else if (item.category === 'Footwear') grad = 'linear-gradient(135deg, #f97316 0%, #ef4444 100%)';
+            else if (item.category === 'Mobiles') grad = 'linear-gradient(135deg, #06b6d4 0%, #3b82f6 100%)';
+            else if (item.category === 'Apparel') grad = 'linear-gradient(135deg, #10b981 0%, #14b8a6 100%)';
+            else grad = 'linear-gradient(135deg, #475569 0%, #1e293b 100%)';
+          }
+          if (!img) img = item.image;
+        }
+        cart.push({ product: id, name, price, image: grad, realImage: img, qty: 1 });
+      }
+      syncCartUI();
+      animateCartBadge();
+    }
+
+    function animateCartBadge() {
+      const badge = document.getElementById('cart-badge-counter');
+      badge.classList.remove('scale-0');
+      badge.classList.add('scale-110');
+      setTimeout(() => {
+        badge.classList.remove('scale-110');
+        badge.classList.add('scale-100');
+      }, 200);
+    }
+
+    function changeCartQty(id, amt) {
+      const item = cart.find(i => i.product === id);
+      if (item) {
+        item.qty += amt;
+        if (item.qty <= 0) {
+          cart = cart.filter(i => i.product !== id);
+        }
+      }
+      syncCartUI();
+    }
+
+    function removeCartItem(id) {
+      cart = cart.filter(i => i.product !== id);
+      syncCartUI();
+    }
+
+    function clearShoppingBag() {
+      cart = [];
+      syncCartUI();
+    }
+
+    async function syncCartUI() {
+      // Sync badge numbers
+      const totalItemsCount = cart.reduce((sum, i) => sum + i.qty, 0);
+      const badge = document.getElementById('cart-badge-counter');
+      badge.textContent = totalItemsCount;
+      if (totalItemsCount > 0) {
+        badge.classList.remove('scale-0');
+        badge.classList.add('scale-100');
+      } else {
+        badge.classList.add('scale-0');
+      }
+
+      // If cart view is open, render items list
+      const list = document.getElementById('cart-items-ledger-list');
+      if (list) list.innerHTML = '';
+
+      if (cart.length === 0) {
+        if (list) {
+          list.innerHTML = `<p class="text-xs text-slate-400 italic p-4 text-center">Your shopping bag is empty.</p>`;
+        }
+        updateCartSummaryDetails(0, false, 1000, []);
+        return;
+      }
+
+      // Render cart items
+      cart.forEach(item => {
+        const row = document.createElement('div');
+        row.className = "themed-card p-4 rounded-2xl border themed-border flex gap-4 items-center justify-between shadow-sm hover:shadow-md transition-shadow relative";
+        
+        row.innerHTML = `
+          <div class="flex gap-4 items-center flex-1">
+            <div class="w-14 h-14 rounded-xl overflow-hidden flex-shrink-0 flex items-center justify-center text-white relative p-1.5" style="background: ${item.image || 'linear-gradient(135deg, #475569 0%, #1e293b 100%)'}">
+              ${item.realImage ? `
+                <img src="${item.realImage}" alt="${item.name}" style="width: 90%; height: 90%; object-fit: contain; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.25));" />
+              ` : `
+                <i class="fa-solid fa-crown text-white/20 text-xl"></i>
+              `}
+            </div>
+            <div class="flex flex-col gap-0.5 truncate max-w-[200px] sm:max-w-xs">
+              <span class="text-xs font-bold truncate text-slate-800 dark:text-zinc-200 hover:text-gold cursor-pointer" onclick="viewProductDetails('${item.product}')">${item.name}</span>
+              <span class="text-[10px] themed-text-muted font-bold">₹${item.price} each</span>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-2">
+            <button onclick="changeCartQty('${item.product}', -1)" class="w-7 h-7 rounded-lg border themed-border flex items-center justify-center text-slate-500 hover:bg-slate-50 dark:hover:bg-zinc-800"><i class="fa-solid fa-minus text-[9px]"></i></button>
+            <span class="text-xs font-bold w-6 text-center text-slate-800 dark:text-zinc-200">${item.qty}</span>
+            <button onclick="changeCartQty('${item.product}', 1)" class="w-7 h-7 rounded-lg border themed-border flex items-center justify-center text-slate-500 hover:bg-slate-50 dark:hover:bg-zinc-800"><i class="fa-solid fa-plus text-[9px]"></i></button>
+          </div>
+
+          <span class="text-xs font-black text-slate-800 dark:text-zinc-200 w-20 text-right">₹${item.price * item.qty}</span>
+          
+          <button onclick="removeCartItem('${item.product}')" class="text-slate-400 hover:text-rose-500 transition-colors p-1 ml-2"><i class="fa-solid fa-trash-can text-sm"></i></button>
+        `;
+        if (list) list.appendChild(row);
+      });
+
+      // Synchronize delivery threshold totals with MERN api
+      try {
+        const payload = cart.map(i => ({ product: i.product, qty: i.qty }));
+        const res = await fetch('/api/cart/metadata', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ cartItems: payload })
+        });
+        const data = await res.json();
+        updateCartSummaryDetails(data.subtotal, data.hasFreeShipping, data.remainingToFreeShipping, data.recommendations);
+      } catch (err) {
+        // Fallback calculations in case MERN backend is offline
+        const sub = cart.reduce((sum, i) => sum + i.price * i.qty, 0);
+        const free = sub >= 1000;
+        updateCartSummaryDetails(sub, free, Math.max(0, 1000 - sub), []);
+      }
+    }
+
+    function updateCartSummaryDetails(subtotal, hasFreeShipping, remainingToFreeShipping, recommendationsList) {
+      // Threshold bar syncs
+      const fill = document.getElementById('cart-progress-fill');
+      const text = document.getElementById('cart-limit-text');
+      const subtext = document.getElementById('cart-meter-subtext');
+      
+      const pct = Math.min(100, (subtotal / 1000) * 100);
+      if (fill) fill.style.width = `${pct}%`;
+      if (text) text.textContent = hasFreeShipping ? 'UNLOCKED! 🎉' : `₹${subtotal} / ₹1000`;
+      
+      if (subtext) {
+        subtext.textContent = hasFreeShipping 
+          ? 'Congratulations! Your order qualifies for Complimentary Premium Delivery.' 
+          : `Add ₹${remainingToFreeShipping} more to unlock free delivery.`;
+      }
+
+      // Recommendations list syncs
+      const upsellPanel = document.getElementById('cart-upsell-panel');
+      const upsellsList = document.getElementById('cart-upsells-list');
+      
+      if (upsellsList) upsellsList.innerHTML = '';
+      
+      if (!hasFreeShipping && recommendationsList && recommendationsList.length > 0) {
+        if (upsellPanel) upsellPanel.classList.remove('hidden');
+        recommendationsList.forEach(prod => {
+          const row = document.createElement('div');
+          row.className = "flex justify-between items-center bg-slate-50 dark:bg-zinc-900/50 p-2.5 rounded-xl border themed-border";
+          row.innerHTML = `
+            <div class="flex flex-col truncate max-w-[180px]">
+              <span class="text-xs font-bold truncate text-slate-700 dark:text-zinc-350">${prod.name}</span>
+              <span class="text-[10px] font-semibold text-slate-500">₹${prod.price}</span>
+            </div>
+            <button onclick="addToBag('${prod._id}', '${prod.name}', ${prod.price}, '')" class="bg-black dark:bg-zinc-150 text-white dark:text-black p-2 rounded-lg flex items-center justify-center transition-all hover:bg-gold hover:text-black active:scale-95 shadow">
+              <i class="fa-solid fa-plus text-[10px]"></i>
+            </button>
+          `;
+          upsellsList.appendChild(row);
+        });
+      } else {
+        if (upsellPanel) upsellPanel.classList.add('hidden');
+      }
+
+      // Summary Invoice syncs
+      const shippingCost = hasFreeShipping ? 0 : 100;
+      const totalAmount = subtotal + shippingCost;
+
+      const subSum = document.getElementById('cart-summary-subtotal');
+      const shipSum = document.getElementById('cart-summary-shipping');
+      const totSum = document.getElementById('cart-summary-total');
+
+      if (subSum) subSum.textContent = `₹${subtotal}`;
+      if (shipSum) shipSum.textContent = hasFreeShipping ? 'Complimentary' : `₹${shippingCost}`;
+      if (totSum) totSum.textContent = `₹${totalAmount}`;
+
+      // Checkout Summary syncs
+      const checkSub = document.getElementById('checkout-summary-subtotal');
+      const checkShip = document.getElementById('checkout-summary-shipping');
+      const checkTot = document.getElementById('checkout-summary-total');
+
+      if (checkSub) checkSub.textContent = `₹${subtotal}`;
+      if (checkShip) checkShip.textContent = hasFreeShipping ? 'Complimentary' : `₹${shippingCost}`;
+      if (checkTot) checkTot.textContent = `₹${totalAmount}`;
+
+      // Refresh dynamic cashback optimizer advice box
+      syncCheckoutOptimizer(totalAmount);
+      syncCheckoutPointsGathers(totalAmount);
+    }
+
+    // --------------------------------------------------
+    // AI CASHBACK OPTIMIZER & WALLET CHECKOUT
+    // --------------------------------------------------
+    async function syncCheckoutOptimizer(totalAmount) {
+      if (totalAmount <= 0) return;
+      const advice = document.getElementById('checkout-optimizer-text');
+      if (!user) {
+        if (advice) advice.textContent = "Sign in to access AI Cashback Optimizer advice.";
+        return;
+      }
+      
+      try {
+        const res = await fetch('/api/wallet/optimizer/ai', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ cartTotal: totalAmount })
+        });
+        const data = await res.json();
+        if (advice) advice.textContent = data.recommendation;
+      } catch (err) {
+        if (advice) advice.textContent = "Use 300 points today and save the remaining points for higher-value future purchases.";
+      }
+    }
+
+    function syncCheckoutPointsGathers(totalAmount) {
+      const box = document.getElementById('checkout-points-redemption-body');
+      if (!box) return;
+
+      if (!user) {
+        box.innerHTML = `<p class="text-xs text-rose-500 font-semibold italic">Please sign in to redeem Luxe Wallet points.</p>`;
+        return;
+      }
+
+      const maxRedeem = Math.min(user.walletPoints, totalAmount);
+      box.innerHTML = `
+        <div class="flex justify-between items-center text-xs font-semibold">
+          <span>Available balance: <strong class="text-gold">${user.walletPoints} pts</strong></span>
+          <span>Max redeemable today: <strong class="text-gold">${maxRedeem} pts</strong></span>
+        </div>
+
+        <div class="flex gap-2">
+          <input
+            id="checkout-points-input"
+            type="number"
+            max="${maxRedeem}"
+            min="0"
+            value="${pointsInputVal}"
+            oninput="handleRedeemInput(this.value, ${maxRedeem}, ${totalAmount})"
+            placeholder="Redeem points..."
+            class="bg-slate-50 dark:bg-zinc-900 border themed-border rounded-lg py-2 px-3 text-xs font-bold focus:outline-none focus:border-gold text-slate-800 dark:text-zinc-100 flex-1"
+          />
+          <button
+            type="button"
+            onclick="triggerMaxRedeem(${maxRedeem}, ${totalAmount})"
+            class="bg-black dark:bg-zinc-100 text-white dark:text-black hover:bg-gold hover:text-black py-2 px-4 rounded-lg text-[10px] font-black uppercase tracking-wider transition-colors"
+          >
+            MAX REDEEM
+          </button>
+        </div>
+      `;
+    }
+
+    let pointsInputVal = 0;
+
+    function handleRedeemInput(val, max, total) {
+      pointsInputVal = Math.min(max, Math.max(0, Number(val)));
+      updateCheckoutTotal(pointsInputVal, total);
+    }
+
+    function triggerMaxRedeem(max, total) {
+      pointsInputVal = max;
+      const input = document.getElementById('checkout-points-input');
+      if (input) input.value = max;
+      updateCheckoutTotal(max, total);
+    }
+
+    function updateCheckoutTotal(pointsRedeemed, totalAmount) {
+      const row = document.getElementById('checkout-summary-points-row');
+      const val = document.getElementById('checkout-summary-points-val');
+      const finalTot = document.getElementById('checkout-summary-total');
+
+      if (pointsRedeemed > 0) {
+        row.classList.remove('hidden');
+        val.textContent = `-₹${pointsRedeemed}`;
+      } else {
+        row.classList.add('hidden');
+      }
+
+      finalTot.textContent = `₹${totalAmount - pointsRedeemed}`;
+    }
+
+    function selectPayGate(method) {
+      selectedPayGate = method;
+      const upi = document.getElementById('pay-upi-btn');
+      const card = document.getElementById('pay-card-btn');
+
+      if (method === 'UPI') {
+        upi.className = "p-3 rounded-lg border text-xs font-extrabold uppercase tracking-wider flex items-center justify-center transition-all border-gold bg-gold/5 font-extrabold";
+        card.className = "p-3 rounded-lg border text-xs font-extrabold uppercase tracking-wider flex items-center justify-center transition-all border-slate-200 dark:border-zinc-800 themed-text-muted hover:bg-slate-50 dark:hover:bg-zinc-900";
+      } else {
+        card.className = "p-3 rounded-lg border text-xs font-extrabold uppercase tracking-wider flex items-center justify-center transition-all border-gold bg-gold/5 font-extrabold";
+        upi.className = "p-3 rounded-lg border text-xs font-extrabold uppercase tracking-wider flex items-center justify-center transition-all border-slate-200 dark:border-zinc-800 themed-text-muted hover:bg-slate-50 dark:hover:bg-zinc-900";
+      }
+    }
+
+    // Secure purchase placement
+    let currentCheckoutOrder = null;
+
+    async function submitSecurePurchase(e) {
+      e.preventDefault();
+      if (!user) {
+        alert('Please log in to make a purchase.');
+        openAuthModal();
+        return;
+      }
+
+      const orderItems = cart.map(i => ({
+        product: i.product,
+        name: i.name,
+        qty: i.qty,
+        price: i.price,
+        image: i.image
+      }));
+
+      try {
+        const res = await fetch('/api/orders', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            orderItems,
+            shippingAddress: { address: '123 Luxury Ave', city: 'Mumbai', zipcode: '400001', phone: '+91 9876543210' },
+            paymentMethod: selectedPayGate,
+            pointsToRedeem: Number(pointsInputVal)
+          })
+        });
+        const data = await res.json();
+        
+        // Confirm mock payment instantly!
+        const verifyRes = await fetch('/api/orders/verify', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ orderId: data.order._id })
+        });
+        const verifyData = await verifyRes.json();
+        
+        currentCheckoutOrder = verifyData.order;
+        cart = [];
+        syncCartUI();
+        
+        // Launch gamification spin modal after confirmation delay!
+        setTimeout(() => {
+          openSpinModal();
+        }, 800);
+
+      } catch (err) {
+        console.error(err);
+      }
+    }
+
+    // --------------------------------------------------
+    // GAMIFICATION POST-PURCHASE LUCKY SPIN WHEEL
+    // --------------------------------------------------
+    function openSpinModal() {
+      const modal = document.getElementById('spin-modal');
+      const wheel = document.getElementById('rotating-spin-wheel');
+      const box = document.getElementById('spin-result-box');
+      const closeBtn = document.getElementById('spin-modal-close-btn');
+      const skipBtn = document.getElementById('spin-modal-skip-btn');
+      const trigger = document.getElementById('spin-wheel-trigger-btn');
+
+      wheel.style.transform = 'rotate(0deg)';
+      box.classList.add('hidden');
+      closeBtn.classList.add('hidden');
+      skipBtn.classList.remove('hidden');
+      trigger.disabled = false;
+
+      modal.classList.remove('hidden');
+    }
+
+    function closeSpinModal() {
+      document.getElementById('spin-modal').classList.add('hidden');
+      // Fetch fresh stats to update badge tier status
+      fetchAuthenticationMe();
+      switchView('profile');
+    }
+
+    async function executeSpinWheelPayout() {
+      const trigger = document.getElementById('spin-wheel-trigger-btn');
+      const skipBtn = document.getElementById('spin-modal-skip-btn');
+      
+      trigger.disabled = true;
+      skipBtn.classList.add('hidden');
+
+      // Randomly spins the wheel
+      const extraDeg = 1440 + Math.floor(Math.random() * 360);
+      document.getElementById('rotating-spin-wheel').style.transform = `rotate(${extraDeg}deg)`;
+
+      try {
+        const res = await fetch('/api/gamification/spin', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ orderId: currentCheckoutOrder ? currentCheckoutOrder._id : 'sandbox_ord_99' })
+        });
+        const data = await res.json();
+
+        setTimeout(() => {
+          // Display result box
+          const box = document.getElementById('spin-result-box');
+          const text = document.getElementById('spin-result-text');
+          const closeBtn = document.getElementById('spin-modal-close-btn');
+
+          text.textContent = `You won ${data.pointsWon} Luxe Points!`;
+          box.classList.remove('hidden');
+          closeBtn.classList.remove('hidden');
+        }, 3000); // 3 seconds spinning
+
+      } catch (err) {
+        console.error(err);
+        trigger.disabled = false;
+      }
+    }
+
+    // --------------------------------------------------
+    // PRODUCT DETAILS VIEW & AI SENTIMENT SENTENCES
+    // --------------------------------------------------
+    let currentDetailProductId = null;
+
+    async function viewProductDetails(productId) {
+      currentDetailProductId = productId;
+      switchView('product-detail');
+      
+      const layout = document.getElementById('detail-product-layout');
+      layout.innerHTML = `<span class="text-xs font-semibold animate-pulse text-gold uppercase"><i class="fa-solid fa-spinner animate-spin"></i> Loading details specs...</span>`;
+
+      try {
+        const res = await fetch(`/api/products/${productId}`);
+        const prod = await res.json();
+
+        // category gradients
+        let gradientStr = 'linear-gradient(135deg, #475569 0%, #1e293b 100%)';
+        if (prod.category === 'Laptops') gradientStr = 'linear-gradient(135deg, #6366f1 0%, #a855f7 100%)';
+        else if (prod.category === 'Footwear') gradientStr = 'linear-gradient(135deg, #f97316 0%, #ef4444 100%)';
+        else if (prod.category === 'Mobiles') gradientStr = 'linear-gradient(135deg, #06b6d4 0%, #3b82f6 100%)';
+        else if (prod.category === 'Apparel') gradientStr = 'linear-gradient(135deg, #10b981 0%, #14b8a6 100%)';
+
+        layout.innerHTML = `
+          <!-- Image Left -->
+          <div class="themed-card p-4 rounded-3xl overflow-hidden aspect-square flex items-center justify-center relative shadow-sm max-h-[500px]" style="background: ${gradientStr}">
+            <div class="absolute inset-0 opacity-15 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-white via-transparent to-transparent"></div>
+            ${prod.image ? `
+              <img src="${prod.image}" alt="${prod.name}" class="relative z-10" style="width: 85%; height: 85%; object-fit: contain; filter: drop-shadow(0 12px 24px rgba(0,0,0,0.35)); border-radius: 14px;" />
+            ` : `
+              <i class="fa-solid fa-crown text-white/20 text-7xl"></i>
+            `}
+          </div>
+
+          <!-- Description Specs Right -->
+          <div class="flex flex-col gap-6">
+            <div class="flex flex-col gap-2">
+              <span class="bg-black dark:bg-zinc-100 text-white dark:text-black px-3 py-1 rounded-md text-[9px] font-black uppercase tracking-wider w-fit">
+                ${prod.category}
+              </span>
+              <h1 class="text-2xl md:text-3xl font-extrabold font-serif tracking-tight text-slate-800 dark:text-zinc-100">
+                ${prod.name}
+              </h1>
+              
+              <div class="flex items-center gap-1.5 mt-1">
+                <span class="flex items-center text-gold font-black text-xs gap-0.5">
+                  <i class="fa-solid fa-star"></i> ${prod.rating}
+                </span>
+                <span class="text-xs text-slate-400">
+                  (${prod.numReviews} verified reviews ledger)
+                </span>
+              </div>
+            </div>
+
+            <p class="text-xs text-slate-500 leading-relaxed font-semibold">
+              ${prod.description}
+            </p>
+
+            <div class="flex justify-between items-center bg-slate-50 dark:bg-zinc-900/50 p-4 rounded-2xl border border-slate-100/50">
+              <div class="flex flex-col">
+                <span class="text-[9px] font-bold themed-text-muted uppercase">Retail Price</span>
+                <span class="text-2xl font-black text-slate-900 dark:text-zinc-100">₹${prod.price}</span>
+              </div>
+              
+              <button onclick="addToBag('${prod._id}', '${prod.name}', ${prod.price}, '${gradientStr}', '${prod.image}')" class="bg-black dark:bg-zinc-100 text-white dark:text-black hover:bg-gold hover:text-black px-6 py-3.5 rounded-xl text-xs font-bold uppercase tracking-wider transition-all flex items-center gap-2 shadow">
+                <i class="fa-solid fa-shopping-bag"></i> Add to Cart
+              </button>
+            </div>
+
+            <div class="flex flex-col gap-3">
+              <span class="text-[10px] font-black themed-text-muted uppercase">Product Specifications</span>
+              <div class="themed-card rounded-2xl overflow-hidden shadow-sm">
+                ${prod.specifications ? prod.specifications.map(s => `
+                  <div class="flex justify-between p-3.5 border-b themed-border last:border-b-0 text-xs font-semibold">
+                    <span class="font-bold text-slate-700 dark:text-zinc-350">${s.name}</span>
+                    <span class="text-right">${s.value}</span>
+                  </div>
+                `).join('') : ''}
+              </div>
+            </div>
+          </div>
+        `;
+
+        loadProductAiReviewsSummary(productId);
+        loadProductReviewsList(productId);
+        renderStarsInput();
+      } catch (err) {
+        console.error(err);
+      }
+    }
+
+    async function loadProductAiReviewsSummary(productId) {
+      const block = document.getElementById('detail-ai-summary-block');
+      block.innerHTML = `<span class="text-xs font-semibold animate-pulse text-gold uppercase"><i class="fa-solid fa-spinner animate-spin"></i> Compiling reviews sentiment...</span>`;
+
+      try {
+        const res = await fetch(`/api/products/${productId}/reviews/summary`, { method: 'POST' });
+        const data = await res.json();
+        
+        block.innerHTML = `
+          <div class="themed-card p-5 rounded-2xl border border-slate-100 flex flex-col gap-4 shadow-sm relative overflow-hidden bg-gold/5 border-gold/10">
+            <div class="flex items-center gap-2">
+              <i class="fa-solid fa-sparkles text-gold animate-spin"></i>
+              <h4 class="text-xs font-extrabold uppercase tracking-wider text-slate-800 dark:text-zinc-200">
+                AI Sentiment Sentiment Summary
+              </h4>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <!-- Pros -->
+              <div class="p-4 rounded-xl bg-emerald-500/5 border border-emerald-500/10 flex flex-col gap-2">
+                <span class="text-[11px] font-bold text-emerald-600 dark:text-emerald-500 flex items-center gap-1.5">
+                  <i class="fa-solid fa-thumbs-up"></i> WHAT CUSTOMERS LOVE
+                </span>
+                <ul class="flex flex-col gap-1 text-[11px] font-semibold text-slate-650 dark:text-zinc-400">
+                  ${data.pros ? data.pros.map(pro => `
+                    <li class="flex items-start gap-1">
+                      <span class="text-emerald-500 font-bold">✓</span>
+                      <span>${pro}</span>
+                    </li>
+                  `).join('') : ''}
+                </ul>
+              </div>
+
+              <!-- Cons -->
+              <div class="p-4 rounded-xl bg-rose-500/5 border border-rose-500/10 flex flex-col gap-2">
+                <span class="text-[11px] font-bold text-rose-600 dark:text-rose-500 flex items-center gap-1.5">
+                  <i class="fa-solid fa-thumbs-down"></i> CONCERNS / DISLIKES
+                </span>
+                <ul class="flex flex-col gap-1 text-[11px] font-semibold text-slate-650 dark:text-zinc-400">
+                  ${data.cons ? data.cons.map(con => `
+                    <li class="flex items-start gap-1">
+                      <span class="text-rose-500 font-bold">✗</span>
+                      <span>${con}</span>
+                    </li>
+                  `).join('') : ''}
+                </ul>
+              </div>
+            </div>
+          </div>
+        `;
+      } catch (err) {
+        console.error(err);
+      }
+    }
+
+    async function loadProductReviewsList(productId) {
+      const container = document.getElementById('detail-reviews-list-container');
+      container.innerHTML = '';
+      
+      const sort = document.getElementById('review-sorting-select').value;
+
+      try {
+        const res = await fetch(`/api/products/${productId}/reviews?sortBy=${sort}`);
+        const list = await res.json();
+
+        if (list.length === 0) {
+          container.innerHTML = `<p class="text-xs text-slate-400 italic">No reviews submitted yet.</p>`;
+          return;
+        }
+
+        list.forEach(rev => {
+          const card = document.createElement('div');
+          card.className = "themed-card p-5 rounded-2xl flex flex-col gap-3 shadow-sm relative";
+          
+          card.innerHTML = `
+            <div class="flex justify-between items-center">
+              <div class="flex flex-col gap-0.5">
+                <span class="text-xs font-bold text-slate-800 dark:text-zinc-200">${rev.userName}</span>
+                <div class="flex items-center gap-2">
+                  <div class="flex text-gold text-[9px]">
+                    ${Array.from({ length: rev.rating }).map(() => `<i class="fa-solid fa-star"></i>`).join('')}
+                  </div>
+                  ${rev.verifiedPurchase ? `
+                    <span class="text-[8px] font-black text-emerald-600 dark:text-emerald-500 uppercase tracking-widest flex items-center gap-0.5">
+                      <i class="fa-solid fa-shield-check"></i> Verified Purchase
+                    </span>
+                  ` : ''}
+                </div>
+              </div>
+              <span class="text-[9px] text-slate-400 font-semibold">${new Date(rev.createdAt).toLocaleDateString()}</span>
+            </div>
+
+            <p class="text-xs leading-relaxed text-slate-650 dark:text-zinc-350 font-medium">
+              ${rev.comment}
+            </p>
+
+            <div class="flex items-center gap-4 mt-1 border-t themed-border pt-3">
+              <button onclick="voteReviewHelpful('${rev._id}')" class="flex items-center gap-1 text-[10px] font-extrabold uppercase tracking-widest text-slate-400 hover:text-emerald-600 transition-colors">
+                <i class="fa-solid fa-thumbs-up"></i> Helpful (${rev.helpfulVotes || 0})
+              </button>
+            </div>
+          `;
+          container.appendChild(card);
+        });
+      } catch (err) {
+        console.error(err);
+      }
+    }
+
+    function resortProductReviews() {
+      if (currentDetailProductId) {
+        loadProductReviewsList(currentDetailProductId);
+      }
+    }
+
+    async function voteReviewHelpful(reviewId) {
+      try {
+        const res = await fetch(`/api/reviews/${reviewId}/helpful`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ type: 'helpful' })
+        });
+        const data = await res.json();
+        if (data.error) {
+          alert(data.error);
+        } else {
+          loadProductReviewsList(currentDetailProductId);
+        }
+      } catch (err) {
+        console.error(err);
+      }
+    }
+
+    function renderStarsInput() {
+      const container = document.getElementById('review-stars-input-container');
+      if (!container) return;
+      
+      container.innerHTML = '';
+      for (let i = 1; i <= 5; i++) {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.onclick = () => selectReviewStars(i);
+        btn.className = `focus:outline-none transition-transform active:scale-90 text-lg ${
+          i <= selectedRating ? 'text-gold' : 'text-slate-300 dark:text-zinc-800'
+        }`;
+        btn.innerHTML = `<i class="fa-solid fa-star"></i>`;
+        container.appendChild(btn);
+      }
+    }
+
+    function selectReviewStars(rating) {
+      selectedRating = rating;
+      renderStarsInput();
+    }
+
+    async function submitProductReview(e) {
+      e.preventDefault();
+      if (!user) {
+        alert('Please log in to submit a review.');
+        openAuthModal();
+        return;
+      }
+
+      const comment = document.getElementById('review-comment-textarea').value.trim();
+      if (!comment) return;
+
+      try {
+        const res = await fetch(`/api/products/${currentDetailProductId}/reviews`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            rating: selectedRating,
+            comment
+          })
+        });
+        const data = await res.json();
+        alert(data.message || 'Review submitted successfully!');
+        
+        document.getElementById('review-comment-textarea').value = '';
+        loadProductReviewsList(currentDetailProductId);
+        loadProductAiReviewsSummary(currentDetailProductId);
+      } catch (err) {
+        console.error(err);
+      }
+    }
+
+    // --------------------------------------------------
+    // SECURE WALLET LEDGERS & MILESTONES
+    // --------------------------------------------------
+    async function loadWalletLoyaltyStats() {
+      if (!user) return;
+      try {
+        const statsRes = await fetch('/api/wallet/stats');
+        if (!statsRes.ok) return;
+        const stats = await statsRes.json();
+        if (stats.error) return;
+        
+        document.getElementById('profile-wallet-balance').textContent = stats.currentPoints;
+        document.getElementById('profile-wallet-balance-inr').textContent = stats.currentPoints;
+        
+        const label = document.getElementById('profile-tier-label');
+        const bonus = document.getElementById('profile-tier-bonus-text');
+        const card = document.getElementById('profile-tier-gradient-card');
+
+        label.textContent = `${stats.membershipTier} Member`;
+        
+        if (stats.membershipTier === 'Platinum') {
+          card.className = "p-5 rounded-2xl bg-gradient-to-br from-indigo-650 to-slate-800 text-white shadow flex flex-col justify-between h-36 relative overflow-hidden";
+          bonus.textContent = `⚡ 8% Bonus Rewards + Priority Support`;
+        } else if (stats.membershipTier === 'Gold') {
+          card.className = "p-5 rounded-2xl bg-gradient-to-br from-yellow-500 to-amber-600 text-white shadow flex flex-col justify-between h-36 relative overflow-hidden";
+          bonus.textContent = `⚡ 5% Bonus Rewards + Early Access Sales`;
+        } else {
+          card.className = "p-5 rounded-2xl bg-gradient-to-br from-slate-400 to-slate-600 text-white shadow flex flex-col justify-between h-36 relative overflow-hidden";
+          bonus.textContent = `⚡ 2% Bonus Rewards base multiplier`;
+        }
+
+        const gamRes = await fetch('/api/gamification/stats');
+        if (!gamRes.ok) return;
+        const gam = await gamRes.json();
+        if (gam.error) return;
+
+        document.getElementById('profile-streak-days').textContent = gam.streakDays;
+        document.getElementById('referral-code-input').value = gam.referralCode;
+
+        // Load transaction lists
+        const ledgerRes = await fetch('/api/wallet/ledger');
+        if (!ledgerRes.ok) return;
+        const ledger = await ledgerRes.json();
+        if (ledger.error || !Array.isArray(ledger)) return;
+        
+        const tbody = document.getElementById('profile-ledger-transactions-tbody');
+        tbody.innerHTML = '';
+        if (ledger.length === 0) {
+          tbody.innerHTML = `<tr><td colspan="3" class="p-4 text-center text-slate-400 italic">No wallet transactions logged.</td></tr>`;
+        } else {
+          ledger.forEach(tx => {
+            const tr = document.createElement('tr');
+            tr.className = "border-b border-slate-100 hover:bg-slate-50/50 text-xs";
+            tr.innerHTML = `
+              <td class="p-4 text-[10px] text-slate-400">${new Date(tx.createdAt).toLocaleDateString()}</td>
+              <td class="p-4 text-slate-700 dark:text-zinc-350">${tx.description}</td>
+              <td class="p-4 text-right font-black ${tx.amount > 0 ? 'text-emerald-600' : 'text-rose-500'}">
+                ${tx.amount > 0 ? `+${tx.amount}` : tx.amount}
+              </td>
+            `;
+            tbody.appendChild(tr);
+          });
+        }
+
+        // Load milestones progress list
+        const mList = document.getElementById('profile-milestones-list');
+        mList.innerHTML = '';
+        if (gam.milestones && Array.isArray(gam.milestones)) {
+          gam.milestones.forEach(m => {
+            const row = document.createElement('div');
+            row.className = "flex gap-3 items-center bg-slate-50 dark:bg-zinc-900/50 p-3 rounded-xl border themed-border relative overflow-hidden";
+            row.innerHTML = `
+              <div class="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 text-xs font-black border ${
+                m.achieved 
+                  ? 'bg-emerald-100 border-emerald-300 text-emerald-600' 
+                  : 'bg-slate-100 border-slate-200 text-slate-400'
+              }">
+                ${m.achieved ? '✓' : m.id}
+              </div>
+              <div class="flex flex-col gap-0.5 truncate flex-1">
+                <span class="text-xs font-bold text-slate-800 dark:text-zinc-250 flex items-center gap-1.5">
+                  ${m.title}
+                  ${m.achieved ? `<span class="text-[8px] font-black text-emerald-650 bg-emerald-50 px-1.5 py-0.5 rounded-full uppercase">Unlocked</span>` : ''}
+                </span>
+                <span class="text-[10px] text-slate-500 leading-normal">${m.desc}</span>
+              </div>
+            `;
+            mList.appendChild(row);
+          });
+        }
+
+      } catch (err) {
+        console.error(err);
+      }
+    }
+
+    function copyInvitationCode() {
+      const code = document.getElementById('referral-code-input').value;
+      navigator.clipboard.writeText(code);
+      alert('Referral invitation code copied to clipboard!');
+    }
+
+    // --------------------------------------------------
+    // MVC ADMIN SYSTEM FUNCTIONS
+    // --------------------------------------------------
+    async function loadAdminConsoleStats() {
+      if (!user || user.role !== 'admin') return;
+      try {
+        const res = await fetch('/api/admin/stats');
+        if (!res.ok) return;
+        const stats = await res.json();
+        if (stats.error) return;
+        
+        document.getElementById('admin-total-revenue').textContent = `₹${stats.totalRevenue}`;
+        document.getElementById('admin-total-users').textContent = `${stats.totalUsers} users`;
+        document.getElementById('admin-total-products').textContent = `${stats.totalProducts} items`;
+        document.getElementById('admin-total-orders').textContent = `${stats.totalOrders} orders`;
+
+        const tbody = document.getElementById('admin-sales-ledger-tbody');
+        tbody.innerHTML = '';
+        
+        if (stats.recentOrders && Array.isArray(stats.recentOrders)) {
+          stats.recentOrders.forEach(ord => {
+            const tr = document.createElement('tr');
+            tr.className = "border-b border-slate-100 hover:bg-slate-50/50 text-xs";
+            tr.innerHTML = `
+              <td class="p-4 font-bold text-[10px] truncate max-w-[80px]">${ord._id}</td>
+              <td class="p-4 text-slate-700 dark:text-zinc-350">${ord.user ? ord.user.name : 'Sandbox Client'}</td>
+              <td class="p-4 font-black">₹${ord.totalPrice}</td>
+              <td class="p-4 text-right">
+                <span class="px-2.5 py-0.5 rounded-full text-[8px] font-black uppercase tracking-wider ${
+                  ord.isPaid ? 'bg-emerald-100 text-emerald-600' : 'bg-rose-100 text-rose-600'
+                }">${ord.isPaid ? 'Paid' : 'Unpaid'}</span>
+              </td>
+            `;
+            tbody.appendChild(tr);
+          });
+        }
+      } catch (err) {
+        console.error(err);
+      }
+    }
+
+    async function adminAddNewProduct(e) {
+      e.preventDefault();
+      const name = document.getElementById('admin-add-name').value.trim();
+      const price = document.getElementById('admin-add-price').value;
+      const stock = document.getElementById('admin-add-stock').value;
+      const category = document.getElementById('admin-add-category').value;
+      const description = document.getElementById('admin-add-desc').value.trim();
+
+      if (!name || !price || !stock || !description) return;
+
+      try {
+        await fetch('/api/products', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            name,
+            description,
+            price: Number(price),
+            category,
+            stock: Number(stock),
+            specifications: [{ name: 'Processor', value: 'Emulated Core' }],
+            tags: ['new', 'accessories']
+          })
+        });
+        alert('New premium catalog product inserted successfully!');
+        
+        // Reset forms and sync admin analytics dials
+        document.getElementById('admin-add-name').value = '';
+        document.getElementById('admin-add-price').value = '';
+        document.getElementById('admin-add-stock').value = '';
+        document.getElementById('admin-add-desc').value = '';
+        
+        loadAdminConsoleStats();
+        loadCatalog();
+      } catch (err) {
+        console.error(err);
+      }
+    }
+
+    // --------------------------------------------------
+    // AUTHENTICATION SECURITY MODAL & HANDLERS
+    // --------------------------------------------------
+    function openAuthModal() {
+      resetAuthForms();
+      document.getElementById('auth-modal').classList.remove('hidden');
+    }
+
+    function closeAuthModal() {
+      document.getElementById('auth-modal').classList.add('hidden');
+    }
+
+    let isAuthRegisterMode = false;
+
+    function toggleAuthModalMode() {
+      isAuthRegisterMode = !isAuthRegisterMode;
+      const title = document.getElementById('auth-modal-title');
+      const desc = document.getElementById('auth-modal-desc');
+      const btn = document.getElementById('auth-modal-mode-btn');
+      
+      const name = document.getElementById('auth-name-group');
+      const ref = document.getElementById('auth-referral-group');
+
+      if (isAuthRegisterMode) {
+        title.textContent = "Join LUXE Program";
+        desc.textContent = "Register today to unlock 100 bonus Luxe Points in your user wallet.";
+        btn.textContent = "Existing User? Sign In";
+        name.classList.remove('hidden');
+        ref.classList.remove('hidden');
+      } else {
+        title.textContent = "Secure Account Login";
+        desc.textContent = "Sign in to access Luxe Wallet points, streaks milestones, and AI budget optimizers.";
+        btn.textContent = "New User? Join";
+        name.classList.add('hidden');
+        ref.classList.add('hidden');
+      }
+    }
+
+    function resetAuthForms() {
+      document.getElementById('auth-email-input').value = '';
+      document.getElementById('auth-password-input').value = '';
+      document.getElementById('auth-name-input').value = '';
+      document.getElementById('auth-referral-input').value = '';
+      isAuthRegisterMode = false;
+      
+      const name = document.getElementById('auth-name-group');
+      const ref = document.getElementById('auth-referral-group');
+      name.classList.add('hidden');
+      ref.classList.add('hidden');
+      
+      document.getElementById('auth-modal-title').textContent = "Secure Account Login";
+      document.getElementById('auth-modal-desc').textContent = "Sign in to access Luxe Wallet points, streaks milestones, and AI budget optimizers.";
+      document.getElementById('auth-modal-mode-btn').textContent = "New User? Join";
+    }
+
+    async function submitAuthForm(e) {
+      e.preventDefault();
+      const email = document.getElementById('auth-email-input').value.trim();
+      const password = document.getElementById('auth-password-input').value;
+      const name = document.getElementById('auth-name-input').value.trim();
+      const referralCode = document.getElementById('auth-referral-input').value.trim();
+
+      let url = isAuthRegisterMode ? '/api/auth/register' : '/api/auth/login';
+      let payload = { email, password };
+      if (isAuthRegisterMode) {
+        payload.name = name;
+        payload.referralCode = referralCode;
+      }
+
+      try {
+        const res = await fetch(url, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        const data = await res.json();
+        
+        if (data.error) {
+          alert(data.error);
+        } else {
+          user = data.user;
+          syncAuthenticationMe();
+          closeAuthModal();
+        }
+      } catch (err) {
+        console.error(err);
+      }
+    }
+
+    async function submitGoogleMockAuth() {
+      try {
+        const res = await fetch('/api/auth/google', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            email: 'google_' + Math.random().toString(36).substr(2, 5) + '@luxe.com',
+            name: 'Sandbox Google User',
+            sub: 'mock_google_id_' + Math.random().toString(36).substr(2, 9)
+          })
+        });
+        const data = await res.json();
+        user = data.user;
+        syncAuthenticationMe();
+        closeAuthModal();
+      } catch (err) {
+        console.error(err);
+      }
+    }
+
+    async function submitLogOut() {
+      try {
+        await fetch('/api/auth/logout', { method: 'POST' });
+        user = null;
+        syncAuthenticationMe();
+        switchView('catalog');
+      } catch (err) {
+        console.error(err);
+      }
+    }
+
+    async function fetchAuthenticationMe() {
+      try {
+        const res = await fetch('/api/auth/me');
+        const data = await res.json();
+        user = data.user;
+        syncAuthenticationMe();
+      } catch (err) {
+        console.warn('Session check failed, running under guest session.');
+      }
+    }
+
+    function syncAuthenticationMe() {
+      const headerBlock = document.getElementById('auth-header-block');
+      
+      const pLink = document.getElementById('nav-profile-link');
+      const aLink = document.getElementById('nav-admin-link');
+
+      if (user) {
+        // Show loyalty links
+        pLink.classList.remove('hidden');
+        if (user.role === 'admin') {
+          aLink.classList.remove('hidden');
+        } else {
+          aLink.classList.add('hidden');
+        }
+
+        // Tier colors badges
+        let badgeColor = 'bg-slate-600 border-slate-500';
+        if (user.membershipTier === 'Platinum') badgeColor = 'bg-indigo-600 border-indigo-500';
+        else if (user.membershipTier === 'Gold') badgeColor = 'bg-amber-600 border-amber-500';
+
+        headerBlock.innerHTML = `
+          <div class="flex items-center gap-3.5">
+            <span class="hidden sm:inline px-2.5 py-0.5 rounded-full text-[8px] font-extrabold uppercase tracking-widest border text-white ${badgeColor}">
+              ${user.membershipTier} Tier
+            </span>
+            <button onclick="switchView('profile')" class="flex items-center gap-1.5 text-xs font-bold text-slate-700 dark:text-zinc-300 hover:underline">
+              <i class="fa-solid fa-circle-user text-base"></i> ${user.name.split(' ')[0]}
+            </button>
+            <button onclick="submitLogOut()" class="text-slate-400 hover:text-rose-500 transition-colors p-1" title="Sign out">
+              <i class="fa-solid fa-sign-out-alt"></i>
+            </button>
+          </div>
+        `;
+
+        loadWalletLoyaltyStats();
+        if (user.role === 'admin') {
+          loadAdminConsoleStats();
+        }
+      } else {
+        pLink.classList.add('hidden');
+        aLink.classList.add('hidden');
+        
+        headerBlock.innerHTML = `
+          <button onclick="openAuthModal()" class="bg-black dark:bg-zinc-100 text-white dark:text-black rounded-md text-[10px] font-bold uppercase tracking-wider py-2 px-5 hover:translate-y-[-1px] transition-all shadow-sm">
+            SIGN IN
+          </button>
+        `;
+      }
+
+      // Sync Cart Points inputs
+      syncCartUI();
+    }
+
+    // --------------------------------------------------
+    // SYSTEM DARK / LIGHT THEME TOGGLE
+    // --------------------------------------------------
+    const themeBtn = document.getElementById('theme-toggle');
+    let activeTheme = localStorage.getItem('luxe_theme') || 'light';
+
+    function syncThemeUI() {
+      const html = document.documentElement;
+      if (activeTheme === 'dark') {
+        html.setAttribute('data-theme', 'dark');
+        themeBtn.innerHTML = `<i class="fa-solid fa-sun text-amber-500"></i>`;
+      } else {
+        html.setAttribute('data-theme', 'light');
+        themeBtn.innerHTML = `<i class="fa-solid fa-moon text-slate-500"></i>`;
+      }
+      localStorage.setItem('luxe_theme', activeTheme);
+    }
+
+    if (themeBtn) {
+      themeBtn.addEventListener('click', () => {
+        activeTheme = activeTheme === 'dark' ? 'light' : 'dark';
+        syncThemeUI();
+      });
+    }
+
+    // --------------------------------------------------
+    // CORE INITIALIZATION
+    // --------------------------------------------------
+    document.addEventListener('DOMContentLoaded', () => {
+      if (document.querySelector('script[src="/src/main.jsx"]')) {
+        console.log("React SPA script detected. Disabling vanilla initialization.");
+        return;
+      }
+      syncThemeUI();
+      loadCatalog();
+      fetchAuthenticationMe();
+      syncCartUI();
+    });
+  </script>
+</body>
+</html>

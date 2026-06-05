@@ -1,0 +1,516 @@
+<!DOCTYPE html><html class="light" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>LUXE | Premium Curations</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;family=Metropolis:wght@600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-tertiary-fixed": "#1a1c1c",
+                    "tertiary-fixed-dim": "#c6c6c7",
+                    "on-background": "#1b1b1d",
+                    "surface-container-high": "#eae7e9",
+                    "on-secondary": "#ffffff",
+                    "tertiary": "#000000",
+                    "outline-variant": "#c6c6cd",
+                    "error": "#ba1a1a",
+                    "secondary-container": "#dee0e2",
+                    "secondary-fixed-dim": "#c5c6c8",
+                    "surface": "#fcf8fa",
+                    "on-error-container": "#93000a",
+                    "on-surface-variant": "#45464c",
+                    "on-tertiary": "#ffffff",
+                    "error-container": "#ffdad6",
+                    "inverse-primary": "#c0c6db",
+                    "surface-bright": "#fcf8fa",
+                    "surface-container": "#f0edee",
+                    "on-primary-container": "#7d8497",
+                    "surface-variant": "#e5e2e3",
+                    "on-primary-fixed-variant": "#404758",
+                    "primary-fixed": "#dce2f7",
+                    "primary": "#000000",
+                    "on-secondary-container": "#606365",
+                    "surface-tint": "#575e70",
+                    "inverse-surface": "#303031",
+                    "on-primary": "#ffffff",
+                    "surface-container-lowest": "#ffffff",
+                    "primary-container": "#141b2b",
+                    "on-tertiary-container": "#838484",
+                    "primary-fixed-dim": "#c0c6db",
+                    "on-secondary-fixed": "#191c1e",
+                    "tertiary-fixed": "#e2e2e2",
+                    "on-primary-fixed": "#141b2b",
+                    "outline": "#76777d",
+                    "surface-dim": "#dcd9db",
+                    "secondary": "#5c5f60",
+                    "surface-container-highest": "#e5e2e3",
+                    "on-tertiary-fixed-variant": "#454747",
+                    "on-surface": "#1b1b1d",
+                    "inverse-on-surface": "#f3f0f1",
+                    "tertiary-container": "#1a1c1c",
+                    "on-secondary-fixed-variant": "#444749",
+                    "on-error": "#ffffff",
+                    "surface-container-low": "#f6f3f4",
+                    "background": "#fcf8fa",
+                    "secondary-fixed": "#e1e2e4"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "section-gap": "80px",
+                    "gutter": "24px",
+                    "margin-mobile": "20px",
+                    "container-max": "1280px",
+                    "margin-desktop": "64px",
+                    "unit": "4px"
+            },
+            "fontFamily": {
+                    "display-lg-mobile": ["Metropolis"],
+                    "body-lg": ["Inter"],
+                    "body-md": ["Inter"],
+                    "headline-sm": ["Metropolis"],
+                    "body-sm": ["Inter"],
+                    "label-caps": ["Inter"],
+                    "headline-md": ["Metropolis"],
+                    "display-lg": ["Metropolis"]
+            },
+            "fontSize": {
+                    "display-lg-mobile": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #d1d5db;
+            border-radius: 10px;
+        }
+        .quick-view-btn {
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .product-card:hover .quick-view-btn {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .product-image-container img {
+            transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .product-card:hover .product-image-container img {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body-md overflow-x-hidden" style="background-image: linear-gradient(rgba(252, 248, 250, 0.7), rgba(252, 248, 250, 0.7)), url(&quot;https://lh3.googleusercontent.com/aida-public/AB6AXuCoesPx5nvv2bEH_Ee29jmpPp5DQbr0nO78G27RtaAzd-zpUKdAGvh89wwDJ-X9fbyNMS0E0ewQ0R5OPeUEpugy9DW98I8ce2WsqzdLiJCfPC8VWe6oNovJiSzHNIGdHc2UQBoJhBGR44YpEUSyeBv3Cl4joeSqsoxCa173UkMGzLKRBgJQlIntsfjb3V4ZFrk3gzwANXaHpMKbSZmiZpPuW-NJHJvsms8REm1_hAfzaj_iRAMtHGeQqHdin6u5_OzJIcfNjA6MgW0&quot;); background-attachment: fixed; background-position: center center; background-repeat: no-repeat; background-size: cover;">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-surface/80 dark:bg-surface-container/80 backdrop-blur-xl border-b border-outline-variant/30 shadow-sm backdrop-blur-2xl">
+<div class="flex justify-between items-center px-64 h-20 max-w-container-max mx-auto">
+<div class="flex items-center gap-12">
+<a class="text-headline-md font-headline-md tracking-tighter text-on-background dark:text-surface-bright" href="#">LUXE</a>
+<div class="hidden md:flex gap-8">
+<a class="font-label-caps text-label-caps text-on-surface-variant dark:text-on-secondary-fixed-variant hover:text-primary dark:hover:text-surface-bright transition-colors duration-300" href="#">Electronics</a>
+<a class="font-label-caps text-label-caps text-primary dark:text-surface-bright border-b-2 border-primary pb-1" href="#">Fashion</a>
+<a class="font-label-caps text-label-caps text-on-surface-variant dark:text-on-secondary-fixed-variant hover:text-primary dark:hover:text-surface-bright transition-colors duration-300" href="#">Home</a>
+<a class="font-label-caps text-label-caps text-on-surface-variant dark:text-on-secondary-fixed-variant hover:text-primary dark:hover:text-surface-bright transition-colors duration-300" href="#">Beauty</a>
+<a class="font-label-caps text-label-caps text-on-surface-variant dark:text-on-secondary-fixed-variant hover:text-primary dark:hover:text-surface-bright transition-colors duration-300" href="#">Travel</a>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="relative hidden lg:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-sm">search</span>
+<input class="bg-surface-container-low border-none rounded-full pl-10 pr-4 py-2 w-64 focus:ring-1 focus:ring-primary/20 text-body-sm" placeholder="Search curated styles..." type="text">
+</div>
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors">favorite</button>
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors relative">
+                    shopping_bag
+                    <span class="absolute -top-1 -right-1 bg-primary text-white text-[10px] w-4 h-4 rounded-full flex items-center justify-center font-bold">2</span>
+</button>
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors">person</button>
+</div>
+</div>
+</nav>
+<main class="pt-28 pb-section-gap px-margin-desktop max-w-container-max mx-auto">
+<!-- Breadcrumbs -->
+<nav class="flex items-center gap-2 mb-8 text-on-surface-variant/60 font-label-caps text-label-caps backdrop-blur-2xl">
+<a class="hover:text-primary transition-colors" href="#">Home</a>
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+<a class="hover:text-primary transition-colors" href="#">Fashion</a>
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+<span class="text-primary">Premium Collections</span>
+</nav>
+<div class="flex flex-col lg:flex-row gap-gutter">
+<!-- Sidebar Filters -->
+<aside class="w-full lg:w-72 flex-shrink-0 space-y-10">
+<div>
+<h3 class="font-label-caps text-label-caps text-on-surface mb-6 border-b border-outline-variant/30 pb-2">Category</h3>
+<div class="space-y-3">
+<label class="flex items-center gap-3 cursor-pointer group">
+<input class="rounded-sm border-outline-variant text-primary focus:ring-primary h-4 w-4" type="checkbox">
+<span class="text-body-sm text-on-surface-variant group-hover:text-primary transition-colors">New Arrivals</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<input checked="" class="rounded-sm border-outline-variant text-primary focus:ring-primary h-4 w-4" type="checkbox">
+<span class="text-body-sm text-primary transition-colors">Outerwear</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<input class="rounded-sm border-outline-variant text-primary focus:ring-primary h-4 w-4" type="checkbox">
+<span class="text-body-sm text-on-surface-variant group-hover:text-primary transition-colors">Knitwear</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<input class="rounded-sm border-outline-variant text-primary focus:ring-primary h-4 w-4" type="checkbox">
+<span class="text-body-sm text-on-surface-variant group-hover:text-primary transition-colors">Accessories</span>
+</label>
+</div>
+</div>
+<div>
+<h3 class="font-label-caps text-label-caps text-on-surface mb-6 border-b border-outline-variant/30 pb-2">Price Range</h3>
+<input class="w-full h-1 bg-surface-container-high rounded-lg appearance-none cursor-pointer accent-primary mb-4" max="5000" min="0" type="range" value="2500">
+<div class="flex justify-between text-label-caps text-on-surface-variant">
+<span class="">$0</span>
+<span class="">$5,000+</span>
+</div>
+</div>
+<div>
+<h3 class="font-label-caps text-label-caps text-on-surface mb-6 border-b border-outline-variant/30 pb-2">Color</h3>
+<div class="flex flex-wrap gap-3">
+<button class="w-8 h-8 rounded-full border border-outline-variant/30 bg-primary ring-offset-2 ring-1 ring-primary"></button>
+<button class="w-8 h-8 rounded-full border border-outline-variant/30 bg-[#F5F5DC]"></button>
+<button class="w-8 h-8 rounded-full border border-outline-variant/30 bg-[#708090]"></button>
+<button class="w-8 h-8 rounded-full border border-outline-variant/30 bg-[#556B2F]"></button>
+<button class="w-8 h-8 rounded-full border border-outline-variant/30 bg-[#FFF]"></button>
+</div>
+</div>
+<div>
+<h3 class="font-label-caps text-label-caps text-on-surface mb-6 border-b border-outline-variant/30 pb-2">Size</h3>
+<div class="grid grid-cols-4 gap-2">
+<button class="py-2 text-label-caps border border-outline-variant hover:border-primary transition-colors">XS</button>
+<button class="py-2 text-label-caps border border-primary bg-primary text-white">S</button>
+<button class="py-2 text-label-caps border border-outline-variant hover:border-primary transition-colors">M</button>
+<button class="py-2 text-label-caps border border-outline-variant hover:border-primary transition-colors">L</button>
+</div>
+</div>
+<div>
+<h3 class="font-label-caps text-label-caps text-on-surface mb-6 border-b border-outline-variant/30 pb-2">Rating</h3>
+<div class="space-y-2">
+<button class="flex items-center gap-2 group w-full">
+<div class="flex text-yellow-500">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm">star</span>
+</div>
+<span class="text-body-sm text-on-surface-variant group-hover:text-primary">&amp; Up</span>
+</button>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<section class="flex-1">
+<div class="flex justify-between items-end mb-12">
+<div>
+<h1 class="font-display-lg text-display-lg text-on-surface leading-tight">Winter '24 Curations</h1>
+<p class="text-body-md text-on-surface-variant mt-2">128 meticulously crafted items discovered.</p>
+</div>
+<div class="flex items-center gap-4">
+<span class="text-label-caps text-on-surface-variant">Sort by</span>
+<select class="bg-transparent border-none border-b border-outline font-label-caps text-label-caps py-1 focus:ring-0 cursor-pointer">
+<option>Popularity</option>
+<option>Price: Low to High</option>
+<option>Price: High to Low</option>
+<option>Newest First</option>
+</select>
+</div>
+</div>
+<!-- Product Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-y-12 gap-x-8" id="product-grid">
+<!-- Product Card 1 -->
+<div class="product-card group cursor-pointer">
+<div class="product-image-container relative aspect-[3/4] overflow-hidden bg-surface-container mb-6">
+<img alt="Premium Wool Coat" class="w-full h-full object-cover" data-alt="A high-end studio photograph of a long, charcoal gray premium wool coat draped over a minimalist white pedestal. The lighting is soft and directional, highlighting the rich texture of the fabric. The background is a clean, neutral gray gradient, creating a sophisticated and luxurious light-mode aesthetic. Shadows are subtle and diffused, emphasizing professional studio quality." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCIGxMCVLQrbwYVSCpLtAPHYkPFy_4sEau82qwcWSl6QYBkBds0jLKf25y7zYW9-CFlxEvCfHrLJEchOuPZxs7LV5MHo_SEJXCIxPQK1ePYBLrRVISsLHm3DGDM-DR1i7wBPTosnB-xZViBiNCOIBcORNkLIO4G7cmqYqvUNut5RdgGgASwADBoHkIBpiOPRzGcvPjuJPzlPhYF2LBOn6yggGXAZYvUuod7CXC1_WTxw6XerpwkMD6KKP8CUa5Z7YYt1rH4dJYixbA">
+<div class="absolute top-4 right-4 z-10">
+<button class="w-10 h-10 rounded-full glass-card flex items-center justify-center text-on-surface hover:bg-primary hover:text-white transition-all">
+<span class="material-symbols-outlined text-lg">favorite</span>
+</button>
+</div>
+<div class="absolute bottom-6 left-1/2 -translate-x-1/2 w-[80%] quick-view-btn z-10">
+<button class="w-full py-4 glass-card text-on-surface font-label-caps text-label-caps tracking-widest hover:bg-primary hover:text-white transition-colors">
+                                    QUICK VIEW
+                                </button>
+</div>
+</div>
+<div class="space-y-1">
+<span class="text-label-caps text-on-surface-variant opacity-60">LIMITED EDITION</span>
+<h4 class="font-body-md text-body-md text-on-surface group-hover:text-primary transition-colors">Heritage Cashmere Trench</h4>
+<p class="font-headline-sm text-headline-sm text-on-surface">$1,450.00</p>
+</div>
+</div>
+<!-- Product Card 2 -->
+<div class="product-card group cursor-pointer">
+<div class="product-image-container relative aspect-[3/4] overflow-hidden bg-surface-container mb-6">
+<img alt="Silk Evening Gown" class="w-full h-full object-cover" data-alt="A minimalist fashion editorial shot featuring a flowing silk midi skirt in a deep obsidian black. The fabric captures the light with a soft, expensive sheen. Set against a clean architectural background with sharp shadows and bright highlights, evoking a high-fashion boutique atmosphere. The mood is serene, focused on material excellence and modern elegance." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAsYJ9TdnOhmop4xRHkV0f44NivapTLjbKexM0TiPUQBC-7SbyeKuVG6pAFByp9joKm_PEAyU2gvwaYafQzZsSfgwxJGfbsvtYDaqbXBo3d1TmWPdg9sXuLA0KBqzhQpyuXt9WlOuc3tLGzb09F6tZtUO_p-g0bbaAGKP_R3tD1zKqsN5hb6HxgHGUyV-JFTqotmkU1b6g7NxLBgjK_N7LLblcYMS5sCwLpraBZxhMHxZSlbwLKJLxbKJ8Sv1FLq0o3yJH8GIAjo1k">
+<div class="absolute top-4 right-4 z-10">
+<button class="w-10 h-10 rounded-full glass-card flex items-center justify-center text-on-surface hover:bg-primary hover:text-white transition-all">
+<span class="material-symbols-outlined text-lg">favorite</span>
+</button>
+</div>
+<div class="absolute bottom-6 left-1/2 -translate-x-1/2 w-[80%] quick-view-btn z-10">
+<button class="w-full py-4 glass-card text-on-surface font-label-caps text-label-caps tracking-widest hover:bg-primary hover:text-white transition-colors">
+                                    QUICK VIEW
+                                </button>
+</div>
+</div>
+<div class="space-y-1">
+<span class="text-label-caps text-on-surface-variant opacity-60">NEW SEASON</span>
+<h4 class="font-body-md text-body-md text-on-surface group-hover:text-primary transition-colors">Architectural Silk Midi</h4>
+<p class="font-headline-sm text-headline-sm text-on-surface">$890.00</p>
+</div>
+</div>
+<!-- Product Card 3 -->
+<div class="product-card group cursor-pointer">
+<div class="product-image-container relative aspect-[3/4] overflow-hidden bg-surface-container mb-6">
+<img alt="Italian Leather Bag" class="w-full h-full object-cover" data-alt="Close-up detail shot of a structured, ivory white Italian leather handbag resting on a reflective glass surface. The lighting is crisp and cool, highlighting the precision stitching and gold hardware. The background is blurred and neutral, maintaining a high-end luxury e-commerce feel. The overall aesthetic is clean, technical, and remarkably sophisticated." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDS8pMyzrWBvz60Xyv-zMiSHym4C581PpjeFwUu8nTVKHvqaxKg89nfYqBIbIM_aFNYQdw3rm1TiHhDQ86RpNqIZuy5f14ndo0xNrpVZR5Qsc6Sd_2lp9ucTurju8zyAOeL5Ojr0_1quOyaY7wSkvYKaZ49c9QjM39Nutch-v2y-fGfilTQRCwH3m8EEJ2PIF5GLTmKNWRwGiAXlzBkgxWnOtf6qhkIjqO93y046C-EYx2snYqJhGtx1rv55azgZGwWOwr7FVXqTZ8">
+<div class="absolute top-4 right-4 z-10">
+<button class="w-10 h-10 rounded-full glass-card flex items-center justify-center text-on-surface hover:bg-primary hover:text-white transition-all">
+<span class="material-symbols-outlined text-lg">favorite</span>
+</button>
+</div>
+<div class="absolute bottom-6 left-1/2 -translate-x-1/2 w-[80%] quick-view-btn z-10">
+<button class="w-full py-4 glass-card text-on-surface font-label-caps text-label-caps tracking-widest hover:bg-primary hover:text-white transition-colors">
+                                    QUICK VIEW
+                                </button>
+</div>
+</div>
+<div class="space-y-1">
+<span class="text-label-caps text-on-surface-variant opacity-60">SIGNATURE</span>
+<h4 class="font-body-md text-body-md text-on-surface group-hover:text-primary transition-colors">Sculpted Tote in Bone</h4>
+<p class="font-headline-sm text-headline-sm text-on-surface">$2,100.00</p>
+</div>
+</div>
+<!-- Product Card 4 -->
+<div class="product-card group cursor-pointer">
+<div class="product-image-container relative aspect-[3/4] overflow-hidden bg-surface-container mb-6">
+<img alt="Merino Wool Sweater" class="w-full h-full object-cover" data-alt="Minimalist portrait of a model wearing a fine-knit merino wool turtleneck in a soft sand beige. The lighting is warm and natural, coming from a large side window, creating soft shadows. The overall composition is airy and expensive, emphasizing the garment's quality and the quiet luxury aesthetic of the brand." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBwStLlqbjv4qHBHB62uZu7Va06r7P6JcyvfJL8Uwomo2QGuJcoD_v5vE8xx9uk8yrg-GKYVzg1zb3Zoq2qCCfqbYnow5WHF_z55AWVJ3t-VzByCxXVTrtozc20SzYNAM-Gac7tgCZXaqrrMxRl5ICWQI_507wzB6xTsPzXBG03BMabvYaKLlIFtS7n2BpoWmgAIsypZfRuapy1DIfZfE6ZdYc-PjrsCuotGnSCXLBt_RMhrdFfE4Qvit_OB92SSwECjgS3M94Ygic">
+<div class="absolute top-4 right-4 z-10">
+<button class="w-10 h-10 rounded-full glass-card flex items-center justify-center text-on-surface hover:bg-primary hover:text-white transition-all">
+<span class="material-symbols-outlined text-lg">favorite</span>
+</button>
+</div>
+<div class="absolute bottom-6 left-1/2 -translate-x-1/2 w-[80%] quick-view-btn z-10">
+<button class="w-full py-4 glass-card text-on-surface font-label-caps text-label-caps tracking-widest hover:bg-primary hover:text-white transition-colors">
+                                    QUICK VIEW
+                                </button>
+</div>
+</div>
+<div class="space-y-1">
+<span class="text-label-caps text-on-surface-variant opacity-60">ESSENTIAL</span>
+<h4 class="font-body-md text-body-md text-on-surface group-hover:text-primary transition-colors">Fine Knit Sand Turtleneck</h4>
+<p class="font-headline-sm text-headline-sm text-on-surface">$420.00</p>
+</div>
+</div>
+</div>
+<!-- Pagination/Load More -->
+<div class="mt-24 flex flex-col items-center">
+<div class="flex items-center gap-8 mb-8">
+<div class="h-[1px] w-12 bg-outline-variant/30"></div>
+<span class="text-label-caps text-on-surface-variant">Showing 4 of 128</span>
+<div class="h-[1px] w-12 bg-outline-variant/30"></div>
+</div>
+<button class="px-12 py-5 bg-primary text-white font-label-caps text-label-caps tracking-[0.2em] hover:bg-primary/90 transition-all active:scale-95 shadow-lg" id="load-more">
+                        LOAD MORE PIECES
+                    </button>
+<div class="flex items-center gap-4 mt-12">
+<button class="w-10 h-10 flex items-center justify-center border border-primary text-white bg-primary font-label-caps">1</button>
+<button class="w-10 h-10 flex items-center justify-center border border-outline-variant text-on-surface-variant hover:border-primary transition-colors font-label-caps">2</button>
+<button class="w-10 h-10 flex items-center justify-center border border-outline-variant text-on-surface-variant hover:border-primary transition-colors font-label-caps">3</button>
+<span class="text-on-surface-variant">...</span>
+<button class="w-10 h-10 flex items-center justify-center border border-outline-variant text-on-surface-variant hover:border-primary transition-colors font-label-caps">32</button>
+</div>
+</div>
+</section>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-low dark:bg-tertiary-container w-full py-20 border-t border-outline-variant">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter px-margin-desktop max-w-container-max mx-auto">
+<div class="space-y-6">
+<h2 class="text-headline-sm font-headline-sm text-primary">LUXE</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+                    Elevating the digital retail experience through meticulous curation and technical precision.
+                </p>
+</div>
+<div class="space-y-4">
+<h4 class="font-label-caps text-label-caps text-primary">Shop</h4>
+<div class="flex flex-col gap-2">
+<a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" href="#">New Arrivals</a>
+<a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" href="#">Best Sellers</a>
+<a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" href="#">Collections</a>
+<a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" href="#">Sale</a>
+</div>
+</div>
+<div class="space-y-4">
+<h4 class="font-label-caps text-label-caps text-primary">Help</h4>
+<div class="flex flex-col gap-2">
+<a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" href="#">Customer Service</a>
+<a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" href="#">Shipping &amp; Returns</a>
+<a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" href="#">Size Guide</a>
+<a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" href="#">Contact</a>
+</div>
+</div>
+<div class="space-y-6">
+<h4 class="font-label-caps text-label-caps text-primary">Newsletter</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Join our circle for early access to new drops.</p>
+<div class="flex border-b border-primary pb-2">
+<input class="bg-transparent border-none focus:ring-0 text-body-sm w-full placeholder:text-on-surface-variant/40" placeholder="Email Address" type="email">
+<button class="material-symbols-outlined text-primary">arrow_forward</button>
+</div>
+</div>
+</div>
+<div class="mt-20 px-margin-desktop max-w-container-max mx-auto pt-8 border-t border-outline-variant/30 flex justify-between items-center">
+<p class="font-body-sm text-body-sm text-on-surface-variant">© 2024 LUXE Premium Retailers. All rights reserved.</p>
+<div class="flex gap-6">
+<a class="text-on-surface-variant hover:text-primary transition-colors font-body-sm text-body-sm" href="#">Privacy Policy</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-body-sm text-body-sm" href="#">Terms of Use</a>
+</div>
+</div>
+</footer>
+<!-- Quick View Modal (Hidden by Default) -->
+<div class="fixed inset-0 bg-black/40 backdrop-blur-sm z-[100] opacity-0 pointer-events-none transition-opacity duration-300 flex items-center justify-center p-6" id="quick-view-overlay">
+<div class="bg-white max-w-4xl w-full flex flex-col md:flex-row overflow-hidden shadow-2xl scale-95 transition-transform duration-300" id="quick-view-modal">
+<div class="md:w-1/2 aspect-[3/4] md:aspect-auto">
+<img alt="Product Detail" class="w-full h-full object-cover" id="modal-img" src="">
+</div>
+<div class="md:w-1/2 p-12 flex flex-col justify-between">
+<div class="flex justify-between items-start">
+<div class="space-y-4">
+<span class="text-label-caps text-on-surface-variant tracking-widest">AUTHENTIC LUXURY</span>
+<h2 class="text-display-lg-mobile font-display-lg-mobile text-on-surface" id="modal-title">Product Name</h2>
+<p class="text-headline-sm font-headline-sm text-on-surface" id="modal-price">$0.00</p>
+<div class="h-[1px] w-12 bg-primary"></div>
+<p class="text-body-md text-on-surface-variant leading-relaxed">
+                            Crafted from the finest materials sourced globally, this piece embodies our commitment to timeless design and technical excellence. Features hand-finished detailing and an optimized silhouette for the modern wardrobe.
+                        </p>
+</div>
+<button class="material-symbols-outlined text-2xl hover:rotate-90 transition-transform" id="close-modal">close</button>
+</div>
+<div class="space-y-8 mt-12">
+<div class="space-y-4">
+<span class="font-label-caps text-label-caps">SELECT SIZE</span>
+<div class="flex gap-4">
+<button class="w-12 h-12 flex items-center justify-center border border-outline-variant hover:border-primary transition-colors text-label-caps">XS</button>
+<button class="w-12 h-12 flex items-center justify-center border border-primary bg-primary text-white text-label-caps">S</button>
+<button class="w-12 h-12 flex items-center justify-center border border-outline-variant hover:border-primary transition-colors text-label-caps">M</button>
+<button class="w-12 h-12 flex items-center justify-center border border-outline-variant hover:border-primary transition-colors text-label-caps">L</button>
+</div>
+</div>
+<div class="flex gap-4">
+<button class="flex-1 py-5 bg-primary text-white font-label-caps text-label-caps tracking-widest hover:opacity-90 transition-opacity">ADD TO BAG</button>
+<button class="w-16 h-16 flex items-center justify-center border border-outline-variant hover:border-primary transition-colors">
+<span class="material-symbols-outlined">favorite</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<script>
+        // Modal Logic
+        const overlay = document.getElementById('quick-view-overlay');
+        const modal = document.getElementById('quick-view-modal');
+        const closeBtn = document.getElementById('close-modal');
+        const quickViewButtons = document.querySelectorAll('.quick-view-btn button');
+        
+        const modalImg = document.getElementById('modal-img');
+        const modalTitle = document.getElementById('modal-title');
+        const modalPrice = document.getElementById('modal-price');
+
+        quickViewButtons.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const card = e.target.closest('.product-card');
+                const img = card.querySelector('img').src;
+                const title = card.querySelector('h4').textContent;
+                const price = card.querySelector('p').textContent;
+
+                modalImg.src = img;
+                modalTitle.textContent = title;
+                modalPrice.textContent = price;
+
+                overlay.classList.remove('opacity-0', 'pointer-events-none');
+                modal.classList.remove('scale-95');
+                document.body.style.overflow = 'hidden';
+            });
+        });
+
+        const hideModal = () => {
+            overlay.classList.add('opacity-0', 'pointer-events-none');
+            modal.classList.add('scale-95');
+            document.body.style.overflow = '';
+        };
+
+        closeBtn.addEventListener('click', hideModal);
+        overlay.addEventListener('click', (e) => {
+            if(e.target === overlay) hideModal();
+        });
+
+        // Load More Mock Interaction
+        const loadMore = document.getElementById('load-more');
+        loadMore.addEventListener('click', () => {
+            loadMore.textContent = 'EXPLORING COLLECTIONS...';
+            loadMore.style.opacity = '0.7';
+            setTimeout(() => {
+                loadMore.textContent = 'LOAD MORE PIECES';
+                loadMore.style.opacity = '1';
+                // In a real app, logic would append more items here
+            }, 1000);
+        });
+
+        // Scroll Navbar Effect
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 50) {
+                nav.classList.add('shadow-md');
+                nav.classList.remove('shadow-sm');
+            } else {
+                nav.classList.add('shadow-sm');
+                nav.classList.remove('shadow-md');
+            }
+        });
+    </script>
+
+
+
+
+</body></html>

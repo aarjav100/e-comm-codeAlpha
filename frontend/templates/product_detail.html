@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LUXE | Chronos T1 Titanium Edition Detail</title>
+  
+  <!-- Fonts: Inter & Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Tabler Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    /* Ethereal Commerce Design System Tokens */
+    :root {
+      --background: #fcf8fa;
+      --surface: #ffffff;
+      --surface-container: #f0edee;
+      --text: #1b1b1d;
+      --muted: #76777d;
+      --border: #e5e2e3;
+      --primary: #000000;
+      
+      --accent-blue: #3b82f6;
+      --accent-green: #10b981;
+      
+      --font-ui: 'Inter', sans-serif;
+      --font-heading: 'Plus Jakarta Sans', system-ui, sans-serif;
+    }
+
+    body {
+      background-color: var(--background);
+      color: var(--text);
+      font-family: var(--font-ui);
+      margin: 0;
+      padding: 0;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: var(--font-heading);
+    }
+
+    /* Minimal Navbar */
+    .premium-navbar {
+      height: 56px;
+      background-color: var(--surface);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 64px;
+    }
+
+    .luxe-logo {
+      font-size: 20px;
+      font-weight: 850;
+      letter-spacing: -0.03em;
+      text-decoration: none;
+      color: var(--primary);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .nav-link {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text);
+      text-decoration: none;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      transition: color 0.15s ease;
+      position: relative;
+    }
+
+    .nav-link:hover {
+      color: var(--muted);
+    }
+
+    /* Product Page layout grid */
+    .product-detail-container {
+      max-width: 6xl;
+      margin: 0 auto;
+      padding: 64px 24px;
+      display: grid;
+      grid-template-columns: 5.5fr 4.2fr;
+      gap: 48px;
+    }
+
+    /* Image Gallery */
+    .main-image-viewport {
+      height: 480px;
+      background: linear-gradient(135deg, #1a1a2e, #2d2d2d);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      transition: background 0.3s ease;
+    }
+
+    .thumbnail-row {
+      display: flex;
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .thumb-btn {
+      width: 80px;
+      height: 80px;
+      border-radius: 6px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s ease;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .thumb-btn.active {
+      border: 2px solid var(--primary);
+    }
+
+    /* Selectors Custom swatches */
+    .finish-swatch {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      position: relative;
+    }
+    
+    .finish-swatch.active::after {
+      content: '';
+      position: absolute;
+      inset: -4px;
+      border: 2px solid var(--primary);
+      border-radius: 50%;
+    }
+
+    .size-pill {
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 8px 16px;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .size-pill.active {
+      background-color: var(--primary);
+      color: #ffffff;
+      border-color: var(--primary);
+    }
+
+    .btn-add-to-cart {
+      width: 100%;
+      background-color: var(--primary);
+      color: #ffffff;
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 16px;
+      border-radius: 6px;
+      transition: all 0.15s ease;
+    }
+
+    .btn-add-to-cart:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+    }
+
+    .btn-buy-now {
+      width: 100%;
+      background-color: #111827;
+      color: #ffffff;
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 16px;
+      border-radius: 6px;
+      margin-top: 10px;
+      transition: all 0.15s ease;
+    }
+    .btn-buy-now:hover {
+      opacity: 0.95;
+    }
+
+    .trust-badge-row {
+      display: flex;
+      gap: 24px;
+      margin-top: 16px;
+      opacity: 0.7;
+    }
+
+    .trust-badge {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* Tabs Specifications */
+    .tabs-header {
+      display: flex;
+      gap: 32px;
+      border-bottom: 1px solid var(--border);
+      margin-top: 48px;
+    }
+
+    .spec-tab {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding-bottom: 12px;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .spec-tab.active {
+      color: var(--primary);
+      font-weight: 700;
+    }
+
+    .spec-tab.active::after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 2px;
+      bottom: 0;
+      left: 0;
+      background-color: var(--primary);
+    }
+
+    .specs-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0;
+      border-left: 1px solid var(--border);
+      border-top: 1px solid var(--border);
+      margin-top: 24px;
+    }
+
+    .spec-cell {
+      border-right: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 14px 20px;
+      display: flex;
+      justify-content: space-between;
+      font-size: 13px;
+    }
+
+    /* Related grid */
+    .related-card {
+      background-color: var(--surface);
+      border-radius: 8px;
+      overflow: hidden;
+      transition: all 0.25s ease;
+      cursor: pointer;
+    }
+    
+    .related-card:hover {
+      transform: translateY(-4px);
+    }
+
+    .related-image-area {
+      aspect-ratio: 3/4;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Footer Grid */
+    .premium-footer {
+      background-color: var(--surface);
+      border-top: 1px solid var(--border);
+      padding: 64px 32px 32px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- MINIMAL NAVBAR -->
+  <nav class="premium-navbar">
+    <a href="home_page.html" class="luxe-logo">LUXE</a>
+    <ul class="nav-links">
+      <li><a href="#" class="nav-link">Electronics</a></li>
+      <li><a href="#" class="nav-link">Fashion</a></li>
+      <li><a href="#" class="nav-link">Home</a></li>
+      <li><a href="#" class="nav-link">Beauty</a></li>
+      <li><a href="#" class="nav-link">Travel</a></li>
+    </ul>
+    
+    <div class="flex gap-6 items-center">
+      <button class="text-slate-700 hover:text-black transition-colors" title="Favorites">
+        <i class="ti ti-heart text-lg"></i>
+      </button>
+      <button class="text-slate-700 hover:text-black transition-colors" title="Shopping Bag" onclick="window.location.href='shopping_bag.html'">
+        <i class="ti ti-shopping-bag text-lg"></i>
+      </button>
+      <button class="text-slate-700 hover:text-black transition-colors" title="Account">
+        <i class="ti ti-user text-lg"></i>
+      </button>
+    </div>
+  </nav>
+
+  <!-- MAIN PRODUCT VIEWPORTS -->
+  <main class="max-w-6xl mx-auto flex flex-col gap-16">
+    
+    <div class="product-detail-container">
+      
+      <!-- LEFT - Image Gallery -->
+      <div>
+        <div class="main-image-viewport" id="main-image-canvas">
+          <i class="ti ti-watch text-white/10 text-8xl transition-all duration-300"></i>
+        </div>
+        
+        <div class="thumbnail-row">
+          <button class="thumb-btn active" onclick="swapMainImage(0, 'linear-gradient(135deg, #1a1a2e, #2d2d2d)')" style="background: linear-gradient(135deg, #1a1a2e, #2d2d2d)"></button>
+          <button class="thumb-btn" onclick="swapMainImage(1, 'linear-gradient(135deg, #475569, #1e293b)')" style="background: linear-gradient(135deg, #475569, #1e293b)"></button>
+          <button class="thumb-btn" onclick="swapMainImage(2, 'linear-gradient(135deg, #c3b091, #8b7765)')" style="background: linear-gradient(135deg, #c3b091, #8b7765)"></button>
+          <button class="thumb-btn" onclick="swapMainImage(3, 'linear-gradient(135deg, #1b4d3e, #0d1f1a)')" style="background: linear-gradient(135deg, #1b4d3e, #0d1f1a)"></button>
+        </div>
+      </div>
+
+      <!-- RIGHT - Product Information Info -->
+      <div class="flex flex-col gap-5 justify-between py-1">
+        <div class="flex flex-col gap-2.5">
+          <span class="text-[10px] font-bold text-slate-450 uppercase tracking-widest">Chronos T1 | Titanium Edition</span>
+          
+          <h1 class="text-3xl font-bold tracking-tight text-slate-900 leading-tight">Chronos T1 Titanium Edition</h1>
+          
+          <!-- Rating row -->
+          <div class="flex items-center gap-2 mt-1">
+            <div class="flex text-amber-400 text-xs gap-0.5">
+              <i class="ti ti-star-filled"></i>
+              <i class="ti ti-star-filled"></i>
+              <i class="ti ti-star-filled"></i>
+              <i class="ti ti-star-filled"></i>
+              <i class="ti ti-star-half-filled"></i>
+            </div>
+            <span class="text-xs text-slate-400 font-semibold">(124 Reviews)</span>
+          </div>
+
+          <span class="text-2xl font-bold text-slate-900 mt-2">$1,450.00</span>
+          
+          <p class="text-xs text-slate-500 leading-relaxed font-semibold max-w-sm mt-1">
+            Sculpted from space-grade titanium for absolute architectural strength and featherlight weight. Calibrated with a high-precision Swiss movement. Couplied with an ultra-durable premium link finish strap.
+          </p>
+        </div>
+
+        <!-- Finish Selector -->
+        <div class="flex flex-col gap-2">
+          <span class="text-[10px] font-bold text-slate-450 uppercase tracking-widest">FINISH</span>
+          <div class="flex gap-4">
+            <span class="finish-swatch bg-slate-900 active" onclick="selectSwatch(this)" title="Space Black"></span>
+            <span class="finish-swatch bg-slate-300" onclick="selectSwatch(this)" title="Titanium Silver"></span>
+            <span class="finish-swatch bg-slate-600" onclick="selectSwatch(this)" title="Slate Gray"></span>
+          </div>
+        </div>
+
+        <!-- Strap Size Selector -->
+        <div class="flex flex-col gap-2">
+          <span class="text-[10px] font-bold text-slate-450 uppercase tracking-widest">STRAP SIZE</span>
+          <div class="flex gap-2">
+            <span class="size-pill" onclick="selectSize(this)">S / M</span>
+            <span class="size-pill active" onclick="selectSize(this)">M / L</span>
+            <span class="size-pill" onclick="selectSize(this)">XL</span>
+          </div>
+        </div>
+
+        <!-- Add to cart buttons -->
+        <div class="flex flex-col gap-2.5">
+          <button class="btn-add-to-cart" onclick="window.location.href='shopping_bag.html'">ADD TO CART</button>
+          <button class="btn-buy-now" onclick="window.location.href='checkout_shipping.html'">BUY NOW</button>
+        </div>
+
+        <!-- Trust Badges -->
+        <div class="trust-badge-row">
+          <div class="trust-badge">
+            <i class="ti ti-truck text-slate-450"></i>
+            <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Express Delivery</span>
+          </div>
+          <div class="trust-badge">
+            <i class="ti ti-shield text-slate-450"></i>
+            <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">2-Year Warranty</span>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- TABS SECTION SPECIFICATIONS -->
+    <section class="max-w-6xl mx-auto px-6">
+      <div class="tabs-header">
+        <span class="spec-tab active">SPECIFICATIONS</span>
+        <span class="spec-tab">REVIEWS</span>
+        <span class="spec-tab">SHIPPING & RETURNS</span>
+      </div>
+
+      <div class="specs-grid">
+        <div class="spec-cell">
+          <span class="font-bold text-slate-400">Case Material</span>
+          <span class="font-bold text-slate-800">Grade 5 Space Titanium</span>
+        </div>
+        <div class="spec-cell">
+          <span class="font-bold text-slate-400">Movement</span>
+          <span class="font-bold text-slate-800">Swiss Automatic Calibre</span>
+        </div>
+        <div class="spec-cell">
+          <span class="font-bold text-slate-400">Power Reserve</span>
+          <span class="font-bold text-slate-800">48 Hours Calibrated</span>
+        </div>
+        <div class="spec-cell">
+          <span class="font-bold text-slate-400">Crystal</span>
+          <span class="font-bold text-slate-800">Anti-Reflective Sapphire</span>
+        </div>
+        <div class="spec-cell">
+          <span class="font-bold text-slate-400">Water Resistance</span>
+          <span class="font-bold text-slate-800">100 Meters / 10 ATM</span>
+        </div>
+        <div class="spec-cell">
+          <span class="font-bold text-slate-400">Warranty</span>
+          <span class="font-bold text-slate-800">2-Year International</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- RELATED ESSENTIALS -->
+    <section class="max-w-6xl mx-auto px-6 py-12 flex flex-col gap-6">
+      <div class="flex justify-between items-center border-b border-slate-100 pb-4">
+        <h2 class="text-sm font-bold text-slate-800 tracking-tight">Related Essentials</h2>
+        <a href="shop_premium_collection.html" class="text-xs font-bold text-slate-400 hover:text-black uppercase tracking-widest transition-colors">VIEW ALL</a>
+      </div>
+
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <!-- Item 1 -->
+        <div class="related-card">
+          <div class="related-image-area" style="background: linear-gradient(135deg, #708090 0%, #475569 100%)">
+            <i class="ti ti-watch text-white/20 text-3xl"></i>
+          </div>
+          <div class="py-3 px-1 flex flex-col gap-0.5">
+            <span class="text-xs font-bold text-slate-850">Aurelius Leather Tote</span>
+            <span class="text-[11px] text-slate-400 font-bold">$2,450.00</span>
+          </div>
+        </div>
+
+        <!-- Item 2 -->
+        <div class="related-card">
+          <div class="related-image-area" style="background: linear-gradient(135deg, #eae7e9 0%, #c6c6cd 100%)">
+            <i class="ti ti-watch text-slate-400 text-3xl"></i>
+          </div>
+          <div class="py-3 px-1 flex flex-col gap-0.5">
+            <span class="text-xs font-bold text-slate-850">Chronos T2 Chronograph</span>
+            <span class="text-[11px] text-slate-400 font-bold">$1,890.00</span>
+          </div>
+        </div>
+
+        <!-- Item 3 -->
+        <div class="related-card">
+          <div class="related-image-area" style="background: linear-gradient(135deg, #1b4d3e 0%, #0d1f1a 100%)">
+            <i class="ti ti-crown text-white/20 text-3xl"></i>
+          </div>
+          <div class="py-3 px-1 flex flex-col gap-0.5">
+            <span class="text-xs font-bold text-slate-850">Elite Travel Case</span>
+            <span class="text-[11px] text-slate-400 font-bold">$340.00</span>
+          </div>
+        </div>
+
+        <!-- Item 4 -->
+        <div class="related-card">
+          <div class="related-image-area" style="background: linear-gradient(135deg, #c3b091 0%, #8b7765 100%)">
+            <i class="ti ti-shirt text-white/20 text-3xl"></i>
+          </div>
+          <div class="py-3 px-1 flex flex-col gap-0.5">
+            <span class="text-xs font-bold text-slate-850">Sand Turtleneck Sand</span>
+            <span class="text-[11px] text-slate-400 font-bold">$420.00</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="premium-footer">
+    <div class="max-w-6xl mx-auto grid grid-cols-12 gap-8 px-6 pb-16 border-b border-slate-100">
+      <div class="col-span-12 md:col-span-4 flex flex-col gap-4">
+        <span class="text-base font-extrabold tracking-tight uppercase">LUXE</span>
+        <p class="text-xs font-semibold text-slate-400 leading-relaxed max-w-xs">Defining the pinnacle of digital luxury through precision design and uncompromising quality.</p>
+      </div>
+
+      <div class="col-span-6 md:col-span-2">
+        <h4 class="text-[11px] font-bold text-slate-900 uppercase tracking-widest mb-4">Explore</h4>
+        <ul class="flex flex-col gap-3 list-none p-0 m-0">
+          <li><a href="#" class="text-xs font-semibold text-slate-400 hover:text-black transition-colors">Chronographs</a></li>
+          <li><a href="#" class="text-xs font-semibold text-slate-400 hover:text-black transition-colors">Bespoke Fitting</a></li>
+          <li><a href="#" class="text-xs font-semibold text-slate-400 hover:text-black transition-colors">Materials Journal</a></li>
+        </ul>
+      </div>
+
+      <div class="col-span-6 md:col-span-2">
+        <h4 class="text-[11px] font-bold text-slate-900 uppercase tracking-widest mb-4">Legal</h4>
+        <ul class="flex flex-col gap-3 list-none p-0 m-0">
+          <li><a href="#" class="text-xs font-semibold text-slate-400 hover:text-black transition-colors">Privacy Policy</a></li>
+          <li><a href="#" class="text-xs font-semibold text-slate-400 hover:text-black transition-colors">Terms of Service</a></li>
+          <li><a href="#" class="text-xs font-semibold text-slate-400 hover:text-black transition-colors">Return Policy</a></li>
+        </ul>
+      </div>
+
+      <div class="col-span-12 md:col-span-4 flex flex-col gap-4">
+        <h4 class="text-[11px] font-bold text-slate-900 uppercase tracking-widest">Journal</h4>
+        <p class="text-xs font-semibold text-slate-400 max-w-xs">Subscribe to get invitations to exclusive private previews.</p>
+        
+        <div class="relative max-w-xs">
+          <input type="email" placeholder="Email Address" class="w-full bg-[#f3f4f6] focus:bg-white focus:ring-1 focus:ring-black border-none py-3 pl-4 pr-12 rounded text-xs font-semibold outline-none transition-all">
+          <button class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-800 hover:text-black"><i class="ti ti-arrow-right"></i></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="max-w-6xl mx-auto pt-8 px-6 flex justify-between items-center text-[10px] font-bold text-slate-450 uppercase tracking-wider">
+      <span>© 2026 LUXE INTERNATIONAL. ALL RIGHTS RESERVED.</span>
+      <div class="flex gap-4">
+        <a href="#" class="text-slate-450 hover:text-black"><i class="ti ti-brand-twitter"></i></a>
+        <a href="#" class="text-slate-450 hover:text-black"><i class="ti ti-brand-instagram"></i></a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Main image swapper
+    function swapMainImage(index, gradientStr) {
+      const view = document.getElementById('main-image-canvas');
+      const thumbs = document.querySelectorAll('.thumb-btn');
+      
+      // Update backgrounds
+      view.style.background = gradientStr;
+      
+      // Update active thumbnails classes
+      thumbs.forEach(t => t.classList.remove('active'));
+      thumbs[index].classList.add('active');
+    }
+
+    // Swatches selection
+    function selectSwatch(element) {
+      const swatches = document.querySelectorAll('.finish-swatch');
+      swatches.forEach(s => s.classList.remove('active'));
+      element.classList.add('active');
+    }
+
+    // Size selection
+    function selectSize(element) {
+      const sizes = document.querySelectorAll('.size-pill');
+      sizes.forEach(s => s.classList.remove('active'));
+      element.classList.add('active');
+    }
+  </script>
+</body>
+</html>

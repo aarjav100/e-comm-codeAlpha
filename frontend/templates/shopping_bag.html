@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LUXE | Your Selection</title>
+  
+  <!-- Fonts: Inter & Plus Jakarta Sans (Metropolis alternative) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Tabler Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+  
+  <!-- Tailwind CSS CDN for structure utilities -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    /* Ethereal Commerce Design System Tokens */
+    :root {
+      --background: #fcf8fa;
+      --surface: #ffffff;
+      --surface-container-low: #f6f3f4;
+      --surface-container: #f0edee;
+      --surface-container-high: #eae7e9;
+      --border: #e5e2e3;
+      --text: #1b1b1d;
+      --muted: #76777d;
+      --primary: #000000;
+      
+      --accent-green: #10b981;
+      --accent-gold: #c9a84c;
+      --accent-blue: #3b82f6;
+      --tan-bg: #f5ede0;
+      
+      --font-ui: 'Inter', sans-serif;
+      --font-heading: 'Plus Jakarta Sans', system-ui, sans-serif;
+    }
+
+    body {
+      background-color: var(--background);
+      color: var(--text);
+      font-family: var(--font-ui);
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      font-family: var(--font-heading);
+      letter-spacing: -0.01em;
+    }
+
+    /* Subtle custom details */
+    .premium-card {
+      background-color: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    
+    .premium-card:hover {
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.04);
+      transform: translateY(-2px);
+    }
+
+    /* Floating navigation bar with glassmorphism */
+    .luxe-nav {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(252, 248, 250, 0.8);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      height: 64px;
+      transition: all 0.3s ease;
+    }
+
+    .nav-link {
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      color: var(--muted);
+      position: relative;
+      padding: 4px 0;
+      transition: color 0.2s ease;
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 1.5px;
+      background-color: var(--primary);
+      transition: width 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .nav-link:hover {
+      color: var(--primary);
+    }
+
+    .nav-link:hover::after {
+      width: 100%;
+    }
+
+    /* Quantity controllers */
+    .qty-btn {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--surface);
+      transition: all 0.2s ease;
+    }
+
+    .qty-btn:hover {
+      background: var(--primary);
+      color: var(--surface);
+      border-color: var(--primary);
+    }
+
+    /* Main checkout action button */
+    .checkout-btn {
+      background: var(--primary);
+      color: var(--surface);
+      border-radius: 6px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .checkout-btn:hover {
+      background: #1c1c1e;
+      transform: translateY(-1px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    /* Custom Input States */
+    .premium-input {
+      background-color: var(--surface-container-low);
+      border: 1px solid transparent;
+      border-radius: 6px;
+      font-size: 14px;
+      padding: 10px 14px;
+      transition: all 0.2s ease;
+      color: var(--text);
+    }
+
+    .premium-input:focus {
+      background-color: var(--surface);
+      border-color: var(--accent-blue);
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+      outline: none;
+    }
+
+    /* Animation on cart item removal */
+    .cart-item {
+      transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .cart-item.removed {
+      opacity: 0;
+      transform: translateX(-50px);
+      height: 0;
+      padding: 0;
+      margin: 0;
+      overflow: hidden;
+      border: none;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Floating Navigation Bar -->
+  <nav class="luxe-nav flex items-center">
+    <div class="max-w-6xl mx-auto w-full px-6 flex justify-between items-center">
+      <div class="flex items-center gap-12">
+        <a href="home_page.html" class="text-[20px] font-extrabold tracking-[0.2em] text-black">LUXE</a>
+        <div class="hidden md:flex items-center gap-8">
+          <a href="shop_premium_collection.html" class="nav-link">COLLECTIONS</a>
+          <a href="#" class="nav-link">NEW ARRIVALS</a>
+          <a href="#" class="nav-link">BESPOKE</a>
+          <a href="#" class="nav-link">STORY</a>
+        </div>
+      </div>
+      <div class="flex items-center gap-6 text-black">
+        <button class="hover:text-amber-600 transition-colors"><i class="ti ti-search text-[19px]"></i></button>
+        <button class="hover:text-amber-600 transition-colors"><i class="ti ti-user text-[19px]"></i></button>
+        <button class="relative active:scale-95 transition-transform hover:text-amber-600">
+          <i class="ti ti-shopping-bag text-[19px]"></i>
+          <span id="global-cart-badge" class="absolute -top-1.5 -right-1.5 bg-black text-white text-[9px] w-4 h-4 rounded-full flex items-center justify-center font-bold">2</span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Bag Container -->
+  <main class="max-w-6xl mx-auto px-6 py-12">
+    <!-- Breadcrumb -->
+    <div class="flex items-center gap-2 text-[11px] uppercase tracking-widest text-gray-400 mb-6">
+      <a href="home_page.html" class="hover:text-black transition-colors">Home</a>
+      <span>/</span>
+      <span class="text-black font-semibold">Shopping Bag</span>
+    </div>
+
+    <!-- Page Header -->
+    <header class="mb-10">
+      <h1 class="text-3xl md:text-4xl font-extrabold text-black mb-2">Your Selection</h1>
+      <p class="text-sm text-gray-500 font-light">Review your curated items before proceeding to checkout.</p>
+    </header>
+
+    <!-- Two-Column Layout -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
+      
+      <!-- Left Column: Cart Items -->
+      <div class="lg:col-span-7 space-y-4">
+        <div id="cart-items-container" class="space-y-4">
+          
+          <!-- Item 1: Aurelius Leather Tote -->
+          <article id="item-tote" class="cart-item premium-card p-6 flex flex-col sm:flex-row gap-5" data-price="2450.00" data-qty="1">
+            <div class="w-full sm:w-[100px] h-[100px] rounded-lg overflow-hidden flex-shrink-0 flex items-center justify-center relative" style="background: linear-gradient(135deg, #f5ede0 0%, #e2d4c9 100%);">
+              <i class="ti ti-briefcase text-3xl text-amber-900/40"></i>
+              <div class="absolute inset-0 bg-black/5"></div>
+            </div>
+            <div class="flex-grow flex flex-col justify-between">
+              <div class="flex justify-between items-start">
+                <div>
+                  <h3 class="font-semibold text-[16px] text-black">Aurelius Leather Tote</h3>
+                  <p class="text-[12px] text-gray-400 mt-1">Midnight Espresso / Full-Grain Calfskin</p>
+                </div>
+                <div class="text-right">
+                  <p class="font-bold text-[16px] text-black">$2,450.00</p>
+                </div>
+              </div>
+              <div class="flex items-center justify-between mt-4">
+                <div class="flex items-center gap-3">
+                  <button class="qty-btn" onclick="adjustQuantity('item-tote', -1)">
+                    <i class="ti ti-minus text-xs"></i>
+                  </button>
+                  <span id="qty-item-tote" class="font-semibold text-sm w-6 text-center text-black">1</span>
+                  <button class="qty-btn" onclick="adjustQuantity('item-tote', 1)">
+                    <i class="ti ti-plus text-xs"></i>
+                  </button>
+                </div>
+                <button onclick="removeCartItem('item-tote')" class="flex items-center gap-1.5 text-[11px] font-bold tracking-widest text-gray-400 hover:text-red-500 transition-colors uppercase">
+                  <i class="ti ti-trash text-sm"></i>
+                  REMOVE
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <!-- Item 2: Vertex Titanium Chrono -->
+          <article id="item-chrono" class="cart-item premium-card p-6 flex flex-col sm:flex-row gap-5" data-price="8900.00" data-qty="1">
+            <div class="w-full sm:w-[100px] h-[100px] rounded-lg overflow-hidden flex-shrink-0 flex items-center justify-center relative" style="background: linear-gradient(135deg, #2a2e39 0%, #1e222b 100%);">
+              <i class="ti ti-clock text-3xl text-gray-500/40"></i>
+              <div class="absolute inset-0 bg-black/10"></div>
+            </div>
+            <div class="flex-grow flex flex-col justify-between">
+              <div class="flex justify-between items-start">
+                <div>
+                  <h3 class="font-semibold text-[16px] text-black">Vertex Titanium Chrono</h3>
+                  <p class="text-[12px] text-gray-400 mt-1">Slate / Grade 5 Titanium</p>
+                </div>
+                <div class="text-right">
+                  <p class="font-bold text-[16px] text-black">$8,900.00</p>
+                </div>
+              </div>
+              <div class="flex items-center justify-between mt-4">
+                <div class="flex items-center gap-3">
+                  <button class="qty-btn" onclick="adjustQuantity('item-chrono', -1)">
+                    <i class="ti ti-minus text-xs"></i>
+                  </button>
+                  <span id="qty-item-chrono" class="font-semibold text-sm w-6 text-center text-black">1</span>
+                  <button class="qty-btn" onclick="adjustQuantity('item-chrono', 1)">
+                    <i class="ti ti-plus text-xs"></i>
+                  </button>
+                </div>
+                <button onclick="removeCartItem('item-chrono')" class="flex items-center gap-1.5 text-[11px] font-bold tracking-widest text-gray-400 hover:text-red-500 transition-colors uppercase">
+                  <i class="ti ti-trash text-sm"></i>
+                  REMOVE
+                </button>
+              </div>
+            </div>
+          </article>
+          
+        </div>
+
+        <!-- Complimentary Delivery Notice -->
+        <div id="delivery-notice" class="flex gap-4 items-start p-4 rounded-lg border border-tan-bg bg-[#f5ede0]/50 mt-6">
+          <i class="ti ti-truck text-[20px] text-amber-800 mt-0.5"></i>
+          <div>
+            <p class="text-sm font-semibold text-black">Complimentary White-Glove Delivery</p>
+            <p class="text-[12px] text-gray-500 mt-0.5">Your order qualifies for Complimentary White-Glove Delivery and custom packaging.</p>
+          </div>
+        </div>
+
+        <!-- Under Threshold Alert (Hidden by default, shown if subtotal < 1000) -->
+        <div id="under-delivery-notice" class="hidden flex gap-4 items-start p-4 rounded-lg border border-red-100 bg-red-50/50 mt-6">
+          <i class="ti ti-info-circle text-[20px] text-red-500 mt-0.5"></i>
+          <div>
+            <p class="text-sm font-semibold text-black">Add more to unlock complimentary shipping</p>
+            <p class="text-[12px] text-gray-500 mt-0.5">Add <span id="delivery-difference" class="font-bold">$0.00</span> more to qualify for premium free white-glove shipping.</p>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Right Column: Summary & Checkout Details -->
+      <div class="lg:col-span-5 space-y-6">
+        
+        <!-- Order Summary Card -->
+        <div class="premium-card p-6 space-y-6">
+          <h2 class="text-lg font-bold text-black border-b border-gray-100 pb-3">Order Summary</h2>
+          
+          <div class="space-y-3.5 text-sm">
+            <div class="flex justify-between text-gray-500">
+              <span>Subtotal</span>
+              <span id="summary-subtotal" class="font-medium text-black">$11,350.00</span>
+            </div>
+            <div class="flex justify-between text-gray-500">
+              <span>Shipping</span>
+              <span id="summary-shipping" class="text-emerald-600 font-bold tracking-wider uppercase text-[11px] flex items-center gap-1">
+                <i class="ti ti-circle-check"></i> COMPLIMENTARY
+              </span>
+            </div>
+            <div class="flex justify-between text-gray-500">
+              <span>Estimated Tax (8%)</span>
+              <span id="summary-tax" class="font-medium text-black">$908.00</span>
+            </div>
+            <div id="summary-promo-row" class="hidden flex justify-between text-emerald-600 font-medium">
+              <span class="flex items-center gap-1"><i class="ti ti-discount"></i> Promo Discount (15%)</span>
+              <span id="summary-promo-discount">-$1,702.50</span>
+            </div>
+          </div>
+
+          <div class="border-t border-gray-100 pt-5 space-y-1">
+            <div class="flex justify-between items-baseline">
+              <span class="text-[11px] font-bold tracking-widest text-gray-400 uppercase">TOTAL</span>
+              <span id="summary-total" class="text-2xl font-extrabold text-black">$12,258.00</span>
+            </div>
+            <div class="text-right">
+              <p class="text-[10px] text-gray-400 mt-1 uppercase tracking-widest">Or 12 monthly payments of <span id="summary-installments" class="font-bold text-black">$1,021.50</span></p>
+            </div>
+          </div>
+
+          <button onclick="proceedToCheckout()" class="checkout-btn w-full py-4 text-xs tracking-[0.2em] uppercase">
+            PROCEED TO CHECKOUT
+          </button>
+
+          <!-- Security and trust links -->
+          <div class="border-t border-gray-100 pt-4 space-y-2 text-xs text-gray-400 font-light">
+            <div class="flex items-center gap-2">
+              <i class="ti ti-shield-lock text-sm text-black"></i>
+              <span>Secure, 256-bit SSL encrypted checkout</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <i class="ti ti-award text-sm text-black"></i>
+              <span>2-Year International LUXE Warranty included</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Promo Code Panel -->
+        <div class="premium-card p-6">
+          <label class="text-[11px] font-bold tracking-wider text-gray-400 uppercase block mb-3">HAVE A PROMO CODE?</label>
+          <div class="flex gap-2">
+            <input id="promo-input" class="premium-input flex-grow" placeholder="Enter code (e.g. LUXE15)" type="text">
+            <button onclick="applyPromoCode()" class="px-5 bg-black hover:bg-neutral-800 text-white text-xs font-bold tracking-widest uppercase rounded-lg transition-colors">
+              APPLY
+            </button>
+          </div>
+          <!-- Success/Error messages -->
+          <div id="promo-message" class="hidden mt-3 text-xs flex items-center gap-1.5 p-2.5 rounded"></div>
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Empty Cart State (Hidden initially, will be shown if all items removed) -->
+  <div id="empty-cart-view" class="hidden max-w-lg mx-auto text-center py-24 px-6 flex flex-col items-center">
+    <div class="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mb-6">
+      <i class="ti ti-shopping-bag-x text-3xl text-gray-400"></i>
+    </div>
+    <h2 class="text-2xl font-bold text-black mb-3">Your Selection is Empty</h2>
+    <p class="text-sm text-gray-500 font-light mb-8">Discover our fine winter collections and premium bespoke timepieces.</p>
+    <a href="shop_premium_collection.html" class="checkout-btn px-8 py-4 text-xs tracking-wider inline-block">
+      EXPLORE THE SHOP
+    </a>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-[#f0edee] border-t border-gray-200 mt-24 py-16">
+    <div class="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-8">
+      <div>
+        <h3 class="text-lg font-black tracking-widest text-black mb-4">LUXE</h3>
+        <p class="text-xs text-gray-500 leading-relaxed font-light">Defining the standards of modern heritage through technical precision and artisanal craftsmanship.</p>
+      </div>
+      <div>
+        <h4 class="text-xs font-bold tracking-wider text-black uppercase mb-4">SHOP</h4>
+        <ul class="space-y-2 text-xs text-gray-500 font-light">
+          <li><a href="#" class="hover:text-black transition-colors">Winter Collections</a></li>
+          <li><a href="#" class="hover:text-black transition-colors">Precision Horology</a></li>
+          <li><a href="#" class="hover:text-black transition-colors">Bespoke Goods</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="text-xs font-bold tracking-wider text-black uppercase mb-4">SUPPORT</h4>
+        <ul class="space-y-2 text-xs text-gray-500 font-light">
+          <li><a href="#" class="hover:text-black transition-colors">Shipping & Returns</a></li>
+          <li><a href="#" class="hover:text-black transition-colors">Care Instructions</a></li>
+          <li><a href="#" class="hover:text-black transition-colors">Private Client Concierge</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="text-xs font-bold tracking-wider text-black uppercase mb-4">CONNECT</h4>
+        <ul class="space-y-2 text-xs text-gray-500 font-light">
+          <li><a href="#" class="hover:text-black transition-colors">Instagram</a></li>
+          <li><a href="#" class="hover:text-black transition-colors">Editorial Journal</a></li>
+          <li><a href="#" class="hover:text-black transition-colors">Vanderbilt Showroom</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="max-w-6xl mx-auto px-6 mt-12 pt-6 border-t border-gray-200 flex flex-col md:flex-row justify-between items-center text-[10px] text-gray-400 tracking-wider">
+      <p>© 2026 LUXE INTERNATIONALE. ALL RIGHTS RESERVED.</p>
+      <div class="flex gap-4 mt-2 md:mt-0">
+        <a href="#" class="hover:text-black">PRIVACY</a>
+        <a href="#" class="hover:text-black">TERMS</a>
+        <a href="#" class="hover:text-black">ACCESSIBILITY</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Global Promo Variable
+    let activePromo = null;
+    let promoDiscountPercent = 0;
+
+    // Helper to calculate pricing breakdown
+    function recalculateTotals() {
+      const items = document.querySelectorAll('.cart-item');
+      let subtotal = 0;
+      let totalQty = 0;
+
+      items.forEach(item => {
+        if (!item.classList.contains('removed')) {
+          const price = parseFloat(item.getAttribute('data-price'));
+          const qty = parseInt(item.getAttribute('data-qty'));
+          subtotal += price * qty;
+          totalQty += qty;
+        }
+      });
+
+      // Update Global Cart Badge and heading quantities
+      const badge = document.getElementById('global-cart-badge');
+      badge.textContent = totalQty;
+      
+      // Handle empty bag state
+      if (totalQty === 0) {
+        document.querySelector('main').classList.add('hidden');
+        document.getElementById('empty-cart-view').classList.remove('hidden');
+        return;
+      }
+
+      // Shipping & White Glove calculations (Threshold at $1000)
+      const shippingNotice = document.getElementById('delivery-notice');
+      const underNotice = document.getElementById('under-delivery-notice');
+      const summaryShipping = document.getElementById('summary-shipping');
+      
+      let shippingCost = 0;
+      
+      if (subtotal >= 1000) {
+        shippingNotice.classList.remove('hidden');
+        underNotice.classList.add('hidden');
+        summaryShipping.innerHTML = `<i class="ti ti-circle-check"></i> COMPLIMENTARY`;
+        summaryShipping.className = 'text-emerald-600 font-bold tracking-wider uppercase text-[11px] flex items-center gap-1';
+      } else {
+        shippingNotice.classList.add('hidden');
+        underNotice.classList.remove('hidden');
+        shippingCost = 150.00; // Standard premium delivery fee
+        const difference = 1000 - subtotal;
+        document.getElementById('delivery-difference').textContent = formatCurrency(difference);
+        
+        summaryShipping.innerHTML = `$${shippingCost.toFixed(2)}`;
+        summaryShipping.className = 'font-medium text-black';
+      }
+
+      // Promo Code discounts
+      const promoRow = document.getElementById('summary-promo-row');
+      const promoDiscountLabel = document.getElementById('summary-promo-discount');
+      let promoDiscountAmt = 0;
+
+      if (activePromo) {
+        promoDiscountAmt = subtotal * promoDiscountPercent;
+        promoRow.classList.remove('hidden');
+        promoDiscountLabel.textContent = `-${formatCurrency(promoDiscountAmt)}`;
+      } else {
+        promoRow.classList.add('hidden');
+      }
+
+      // Estimated Taxes (8% on subtotal after promo discount)
+      const taxableAmount = Math.max(0, subtotal - promoDiscountAmt);
+      const estTax = taxableAmount * 0.08;
+
+      // Final Grand Total
+      const grandTotal = taxableAmount + estTax + shippingCost;
+      const installmentAmt = grandTotal / 12;
+
+      // Render to DOM
+      document.getElementById('summary-subtotal').textContent = formatCurrency(subtotal);
+      document.getElementById('summary-tax').textContent = formatCurrency(estTax);
+      document.getElementById('summary-total').textContent = formatCurrency(grandTotal);
+      document.getElementById('summary-installments').textContent = formatCurrency(installmentAmt);
+    }
+
+    // Adjust quantities (+/-)
+    function adjustQuantity(itemId, delta) {
+      const itemElement = document.getElementById(itemId);
+      if (!itemElement) return;
+
+      let currentQty = parseInt(itemElement.getAttribute('data-qty'));
+      currentQty = Math.max(1, currentQty + delta);
+      
+      itemElement.setAttribute('data-qty', currentQty);
+      
+      // Update quantity number indicator
+      const qtyIndicator = document.getElementById(`qty-${itemId}`);
+      if (qtyIndicator) qtyIndicator.textContent = currentQty;
+
+      // Re-trigger global recalculation
+      recalculateTotals();
+    }
+
+    // Remove item with graceful exit animation
+    function removeCartItem(itemId) {
+      const itemElement = document.getElementById(itemId);
+      if (!itemElement) return;
+
+      itemElement.classList.add('removed');
+
+      // Wait for transitions to finish, then recalculate
+      setTimeout(() => {
+        itemElement.remove();
+        recalculateTotals();
+      }, 400);
+    }
+
+    // Apply Promo Code
+    function applyPromoCode() {
+      const inputVal = document.getElementById('promo-input').value.trim().toUpperCase();
+      const messageBox = document.getElementById('promo-message');
+      
+      messageBox.className = "mt-3 text-xs flex items-center gap-1.5 p-2.5 rounded";
+      messageBox.classList.remove('hidden');
+
+      if (inputVal === 'LUXE15') {
+        activePromo = 'LUXE15';
+        promoDiscountPercent = 0.15;
+        
+        messageBox.classList.add('bg-emerald-50', 'text-emerald-700', 'border', 'border-emerald-100');
+        messageBox.innerHTML = `<i class="ti ti-discount-2"></i> <strong>LUXE15</strong> applied! 15% discount has been successfully credited.`;
+        
+        recalculateTotals();
+      } else if (inputVal === '') {
+        messageBox.classList.add('hidden');
+      } else {
+        // Invalid promo code
+        messageBox.classList.add('bg-red-50', 'text-red-700', 'border', 'border-red-100');
+        messageBox.innerHTML = `<i class="ti ti-alert-triangle"></i> Invalid promo code. Try <strong>LUXE15</strong> for a private client discount.`;
+      }
+    }
+
+    // Helper to format currency values cleanly
+    function formatCurrency(val) {
+      return new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'USD'
+      }).format(val);
+    }
+
+    // Simple Alert for Checkout click
+    function proceedToCheckout() {
+      window.location.href = "checkout_shipping.html";
+    }
+
+    // Run dynamic items update on startup
+    document.addEventListener('DOMContentLoaded', () => {
+      recalculateTotals();
+    });
+  </script>
+</body>
+</html>

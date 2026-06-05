@@ -1,0 +1,383 @@
+<!DOCTYPE html><html class="light" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>LUXE | Premium Product Detail</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;family=Metropolis:wght@600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-fixed": "#1a1c1c",
+                        "tertiary-fixed-dim": "#c6c6c7",
+                        "on-background": "#1b1b1d",
+                        "surface-container-high": "#eae7e9",
+                        "on-secondary": "#ffffff",
+                        "tertiary": "#000000",
+                        "outline-variant": "#c6c6cd",
+                        "error": "#ba1a1a",
+                        "secondary-container": "#dee0e2",
+                        "secondary-fixed-dim": "#c5c6c8",
+                        "surface": "#fcf8fa",
+                        "on-error-container": "#93000a",
+                        "on-surface-variant": "#45464c",
+                        "on-tertiary": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "inverse-primary": "#c0c6db",
+                        "surface-bright": "#fcf8fa",
+                        "surface-container": "#f0edee",
+                        "on-primary-container": "#7d8497",
+                        "surface-variant": "#e5e2e3",
+                        "on-primary-fixed-variant": "#404758",
+                        "primary-fixed": "#dce2f7",
+                        "primary": "#000000",
+                        "on-secondary-container": "#606365",
+                        "surface-tint": "#575e70",
+                        "inverse-surface": "#303031",
+                        "on-primary": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "primary-container": "#141b2b",
+                        "on-tertiary-container": "#838484",
+                        "primary-fixed-dim": "#c0c6db",
+                        "on-secondary-fixed": "#191c1e",
+                        "tertiary-fixed": "#e2e2e2",
+                        "on-primary-fixed": "#141b2b",
+                        "outline": "#76777d",
+                        "surface-dim": "#dcd9db",
+                        "secondary": "#5c5f60",
+                        "surface-container-highest": "#e5e2e3",
+                        "on-tertiary-fixed-variant": "#454747",
+                        "on-surface": "#1b1b1d",
+                        "inverse-on-surface": "#f3f0f1",
+                        "tertiary-container": "#1a1c1c",
+                        "on-secondary-fixed-variant": "#444749",
+                        "on-error": "#ffffff",
+                        "surface-container-low": "#f6f3f4",
+                        "background": "#fcf8fa",
+                        "secondary-fixed": "#e1e2e4"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "section-gap": "80px",
+                        "gutter": "24px",
+                        "margin-mobile": "20px",
+                        "container-max": "1280px",
+                        "margin-desktop": "64px",
+                        "unit": "4px"
+                    },
+                    "fontFamily": {
+                        "display-lg": ["Metropolis"],
+                        "body-lg": ["Inter"],
+                        "body-md": ["Inter"],
+                        "headline-sm": ["Metropolis"],
+                        "body-sm": ["Inter"],
+                        "label-caps": ["Inter"],
+                        "headline-md": ["Metropolis"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .glass-header {
+            background: rgba(252, 248, 250, 0.8);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+        .zoom-container {
+            overflow: hidden;
+            cursor: zoom-in;
+        }
+        .zoom-container img {
+            transition: transform 0.5s ease;
+        }
+        .zoom-container:hover img {
+            transform: scale(1.5);
+        }
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #d1d5db;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-surface/80 dark:bg-surface-container/80 backdrop-blur-xl border-b border-outline-variant/30 shadow-sm">
+<div class="flex justify-between items-center px-margin-desktop h-20 max-w-container-max mx-auto">
+<div class="text-headline-md font-headline-md tracking-tighter text-on-background dark:text-surface-bright">LUXE</div>
+<div class="hidden md:flex items-center gap-8">
+<a class="font-label-caps text-label-caps text-on-surface-variant dark:text-on-secondary-fixed-variant hover:text-primary dark:hover:text-surface-bright transition-colors duration-300" href="#">Electronics</a>
+<a class="font-label-caps text-label-caps text-on-surface-variant dark:text-on-secondary-fixed-variant hover:text-primary dark:hover:text-surface-bright transition-colors duration-300" href="#">Fashion</a>
+<a class="font-label-caps text-label-caps text-on-surface-variant dark:text-on-secondary-fixed-variant hover:text-primary dark:hover:text-surface-bright transition-colors duration-300" href="#">Home</a>
+<a class="font-label-caps text-label-caps text-on-surface-variant dark:text-on-secondary-fixed-variant hover:text-primary dark:hover:text-surface-bright transition-colors duration-300" href="#">Beauty</a>
+<a class="font-label-caps text-label-caps text-on-surface-variant dark:text-on-secondary-fixed-variant hover:text-primary dark:hover:text-surface-bright transition-colors duration-300" href="#">Travel</a>
+</div>
+<div class="flex items-center gap-6">
+<span class="material-symbols-outlined text-primary cursor-pointer hover:opacity-70 transition-opacity">favorite</span>
+<span class="material-symbols-outlined text-primary cursor-pointer hover:opacity-70 transition-opacity">shopping_bag</span>
+<span class="material-symbols-outlined text-primary cursor-pointer hover:opacity-70 transition-opacity">person</span>
+</div>
+</div>
+</nav>
+<main class="pt-32 pb-section-gap px-margin-desktop max-w-container-max mx-auto">
+<!-- Product Main Section -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+<!-- Left: Gallery -->
+<div class="lg:col-span-7 flex flex-col gap-4">
+<div class="zoom-container aspect-[4/5] bg-surface-container-low rounded-lg shadow-sm">
+<img class="w-full h-full object-cover" data-alt="A high-end luxury minimalist watch with a sapphire crystal face and a brushed titanium link bracelet. The watch is positioned against a clean, off-white architectural background with soft, diffused cinematic lighting. The atmosphere is sophisticated and quiet luxury, highlighting the fine mechanical textures and the sleek, monochromatic design palette." id="main-image" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDQIsLDvbvD6M5VpDm1yuQT4raAG6ylrg-v6qC11UMGeYTwYbyj8mUtmq14YTWxacwY-J56PxnGEwg4KaIXQ5jdAS_FvRQ02_bIGsQQBjg94owbTcTXo5eHgB63_yrKnW-r-mS9l4y_6_qlO69b8V4xGeChAEalpQyP8mzE01jILV9UrnS8InsHcQTUAlBtCUD-7bNLGPZnBkJQhKRjAUbLhzs43s6-VwoABbP_qm3_WAi5VGC0wfvkIA6RX7MZIdJCH92ntdv4BsM">
+</div>
+<div class="grid grid-cols-4 gap-4">
+<div class="aspect-square bg-surface-container overflow-hidden rounded cursor-pointer ring-2 ring-primary">
+<img class="w-full h-full object-cover opacity-100 hover:opacity-80 transition-opacity" data-alt="Close-up detailed view of a premium titanium watch dial with minimalist markings and polished hands. The lighting is soft and even, emphasizing the high-tech precision and clean aesthetic of the luxury brand. The colors are muted silvers and deep blacks." onclick="document.getElementById('main-image').src=this.src" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAC2OB82KGY_wXsBCJgCbVm36UaxB3wJVeipxInH6r-zAn2uUjA4F3BpQYi1D8_N0jzmKvTHCsZjtyc47pP3b14k9cWZFB6s64gEFT1gXWZ_wvn3nwCAMnqUqTcZXCmPq5GMNdxHj-ZO1YwIl2XdxlX2nlQFLuqjUyPruGOeVFcr2vK0MNELgEmCiT3_KVXCuzNZQdpN89NTVnLa1wx6RHcKbM0SqW8FL2FX1FrY3nsnRw0XZwtyxMXr6kc95GmAxh6MaRrK3GaDsY">
+</div>
+<div class="aspect-square bg-surface-container overflow-hidden rounded cursor-pointer">
+<img class="w-full h-full object-cover opacity-100 hover:opacity-80 transition-opacity" data-alt="An alternative side view of a high-end luxury camera lens, showing the glass reflection and precision-engineered focus rings. The image has a professional, clean studio aesthetic with a soft gray background. The lighting is bright and high-key, maintaining a premium minimalist feel." onclick="document.getElementById('main-image').src=this.src" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAjyYNswpC1W6n1OaZoA092WLK1arrdC41SPgbtWaTCT_AsIAYovi4C6P9c_Q9UWGui6kuKiSzYvXroyafnpm1nxVHyzX8Oc8yd_lqXMVGnzl8wJ7NYZTXWRQRUE4XzqyZN7ndY_J5SdO7l2VZ7Y7tk7mZEoL3iX6bOE1SHwTIs7e27lV7U6onLWXxaiG1qrarRGEao5MImg5Ps7JLrnlGKGRdgQQaDdfvVXLetbhQBqxTMr0TMYA40KZDv5CfdA_wGUHb34n2PWF0">
+</div>
+<div class="aspect-square bg-surface-container overflow-hidden rounded cursor-pointer">
+<img class="w-full h-full object-cover opacity-100 hover:opacity-80 transition-opacity" data-alt="Premium leather and mesh headphones with a modern minimalist design. The product is shot in a bright, airy studio with high-contrast shadows. The focus is on the tactile quality of the materials and the elegant, functional form of the audio equipment." onclick="document.getElementById('main-image').src=this.src" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBaCqycmDsXG9Djm33q1irLybCuiD-rmANEbr6l0zF8i8SkElm8taovjZp1UR7vUes3Wa-FGwo41JhZ6jOQ_OG1ZNabH2QDnWEUWNctcD0opdJN41CYSK-u7eUSXgf97qXA03iBIPnYRq_RUq6k4oFzG3rNsn6NYCKjiYTVJ4OooB-5pWsK4G1OubpAjP9tEeIpDDYYy6X3tTqrY6OwsEP6q-r-xi1LSKm0TsxSFhLEHTwOmleH1Xs05A8Sv0ldqOf7sLGMlq8pEdo">
+</div>
+<div class="aspect-square bg-surface-container overflow-hidden rounded cursor-pointer">
+<img class="w-full h-full object-cover opacity-100 hover:opacity-80 transition-opacity" data-alt="A pair of sleek, high-performance running shoes in a vibrant red against a stark, minimalist white background. The lighting is sharp and technical, emphasizing the aerodynamic curves and lightweight texture of the textile material." onclick="document.getElementById('main-image').src=this.src" src="https://lh3.googleusercontent.com/aida-public/AB6AXuALc7Kx16NGPJs3yYc1FzRRgqhwgEIFK7TJcwS77o-DlqYW_FNbbr-5f5RnioVxtgruJOEdhumC8TLey5gSAYlz9yJ0PzsM4ddrpKsqTxgYq-cDHbMqTxR0FYMN3YStyb_1YEA5hoLD46AFjWNFf4_sOlNcCjGEjZTpyx20zkvIQPmCLzQc8a1CjxPto1DiAdHWXMn4eV2qMm-SEqjSWstVFoSiOy9GDx0c-T96awUTl1zHZ0CMuabJ3LZt8tVrL1qNbEB7ax7nagM">
+</div>
+</div>
+</div>
+<!-- Right: Info -->
+<div class="lg:col-span-5 flex flex-col gap-8 p-8 rounded-xl" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBaSM_G0r0GfpuihMGcKVcBHVLJv2edKJdCfOXQcsF_DT-GczfpbxLtiEshrruZtuo76egod_d2j0WopUqQQGcsia3HhGlX7EJNPD9LyAjy4ztz7r75kS6vnYnPVuZzV-m1TPuf44J_cJwmy4XA48OMxdOpmUn8uLjcL3P6qwoF892dOehU4Y_zOnev3XCfICDGhoLS598_xwwxjdhuuF31J_9o5uOA5FBXoVDhFOxF4Y3yPE6cO0FiR8oCImAc-hq_5SwQsNnxHEM'); background-size: cover; background-position: center;">
+<div>
+<h1 class="font-display-lg text-display-lg mb-2">Chronos T1 Titanium Edition</h1>
+<div class="flex items-center gap-4 mb-4">
+<div class="flex text-primary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined">star_half</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">(124 Reviews)</span>
+</div>
+<div class="font-headline-md text-display-lg-mobile text-primary tracking-tight">$1,450.00</div>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+                    Designed for the modern professional, the Chronos T1 blends aerospace-grade titanium with a precision mechanical movement. A testament to quiet luxury and technical excellence.
+                </p>
+<!-- Variants -->
+<div class="flex flex-col gap-6">
+<div>
+<span class="font-label-caps text-label-caps block mb-3">FINISH</span>
+<div class="flex gap-3">
+<button class="w-10 h-10 rounded-full bg-on-background border-2 border-primary ring-2 ring-offset-2 ring-primary"></button>
+<button class="w-10 h-10 rounded-full bg-outline-variant border border-transparent"></button>
+<button class="w-10 h-10 rounded-full bg-on-secondary-container border border-transparent"></button>
+</div>
+</div>
+<div>
+<span class="font-label-caps text-label-caps block mb-3">STRAP SIZE</span>
+<div class="flex gap-2">
+<button class="px-6 py-2 border border-outline-variant rounded font-label-caps text-label-caps hover:bg-surface-container transition-colors">S/M</button>
+<button class="px-6 py-2 border-2 border-primary bg-primary text-white rounded font-label-caps text-label-caps">M/L</button>
+<button class="px-6 py-2 border border-outline-variant rounded font-label-caps text-label-caps hover:bg-surface-container transition-colors">XL</button>
+</div>
+</div>
+</div>
+<!-- Actions -->
+<div class="flex flex-col gap-3 pt-4">
+<button class="w-full bg-[#111827] text-white py-4 font-label-caps text-label-caps tracking-widest hover:bg-black transition-all shadow-lg active:scale-[0.98]">ADD TO CART</button>
+<button class="w-full bg-primary-container text-white py-4 font-label-caps text-label-caps tracking-widest hover:opacity-90 transition-all active:scale-[0.98]">BUY NOW</button>
+</div>
+<div class="flex items-center gap-6 py-4 border-y border-outline-variant/30">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-on-surface-variant">local_shipping</span>
+<span class="text-body-sm">Express Delivery</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-on-surface-variant">verified_user</span>
+<span class="text-body-sm">2-Year Warranty</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Tabs Section -->
+<section class="mt-section-gap">
+<div class="flex border-b border-outline-variant/30 gap-12">
+<button class="pb-4 font-label-caps text-label-caps text-primary border-b-2 border-primary transition-all" id="tab-specs" onclick="switchTab('specs')">SPECIFICATIONS</button>
+<button class="pb-4 font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-all" id="tab-reviews" onclick="switchTab('reviews')">REVIEWS</button>
+<button class="pb-4 font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-all" id="tab-shipping" onclick="switchTab('shipping')">SHIPPING &amp; RETURNS</button>
+</div>
+<div class="py-12" id="tab-content">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-x-20 gap-y-6" id="content-specs">
+<div class="flex justify-between border-b border-outline-variant/10 pb-2">
+<span class="text-on-surface-variant">Case Material</span>
+<span class="font-semibold text-primary">Grade 5 Titanium</span>
+</div>
+<div class="flex justify-between border-b border-outline-variant/10 pb-2">
+<span class="text-on-surface-variant">Crystal</span>
+<span class="font-semibold text-primary">Anti-reflective Sapphire</span>
+</div>
+<div class="flex justify-between border-b border-outline-variant/10 pb-2">
+<span class="text-on-surface-variant">Movement</span>
+<span class="font-semibold text-primary">Caliber L888 Automatic</span>
+</div>
+<div class="flex justify-between border-b border-outline-variant/10 pb-2">
+<span class="text-on-surface-variant">Water Resistance</span>
+<span class="font-semibold text-primary">100 Meters / 10 Bar</span>
+</div>
+<div class="flex justify-between border-b border-outline-variant/10 pb-2">
+<span class="text-on-surface-variant">Power Reserve</span>
+<span class="font-semibold text-primary">72 Hours</span>
+</div>
+<div class="flex justify-between border-b border-outline-variant/10 pb-2">
+<span class="text-on-surface-variant">Warranty</span>
+<span class="font-semibold text-primary">24 Months Global</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Related Products -->
+<section class="mt-section-gap">
+<div class="flex justify-between items-end mb-12">
+<h2 class="font-display-lg text-display-lg-mobile md:text-headline-md">Related Essentials</h2>
+<a class="font-label-caps text-label-caps border-b border-primary pb-1" href="#">VIEW ALL</a>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter">
+<!-- Card 1 -->
+<div class="group cursor-pointer">
+<div class="aspect-[3/4] bg-surface-container-low mb-6 overflow-hidden rounded-lg">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" data-alt="A minimalist black leather cardholder positioned on a polished marble surface. The lighting is cold and sophisticated, emphasizing the fine stitching and premium texture. The overall style is high-end luxury retail with a focus on geometric balance and clean lines." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBcJ7HH1ZdE4ccbKEJdBS23pzuH7-ewZWn7Hctbn3iLXab1aI59865YkwHsAZOJbFOyZXgu2D0wyS9NwUCBulWGCoVRAfAVPjxGC8Sj9sBuK7_VlNciRbvZUh_8B42k4d0movM1zsiXsTXkn-0RtZHu62R0jK-Y6lwfmOwFcpyiz7WEdwGMnjhcevXLIg9I9_a4nchQYGgXoWs_gujc3bg_RtxlwjPmkOC9BFR03_5PXhBVDxQ1OLfpM7xA0SK51CrESjog50qf384">
+</div>
+<h3 class="font-body-md text-body-md mb-1">Pinnacle Cardholder</h3>
+<div class="font-headline-sm text-headline-sm">$180.00</div>
+</div>
+<!-- Card 2 -->
+<div class="group cursor-pointer">
+<div class="aspect-[3/4] bg-surface-container-low mb-6 overflow-hidden rounded-lg">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" data-alt="Modern geometric sunglasses with a dark matte frame and gradient lenses. The image features high-contrast studio lighting that creates sharp reflections on the frame. The background is a soft, tonal gray, keeping the focus entirely on the sleek design of the eyewear." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDaouNBI25Yf8DfS77EXvweWLIlZDuBpVkpQvgKvdw_hBQOumMCBH0fGXNlTOzl4AaQMS-fi-CweqHcECit846DnzeefnwNrQ3XWdcju0szYd5Fk73GIUkBZkVp0r40cBPPbI2Bp8eeq9aNio9ox4It_JlLP77UfjNFgOkcIyqidc4oJ23N7lvFROBLLxudR2YyzUowSoomu8L4Ckc4z5-jsnZk0-e0J5HinUk0n-ecTA-NPWetpVcIBYg4W3tgTdRHG-lev0_eh8E">
+</div>
+<h3 class="font-body-md text-body-md mb-1">Aero Shades</h3>
+<div class="font-headline-sm text-headline-sm">$420.00</div>
+</div>
+<!-- Card 3 -->
+<div class="group cursor-pointer">
+<div class="aspect-[3/4] bg-surface-container-low mb-6 overflow-hidden rounded-lg">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" data-alt="A professional-grade matte black microphone for high-end studio recording. The product is illuminated with a subtle cyan backlighting that defines its silhouette against a dark, minimalist tech-inspired background. The aesthetic is clean, precise, and premium." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCa4F3_8ts3cZfQ5jpkMDnf2wU3D-egXKFBdgOhImeTZRmkB-8d0mfgontz8mB0myOdfM2SqyoADwdz8SzRrnB7wQWTX8yCKc7FvTrR8LdZEccHrGMxfUvKhF-6O9V6ognKc5HtjANdnzEDMq1eaSGElEI9tf8lp17HHdkIirjNBcqxBiVdfZTcXBmyeLvZEor1QqHZOdd3GoiCtOhmrkYrcIqkw4-BMszy0O3984RIXlgGal7Fyk1wyirdPaMLJOnp2KLkDYgDJoQ">
+</div>
+<h3 class="font-body-md text-body-md mb-1">Sonic Condenser</h3>
+<div class="font-headline-sm text-headline-sm">$890.00</div>
+</div>
+<!-- Card 4 -->
+<div class="group cursor-pointer">
+<div class="aspect-[3/4] bg-surface-container-low mb-6 overflow-hidden rounded-lg">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" data-alt="A minimalist tech backpack made of structured, waterproof gray fabric with hidden zippers. The shot is from a three-quarter angle in a bright, modern architectural space. Soft natural light creates subtle gradients on the material's surface, conveying a sense of high-end utility." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDTmqAE1c9f3msx1meeBEVpQRTQ1tl5lN6phDCfYpvfFmFGBpXN1awoL96gQcS2kmQiW74brBMJ4F4oGorwOZg6ZED6DCjqj-BHIlaEh4W80IR4DpID_qb5UJ-KAiSrsgee6MsTp_mgEb2a9RElHmznU76tp6b6uI3XnUTVwSL_4FPfnEQF8IYerFRvKqVnMQU_7vCe3nT05DMv9XiWaDTqk1mj6AAhJHkhB4H0i0L4dy3eX9oXXA-mcb1C5t5rlRtUmLXWrpbXrPg">
+</div>
+<h3 class="font-body-md text-body-md mb-1">Nomad Tech Pack</h3>
+<div class="font-headline-sm text-headline-sm">$350.00</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full py-section-gap bg-surface-container-low dark:bg-tertiary-container border-t border-outline-variant">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter px-margin-desktop max-w-container-max mx-auto">
+<div class="flex flex-col gap-6">
+<div class="text-headline-sm font-headline-sm text-primary">LUXE</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">The global destination for discerning taste and uncompromising quality in every detail.</p>
+</div>
+<div class="flex flex-col gap-4">
+<span class="font-label-caps text-label-caps text-primary">EXPLORE</span>
+<a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" href="#">Customer Service</a>
+<a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" href="#">About Us</a>
+<a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" href="#">Shipping</a>
+</div>
+<div class="flex flex-col gap-4">
+<span class="font-label-caps text-label-caps text-primary">LEGAL</span>
+<a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" href="#">Privacy Policy</a>
+<a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" href="#">Terms of Use</a>
+</div>
+<div class="flex flex-col gap-4">
+<span class="font-label-caps text-label-caps text-primary">NEWSLETTER</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Subscribe for exclusive early access.</p>
+<div class="flex border-b border-primary py-2">
+<input class="bg-transparent border-none focus:ring-0 text-sm flex-grow font-body-sm" placeholder="email@address.com" type="email">
+<button class="material-symbols-outlined text-primary">arrow_forward</button>
+</div>
+</div>
+</div>
+<div class="mt-20 pt-8 border-t border-outline-variant/30 text-center font-body-sm text-body-sm text-on-surface-variant/60">
+            © 2024 LUXE Premium Retailers. All rights reserved.
+        </div>
+</footer>
+<script>
+        function switchTab(tab) {
+            const content = document.getElementById('tab-content');
+            const tabs = ['specs', 'reviews', 'shipping'];
+            
+            // Reset styles
+            tabs.forEach(t => {
+                const btn = document.getElementById('tab-' + t);
+                btn.classList.remove('text-primary', 'border-b-2', 'border-primary');
+                btn.classList.add('text-on-surface-variant');
+            });
+
+            // Set active
+            const activeBtn = document.getElementById('tab-' + tab);
+            activeBtn.classList.add('text-primary', 'border-b-2', 'border-primary');
+            activeBtn.classList.remove('text-on-surface-variant');
+
+            // Change content
+            if (tab === 'specs') {
+                content.innerHTML = `
+                    <div id="content-specs" class="grid grid-cols-1 md:grid-cols-2 gap-x-20 gap-y-6">
+                        <div class="flex justify-between border-b border-outline-variant/10 pb-2"><span class="text-on-surface-variant">Case Material</span><span class="font-semibold text-primary">Grade 5 Titanium</span></div>
+                        <div class="flex justify-between border-b border-outline-variant/10 pb-2"><span class="text-on-surface-variant">Crystal</span><span class="font-semibold text-primary">Anti-reflective Sapphire</span></div>
+                        <div class="flex justify-between border-b border-outline-variant/10 pb-2"><span class="text-on-surface-variant">Movement</span><span class="font-semibold text-primary">Caliber L888 Automatic</span></div>
+                        <div class="flex justify-between border-b border-outline-variant/10 pb-2"><span class="text-on-surface-variant">Water Resistance</span><span class="font-semibold text-primary">100 Meters / 10 Bar</span></div>
+                    </div>
+                `;
+            } else if (tab === 'reviews') {
+                content.innerHTML = `
+                    <div class="flex flex-col gap-8">
+                        <div class="border-b border-outline-variant/10 pb-6">
+                            <div class="flex gap-1 text-primary mb-2"><span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span><span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span><span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span><span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span><span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span></div>
+                            <h4 class="font-headline-sm mb-2">Exquisite craftsmanship</h4>
+                            <p class="text-on-surface-variant text-body-sm">Truly a remarkable piece of engineering. The weight is perfect and the titanium finish is stunning in person.</p>
+                        </div>
+                        <div class="border-b border-outline-variant/10 pb-6">
+                            <div class="flex gap-1 text-primary mb-2"><span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span><span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span><span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span><span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span><span class="material-symbols-outlined">star</span></div>
+                            <h4 class="font-headline-sm mb-2">Modern Classic</h4>
+                            <p class="text-on-surface-variant text-body-sm">Love the minimalist dial. Shipping was fast and the packaging was pure luxury.</p>
+                        </div>
+                    </div>
+                `;
+            } else {
+                content.innerHTML = `
+                    <div class="flex flex-col gap-4 text-on-surface-variant">
+                        <p class="font-semibold text-primary">Complimentary Worldwide Shipping</p>
+                        <p>We provide insured express shipping for all orders. Delivery typically takes 3-5 business days for international orders.</p>
+                        <p class="font-semibold text-primary mt-4">Hassle-Free Returns</p>
+                        <p>Items can be returned within 30 days of receipt. Products must be in original, unworn condition with all tags and protective films attached.</p>
+                    </div>
+                `;
+            }
+        }
+    </script>
+
+
+</body></html>

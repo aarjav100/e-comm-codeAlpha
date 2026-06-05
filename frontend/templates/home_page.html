@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LUXE | Haute Couture & Premium Storefront</title>
+  
+  <!-- Fonts: Inter & Plus Jakarta Sans & Georgia serif fallback -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+  
+  <!-- Tabler Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    /* Ethereal Commerce Design System Tokens */
+    :root {
+      --background: #fcf8fa;
+      --surface: #ffffff;
+      --surface-container: #f0edee;
+      --text: #1b1b1d;
+      --muted: #76777d;
+      --border: #e5e2e3;
+      --primary: #000000;
+      
+      --accent-blue: #3b82f6;
+      --accent-green: #10b981;
+      
+      --font-ui: 'Inter', sans-serif;
+      --font-heading: 'Plus Jakarta Sans', system-ui, sans-serif;
+      --font-serif: 'Playfair Display', Georgia, serif;
+    }
+
+    body {
+      background-color: var(--background);
+      color: var(--text);
+      font-family: var(--font-ui);
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: var(--font-heading);
+    }
+
+    /* Sticky Navbar */
+    .premium-navbar {
+      height: 56px;
+      background-color: var(--surface);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 64px;
+    }
+
+    .luxe-logo {
+      font-size: 20px;
+      font-weight: 850;
+      letter-spacing: -0.03em;
+      text-decoration: none;
+      color: var(--primary);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .nav-link {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text);
+      text-decoration: none;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      transition: color 0.15s ease;
+      position: relative;
+      padding: 4px 0;
+    }
+    
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 1.5px;
+      bottom: 0;
+      left: 0;
+      background-color: var(--primary);
+      transition: width 0.2s ease;
+    }
+
+    .nav-link:hover::after {
+      width: 100%;
+    }
+
+    .nav-link.active::after {
+      width: 100%;
+    }
+
+    .nav-search-input {
+      background-color: #f0edee;
+      border: none;
+      border-radius: 4px;
+      padding: 6px 12px;
+      font-size: 12px;
+      outline: none;
+      width: 180px;
+      transition: all 0.2s ease;
+    }
+    .nav-search-input:focus {
+      width: 220px;
+      background-color: var(--surface);
+      box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.05);
+    }
+
+    /* Hero */
+    .premium-hero {
+      height: 480px;
+      background-color: #111827;
+      background-image: radial-gradient(circle at 10% 10%, rgba(255, 255, 255, 0.03) 0%, transparent 60%);
+      position: relative;
+      display: flex;
+      align-items: center;
+      padding: 0 64px;
+      overflow: hidden;
+    }
+
+    .hero-top-label {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: #9ca3af;
+    }
+
+    .hero-heading {
+      font-family: var(--font-serif);
+      font-size: clamp(36px, 5vw, 52px);
+      color: #ffffff;
+      font-weight: 700;
+      line-height: 1.15;
+      margin-top: 8px;
+    }
+
+    .hero-frosted-card {
+      position: absolute;
+      bottom: 40px;
+      left: 64px;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      background: rgba(255, 255, 255, 0.12);
+      border-radius: 12px;
+      padding: 28px 32px;
+      max-width: 400px;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Curated Categories Card */
+    .category-card {
+      aspect-ratio: 1/1;
+      border-radius: 8px;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .category-card-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.1) 60%);
+      transition: opacity 0.3s ease;
+    }
+
+    .category-card:hover .category-card-overlay {
+      opacity: 0.85;
+    }
+
+    /* Season's highlights scroll row */
+    .highlight-scroll-row {
+      display: flex;
+      gap: 20px;
+      overflow-x: auto;
+      scroll-behavior: smooth;
+      padding-bottom: 12px;
+    }
+
+    .highlight-scroll-row::-webkit-scrollbar {
+      height: 4px;
+    }
+    .highlight-scroll-row::-webkit-scrollbar-thumb {
+      background-color: var(--border);
+      border-radius: 4px;
+    }
+
+    .product-highlight-card {
+      width: 260px;
+      flex-shrink: 0;
+      background-color: var(--surface);
+      border-radius: 8px;
+      overflow: hidden;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      transition: all 0.25s ease;
+    }
+
+    .product-highlight-card:hover {
+      transform: translateY(-4px);
+    }
+
+    .highlight-image-area {
+      aspect-ratio: 3/4;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .add-to-bag-hover-btn {
+      position: absolute;
+      bottom: -46px;
+      left: 0;
+      width: 100%;
+      background-color: var(--primary);
+      color: #ffffff;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 12px;
+      transition: bottom 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      text-align: center;
+    }
+
+    .product-highlight-card:hover .add-to-bag-hover-btn {
+      bottom: 0;
+    }
+
+    /* Trending editorial grid */
+    .editorial-grid {
+      display: grid;
+      grid-template-columns: 6fr 4fr;
+      gap: 20px;
+    }
+
+    .editorial-cell {
+      background-color: #111827;
+      background-image: linear-gradient(rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.8) 100%);
+      border-radius: 8px;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 32px;
+      min-height: 280px;
+      cursor: pointer;
+    }
+
+    .editorial-cell-bg-emerald {
+      background: linear-gradient(135deg, #1b4d3e 0%, #0d1f1a 100%);
+    }
+
+    /* Testimonial Section */
+    .testimonial-card {
+      background-color: #f6f3f4;
+      padding: 48px;
+      border-radius: 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 16px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    /* Newsletter CTA */
+    .newsletter-section {
+      background-color: #111827;
+      background-image: radial-gradient(circle at 90% 50%, rgba(255,255,255,0.02) 0%, transparent 50%);
+      border-radius: 16px;
+      padding: 64px;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      overflow: hidden;
+      position: relative;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- STICKY NAVBAR -->
+  <nav class="premium-navbar">
+    <a href="#" class="luxe-logo">LUXE</a>
+    <ul class="nav-links">
+      <li><a href="#" class="nav-link active">Electronics</a></li>
+      <li><a href="#" class="nav-link">Fashion</a></li>
+      <li><a href="#" class="nav-link">Home</a></li>
+      <li><a href="#" class="nav-link">Beauty</a></li>
+      <li><a href="#" class="nav-link">Travel</a></li>
+    </ul>
+    
+    <div class="flex gap-6 items-center">
+      <div class="relative">
+        <input type="text" placeholder="Search curated..." class="nav-search-input">
+      </div>
+      <button class="text-slate-700 hover:text-black transition-colors" title="Favorites">
+        <i class="ti ti-heart text-lg"></i>
+      </button>
+      <button class="text-slate-700 hover:text-black transition-colors" title="Shopping Bag" onclick="window.location.href='shopping_bag.html'">
+        <i class="ti ti-shopping-bag text-lg"></i>
+      </button>
+      <button class="text-slate-700 hover:text-black transition-colors" title="Account">
+        <i class="ti ti-user text-lg"></i>
+      </button>
+    </div>
+  </nav>
+
+  <!-- HERO SECTION -->
+  <header class="premium-hero">
+    <div class="flex flex-col gap-1.5 z-10 max-w-xl">
+      <span class="hero-top-label">COLLECTION 2026</span>
+      <h1 class="hero-heading">Precision in Every Second.</h1>
+    </div>
+
+    <!-- Frosted glass details overlay -->
+    <div class="hero-frosted-card flex flex-col gap-4 text-white z-10">
+      <p class="text-xs font-semibold leading-relaxed opacity-90">
+        Discover the new Chronos Titanium Series. Sculpted from space-grade elements, designed for absolute timing accuracy.
+      </p>
+      <div class="flex gap-3">
+        <button class="bg-white text-black text-[11px] font-bold uppercase tracking-wider py-2.5 px-6 rounded hover:opacity-90 transition-all shadow" onclick="window.location.href='product_detail.html'">
+          DISCOVER NOW
+        </button>
+        <button class="bg-transparent border border-white text-white text-[11px] font-bold uppercase tracking-wider py-2.5 px-6 rounded hover:bg-white/10 transition-all">
+          VIEW GALLERY
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN WRAPPER CONTAINER -->
+  <main class="max-w-6xl mx-auto px-6 py-20 flex flex-col gap-24">
+    
+    <!-- CURATED CATEGORIES -->
+    <section class="flex flex-col gap-6">
+      <div class="flex justify-between items-center border-b border-slate-100 pb-4">
+        <h2 class="text-lg font-bold text-slate-800 tracking-tight">Curated Categories</h2>
+        <a href="shop_premium_collection.html" class="text-xs font-bold text-slate-400 hover:text-black uppercase tracking-widest transition-colors">EXPLORE ALL</a>
+      </div>
+
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <!-- apparel -->
+        <div class="category-card" style="background: linear-gradient(135deg, #c3b091 0%, #8b7765 100%)">
+          <div class="category-card-overlay"></div>
+          <div class="absolute bottom-6 left-6 text-white z-10 flex flex-col gap-0.5">
+            <span class="font-bold text-sm tracking-wide">Apparel</span>
+            <span class="text-[10px] opacity-75 font-semibold">418 items</span>
+          </div>
+        </div>
+
+        <!-- accessories -->
+        <div class="category-card" style="background: linear-gradient(135deg, #708090 0%, #475569 100%)">
+          <div class="category-card-overlay"></div>
+          <div class="absolute bottom-6 left-6 text-white z-10 flex flex-col gap-0.5">
+            <span class="font-bold text-sm tracking-wide">Accessories</span>
+            <span class="text-[10px] opacity-75 font-semibold">284 items</span>
+          </div>
+        </div>
+
+        <!-- electronics -->
+        <div class="category-card" style="background: linear-gradient(135deg, #4b0082 0%, #1e1b4b 100%)">
+          <div class="category-card-overlay"></div>
+          <div class="absolute bottom-6 left-6 text-white z-10 flex flex-col gap-0.5">
+            <span class="font-bold text-sm tracking-wide">Electronics</span>
+            <span class="text-[10px] opacity-75 font-semibold">142 items</span>
+          </div>
+        </div>
+
+        <!-- beauty -->
+        <div class="category-card" style="background: linear-gradient(135deg, #ffb6c1 0%, #db7093 100%)">
+          <div class="category-card-overlay"></div>
+          <div class="absolute bottom-6 left-6 text-white z-10 flex flex-col gap-0.5">
+            <span class="font-bold text-sm tracking-wide">Beauty</span>
+            <span class="text-[10px] opacity-75 font-semibold">96 items</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SEASONS HIGHLIGHTS -->
+    <section class="flex flex-col gap-6">
+      <div class="border-b border-slate-100 pb-4">
+        <h2 class="text-lg font-bold text-slate-800 tracking-tight">Season's Highlights</h2>
+      </div>
+
+      <div class="highlight-scroll-row">
+        <!-- Card 1 -->
+        <div class="product-highlight-card">
+          <div class="highlight-image-area" style="background: linear-gradient(135deg, #eae7e9 0%, #c6c6cd 100%)">
+            <span class="absolute top-4 left-4 bg-black text-white text-[9px] font-bold px-2 py-0.5 rounded-sm uppercase tracking-wider">NEW SEASON</span>
+            <div class="absolute inset-0 flex items-center justify-center">
+              <i class="ti ti-watch text-slate-400 text-3xl"></i>
+            </div>
+            <button class="add-to-bag-hover-btn">ADD TO BAG</button>
+          </div>
+          <div class="py-4 px-1 flex flex-col gap-1">
+            <span class="text-xs font-bold text-slate-800">Chronos T1 Titanium</span>
+            <span class="text-sm font-bold text-slate-900">$1,450.00</span>
+          </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="product-highlight-card">
+          <div class="highlight-image-area" style="background: linear-gradient(135deg, #c3b091 0%, #b3a081 100%)">
+            <span class="absolute top-4 left-4 bg-black text-white text-[9px] font-bold px-2 py-0.5 rounded-sm uppercase tracking-wider">LIMITED</span>
+            <div class="absolute inset-0 flex items-center justify-center">
+              <i class="ti ti-briefcase text-slate-500/20 text-3xl"></i>
+            </div>
+            <button class="add-to-bag-hover-btn">ADD TO BAG</button>
+          </div>
+          <div class="py-4 px-1 flex flex-col gap-1">
+            <span class="text-xs font-bold text-slate-800">Aurelius Leather Tote</span>
+            <span class="text-sm font-bold text-slate-900">$2,450.00</span>
+          </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="product-highlight-card">
+          <div class="highlight-image-area" style="background: linear-gradient(135deg, #a855f7 0%, #1e1b4b 100%)">
+            <span class="absolute top-4 left-4 bg-black text-white text-[9px] font-bold px-2 py-0.5 rounded-sm uppercase tracking-wider">LUXE</span>
+            <div class="absolute inset-0 flex items-center justify-center">
+              <i class="ti ti-device-speaker text-white/20 text-3xl"></i>
+            </div>
+            <button class="add-to-bag-hover-btn">ADD TO BAG</button>
+          </div>
+          <div class="py-4 px-1 flex flex-col gap-1">
+            <span class="text-xs font-bold text-slate-800">SoundStage X Studio</span>
+            <span class="text-sm font-bold text-slate-900">$620.00</span>
+          </div>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="product-highlight-card">
+          <div class="highlight-image-area" style="background: linear-gradient(135deg, #eae7e9 0%, #c6c6cd 100%)">
+            <span class="absolute top-4 left-4 bg-black text-white text-[9px] font-bold px-2 py-0.5 rounded-sm uppercase tracking-wider">NEW SEASON</span>
+            <div class="absolute inset-0 flex items-center justify-center">
+              <i class="ti ti-shirt text-slate-400 text-3xl"></i>
+            </div>
+            <button class="add-to-bag-hover-btn">ADD TO BAG</button>
+          </div>
+          <div class="py-4 px-1 flex flex-col gap-1">
+            <span class="text-xs font-bold text-slate-800">Fine Knit Sand Turtleneck</span>
+            <span class="text-sm font-bold text-slate-900">$420.00</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TRENDING MOMENTS -->
+    <section class="flex flex-col gap-6">
+      <div class="border-b border-slate-100 pb-4">
+        <h2 class="text-lg font-bold text-slate-800 tracking-tight">Trending Moments</h2>
+      </div>
+
+      <div class="editorial-grid">
+        <!-- Large Left Cell -->
+        <div class="editorial-cell editorial-cell-bg-emerald gap-2">
+          <span class="bg-emerald-500 text-white text-[9px] font-bold px-2 py-0.5 rounded-sm uppercase tracking-wider w-fit">THE RESORT EDIT</span>
+          <h3 class="font-serif text-2xl text-white font-bold max-w-xs leading-tight">Effortless Luxury for Endless Sunsets.</h3>
+          <span class="text-xs text-slate-350 font-medium">Explore standard apparel collections tailored for warm resort getaways.</span>
+        </div>
+
+        <!-- Two Stacked Right Cells -->
+        <div class="flex flex-col gap-4">
+          <div class="editorial-cell" style="background-image: linear-gradient(135deg, #374151 0%, #111827 100%)">
+            <h4 class="text-white font-bold text-base">Architectural Silhouettes</h4>
+            <span class="text-xs text-slate-400 font-semibold mt-1">Winter structured styles.</span>
+          </div>
+
+          <div class="editorial-cell" style="background-image: linear-gradient(135deg, #c3b091 0%, #475569 100%)">
+            <h4 class="text-white font-bold text-base">Sartorial Precision</h4>
+            <span class="text-xs text-slate-350 font-semibold mt-1">Bespoke crafted accessories.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- BRAND LOGOS BAR -->
+    <section class="flex justify-center items-center gap-12 py-10 border-y border-slate-100 text-slate-400 text-xs font-extrabold uppercase tracking-widest flex-wrap">
+      <span>ARMANI</span>
+      <span class="w-1.5 h-1.5 rounded-full bg-slate-200"></span>
+      <span>GUCCI</span>
+      <span class="w-1.5 h-1.5 rounded-full bg-slate-200"></span>
+      <span>PRADA</span>
+      <span class="w-1.5 h-1.5 rounded-full bg-slate-200"></span>
+      <span>HERMÈS</span>
+      <span class="w-1.5 h-1.5 rounded-full bg-slate-200"></span>
+      <span>CARTIER</span>
+    </section>
+
+    <!-- TESTIMONIAL SECTION -->
+    <section class="testimonial-card">
+      <i class="ti ti-quote text-slate-300 text-4xl leading-none mb-2"></i>
+      <blockquote class="text-base md:text-lg italic font-serif text-slate-800 leading-relaxed">
+        "LUXE's engineering is a masterclass in quiet luxury. The Chronos watch is literally perfect—absolute mechanical precision coupled with sophisticated aesthetics."
+      </blockquote>
+      <div class="flex flex-col items-center gap-1 mt-2">
+        <span class="text-xs font-bold text-slate-900 uppercase tracking-widest">Charles Vane</span>
+        <span class="text-[9px] bg-slate-200 text-slate-600 px-2 py-0.5 rounded uppercase tracking-wider font-extrabold">VERIFIED COLLECTOR</span>
+      </div>
+      
+      <!-- dot pagination -->
+      <div class="flex gap-2 mt-4">
+        <span class="w-1.5 h-1.5 rounded-full bg-black cursor-pointer"></span>
+        <span class="w-1.5 h-1.5 rounded-full bg-slate-300 cursor-pointer"></span>
+      </div>
+    </section>
+
+    <!-- NEWSLETTER CTA -->
+    <section class="newsletter-section">
+      <div class="flex flex-col gap-3 z-10 max-w-md">
+        <h2 class="text-2xl font-bold tracking-tight text-white font-serif">Join the Elite.</h2>
+        <p class="text-xs leading-relaxed text-slate-400 font-semibold">
+          Register with LUXE to receive VIP collection invitations, complimentary shipping upgrades, and exclusive bespoke updates.
+        </p>
+        <div class="flex gap-2 max-w-sm mt-2">
+          <input type="email" placeholder="Email Address" class="bg-slate-800 border-none rounded py-3 pl-4 pr-12 text-xs font-semibold text-white placeholder-slate-500 flex-1 outline-none focus:ring-1 focus:ring-white">
+          <button class="bg-white text-black font-bold uppercase tracking-wider text-[10px] px-6 rounded hover:opacity-90 transition-all">SUBSCRIBE</button>
+        </div>
+      </div>
+
+      <div class="hidden md:flex text-white/5 text-9xl absolute right-16 top-1/2 -translate-y-1/2 select-none pointer-events-none">
+        <i class="ti ti-mail"></i>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="w-full py-16 bg-surface border-t border-slate-100">
+    <div class="max-w-6xl mx-auto grid grid-cols-12 gap-8 px-6 pb-16 border-b border-slate-100">
+      <div class="col-span-12 md:col-span-4 flex flex-col gap-4">
+        <span class="text-base font-extrabold tracking-tight uppercase">LUXE</span>
+        <p class="text-xs font-semibold text-slate-400 leading-relaxed max-w-xs">Defining the pinnacle of digital luxury through precision design and uncompromising quality.</p>
+      </div>
+
+      <div class="col-span-6 md:col-span-2">
+        <h4 class="text-[11px] font-bold text-slate-900 uppercase tracking-widest mb-4">Shop Collections</h4>
+        <ul class="flex flex-col gap-3 list-none p-0 m-0">
+          <li><a href="#" class="text-xs font-semibold text-slate-400 hover:text-black transition-colors">Electronics</a></li>
+          <li><a href="#" class="text-xs font-semibold text-slate-400 hover:text-black transition-colors">Fashion Apparel</a></li>
+          <li><a href="#" class="text-xs font-semibold text-slate-400 hover:text-black transition-colors">Luxury Bags</a></li>
+        </ul>
+      </div>
+
+      <div class="col-span-6 md:col-span-2">
+        <h4 class="text-[11px] font-bold text-slate-900 uppercase tracking-widest mb-4">Support</h4>
+        <ul class="flex flex-col gap-3 list-none p-0 m-0">
+          <li><a href="#" class="text-xs font-semibold text-slate-400 hover:text-black transition-colors">Concierge Desk</a></li>
+          <li><a href="#" class="text-xs font-semibold text-slate-400 hover:text-black transition-colors">Bespoke Consults</a></li>
+          <li><a href="#" class="text-xs font-semibold text-slate-400 hover:text-black transition-colors">Shipping Returns</a></li>
+        </ul>
+      </div>
+
+      <div class="col-span-12 md:col-span-4 flex flex-col gap-4">
+        <h4 class="text-[11px] font-bold text-slate-900 uppercase tracking-widest">Connect</h4>
+        <div class="flex gap-4 text-slate-400 text-lg">
+          <a href="#" class="hover:text-black transition-colors"><i class="ti ti-brand-twitter"></i></a>
+          <a href="#" class="hover:text-black transition-colors"><i class="ti ti-brand-instagram"></i></a>
+          <a href="#" class="hover:text-black transition-colors"><i class="ti ti-brand-facebook"></i></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="max-w-6xl mx-auto pt-8 px-6 flex justify-between items-center text-[10px] font-bold text-slate-450 uppercase tracking-wider">
+      <span>© 2026 LUXE INTERNATIONAL. ALL RIGHTS RESERVED.</span>
+      <div class="flex gap-6">
+        <a href="#" class="hover:underline">Privacy Policy</a>
+        <a href="#" class="hover:underline">Terms of Use</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

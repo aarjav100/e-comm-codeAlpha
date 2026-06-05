@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LUXE | Secure Payment & Billing Checkout</title>
+  
+  <!-- Fonts: Inter & Plus Jakarta Sans (Metropolis alternative) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Tabler Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    /* Ethereal Commerce Design System Tokens */
+    :root {
+      --background: #fcf8fa;
+      --surface: #ffffff;
+      --surface-container: #f0edee;
+      --text: #1b1b1d;
+      --muted: #76777d;
+      --border: #e5e2e3;
+      --primary: #000000;
+      
+      --accent-blue: #3b82f6;
+      --accent-green: #10b981;
+      
+      --font-ui: 'Inter', sans-serif;
+      --font-heading: 'Plus Jakarta Sans', 'Metropolis', system-ui, sans-serif;
+    }
+
+    body {
+      background-color: var(--background);
+      color: var(--text);
+      font-family: var(--font-ui);
+      margin: 0;
+      padding: 0;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: var(--font-heading);
+    }
+
+    /* Navbar */
+    .premium-navbar {
+      height: 56px;
+      background-color: var(--surface);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 64px;
+    }
+
+    .luxe-logo {
+      font-size: 20px;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      text-decoration: none;
+      color: var(--primary);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .nav-link {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text);
+      text-decoration: none;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      transition: color 0.15s ease;
+    }
+
+    .nav-link:hover {
+      color: var(--muted);
+    }
+
+    /* Stepper */
+    .stepper-container {
+      max-width: 600px;
+      margin: 40px auto 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: relative;
+    }
+
+    .stepper-line {
+      position: absolute;
+      top: 16px;
+      left: 0;
+      height: 2px;
+      background-color: var(--border);
+      width: 100%;
+      z-index: 1;
+    }
+
+    .stepper-line-filled {
+      position: absolute;
+      top: 16px;
+      left: 0;
+      height: 2px;
+      background-color: var(--primary);
+      width: 66.6%;
+      z-index: 2;
+    }
+
+    .step {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      z-index: 3;
+      background-color: var(--background);
+      padding: 0 16px;
+    }
+
+    .step-circle {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      border: 2px solid var(--border);
+      background-color: var(--surface);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--muted);
+      transition: all 0.25s ease;
+    }
+
+    .step.completed .step-circle {
+      background-color: var(--surface);
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+
+    .step.active .step-circle {
+      background-color: var(--primary);
+      border-color: var(--primary);
+      color: #ffffff;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .step-label {
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-top: 8px;
+      color: var(--muted);
+    }
+
+    .step.active .step-label {
+      color: var(--primary);
+      font-weight: 700;
+    }
+
+    /* Accordion Payment Panels */
+    .payment-accordion {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background-color: var(--surface);
+      margin-bottom: 10px;
+      overflow: hidden;
+      transition: border 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .payment-accordion.active {
+      border: 1.5px solid #111;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.02);
+    }
+
+    .accordion-header {
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+    }
+
+    .accordion-body {
+      padding: 0 20px 24px;
+      display: none;
+    }
+
+    .payment-accordion.active .accordion-body {
+      display: block;
+    }
+
+    /* Inputs */
+    .premium-input {
+      width: 100%;
+      background-color: #f3f4f6;
+      border: 1px solid transparent;
+      border-radius: 4px;
+      padding: 12px 14px;
+      font-size: 14px;
+      outline: none;
+      transition: all 0.2s ease;
+    }
+
+    .premium-input::placeholder {
+      color: #9ca3af;
+    }
+
+    .premium-input:focus {
+      background-color: var(--surface);
+      border-color: var(--accent-blue);
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+    }
+
+    /* Card Brands icons opacity toggler */
+    .card-brand-icon {
+      opacity: 0.25;
+      transition: opacity 0.2s ease;
+      font-size: 20px;
+    }
+    .card-brand-icon.active {
+      opacity: 1;
+      color: var(--primary);
+    }
+
+    /* Sidebar summary */
+    .summary-card {
+      background-color: var(--surface);
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      padding: 24px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+    }
+
+    .thumb-placeholder {
+      width: 80px;
+      height: 80px;
+      border-radius: 6px;
+      background: linear-gradient(135deg, #eae7e9 0%, #dcd9db 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .complete-btn {
+      width: 100%;
+      background-color: var(--primary);
+      color: #ffffff;
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      padding: 16px;
+      border-radius: 6px;
+      transition: all 0.15s ease;
+    }
+
+    .complete-btn:hover {
+      background-color: #222222;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Security Bar */
+    .security-bar {
+      display: flex;
+      justify-content: center;
+      gap: 32px;
+      margin: 48px 0 24px;
+      opacity: 0.7;
+    }
+
+    .security-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+    }
+
+    /* Footer Grid */
+    .premium-footer {
+      background-color: var(--surface);
+      border-top: 1px solid var(--border);
+      padding: 64px 32px 32px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="premium-navbar">
+    <a href="#" class="luxe-logo">LUXE</a>
+    <ul class="nav-links">
+      <li><a href="#" class="nav-link">Collections</a></li>
+      <li><a href="#" class="nav-link">New Arrivals</a></li>
+      <li><a href="#" class="nav-link">Bespoke</a></li>
+      <li><a href="#" class="nav-link">Story</a></li>
+    </ul>
+    <div class="flex gap-6 items-center">
+      <button class="relative p-1 text-slate-700 hover:text-black transition-colors" title="Shopping Bag">
+        <i class="ti ti-shopping-bag text-lg"></i>
+      </button>
+      <button class="p-1 text-slate-700 hover:text-black transition-colors" title="Account">
+        <i class="ti ti-user text-lg"></i>
+      </button>
+    </div>
+  </nav>
+
+  <!-- PROGRESS STEPPER -->
+  <div class="stepper-container">
+    <div class="stepper-line"></div>
+    <div class="stepper-line-filled"></div>
+    
+    <div class="step completed">
+      <div class="step-circle">
+        <i class="ti ti-check text-sm"></i>
+      </div>
+      <span class="step-label">Cart</span>
+    </div>
+    
+    <div class="step completed">
+      <div class="step-circle">
+        <i class="ti ti-check text-sm"></i>
+      </div>
+      <span class="step-label">Shipping</span>
+    </div>
+    
+    <div class="step active">
+      <div class="step-circle">3</div>
+      <span class="step-label">Payment</span>
+    </div>
+  </div>
+
+  <!-- MAIN COLUMN LAYOUT -->
+  <main class="max-w-6xl mx-auto px-6 pb-24 grid grid-cols-12 gap-10">
+    
+    <!-- LEFT COLUMN - Payment Method -->
+    <div class="col-span-12 lg:col-span-7 flex flex-col gap-6">
+      <h1 class="text-2xl font-bold tracking-tight text-slate-900 mb-2">Payment Method</h1>
+      
+      <div class="flex flex-col">
+        <!-- Panel 1: Card Details (Active) -->
+        <div class="payment-accordion active" id="panel-card">
+          <div class="accordion-header" onclick="selectPanel('panel-card')">
+            <div class="flex items-center gap-4">
+              <input type="radio" name="payment_gate" id="radio-card" checked class="w-4 h-4 accent-black cursor-pointer">
+              <label for="radio-card" class="text-sm font-bold text-slate-800 cursor-pointer">Credit or Debit Card</label>
+            </div>
+            <div class="flex gap-2">
+              <i class="ti ti-brand-visa card-brand-icon" id="icon-visa"></i>
+              <i class="ti ti-brand-mastercard card-brand-icon" id="icon-mastercard"></i>
+              <i class="ti ti-credit-card card-brand-icon" id="icon-generic"></i>
+            </div>
+          </div>
+          
+          <div class="accordion-body">
+            <div class="grid grid-cols-1 gap-4 pt-4 border-t border-slate-100">
+              <div class="flex flex-col gap-1.5">
+                <label class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Cardholder Name</label>
+                <input type="text" placeholder="John Doe" class="premium-input uppercase tracking-wider">
+              </div>
+              <div class="flex flex-col gap-1.5">
+                <label class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Card Number</label>
+                <div class="relative">
+                  <input type="text" id="card-number-input" placeholder="0000 0000 0000 0000" class="premium-input pr-10">
+                  <i class="ti ti-lock absolute right-4 top-1/2 -translate-y-1/2 text-slate-400"></i>
+                </div>
+              </div>
+              
+              <div class="grid grid-cols-2 gap-4">
+                <div class="flex flex-col gap-1.5">
+                  <label class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Expiry Date</label>
+                  <input type="text" placeholder="MM / YY" class="premium-input text-center">
+                </div>
+                <div class="flex flex-col gap-1.5">
+                  <label class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">CVC</label>
+                  <input type="password" placeholder="•••" maxlength="4" class="premium-input text-center">
+                </div>
+              </div>
+
+              <div class="flex items-center gap-3 pt-2">
+                <input type="checkbox" id="save-card-chk" checked class="w-4 h-4 accent-black rounded border-slate-300">
+                <label for="save-card-chk" class="text-xs text-slate-500 font-semibold cursor-pointer">Save this card for future premium checkouts</label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Panel 2: Digital Wallets -->
+        <div class="payment-accordion" id="panel-wallets">
+          <div class="accordion-header" onclick="selectPanel('panel-wallets')">
+            <div class="flex items-center gap-4">
+              <input type="radio" name="payment_gate" id="radio-wallets" class="w-4 h-4 accent-black cursor-pointer">
+              <label for="radio-wallets" class="text-sm font-bold text-slate-800 cursor-pointer">Digital Wallets</label>
+            </div>
+            <div class="flex gap-3 text-slate-400 text-lg">
+              <i class="ti ti-brand-apple"></i>
+              <i class="ti ti-brand-google-play"></i>
+            </div>
+          </div>
+          <div class="accordion-body border-t border-slate-100 pt-4 text-xs font-semibold text-slate-450 leading-relaxed">
+            Select this option to complete your purchase using Apple Pay or Google Pay.
+          </div>
+        </div>
+
+        <!-- Panel 3: Bank Transfer -->
+        <div class="payment-accordion" id="panel-transfer">
+          <div class="accordion-header" onclick="selectPanel('panel-transfer')">
+            <div class="flex items-center gap-4">
+              <input type="radio" name="payment_gate" id="radio-transfer" class="w-4 h-4 accent-black cursor-pointer">
+              <label for="radio-transfer" class="text-sm font-bold text-slate-800 cursor-pointer">Bank Transfer</label>
+            </div>
+            <div class="text-slate-400 text-lg">
+              <i class="ti ti-building-bank"></i>
+            </div>
+          </div>
+          <div class="accordion-body border-t border-slate-100 pt-4 text-xs font-semibold text-slate-450 leading-relaxed">
+            Settle your checkout balance directly via electronic wire transfer. Instructions will be provided instantly.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT COLUMN - Order Summary card -->
+    <div class="col-span-12 lg:col-span-5">
+      <div class="summary-card flex flex-col gap-6">
+        <h2 class="text-sm font-bold uppercase tracking-wider text-slate-800 border-b border-slate-100 pb-4">Order Summary</h2>
+        
+        <!-- Product Rows -->
+        <div class="flex flex-col gap-4">
+          <!-- Item 1 -->
+          <div class="flex gap-4 items-center">
+            <div class="thumb-placeholder relative overflow-hidden">
+              <span class="absolute inset-0 bg-gradient-to-br from-indigo-500 to-purple-500 opacity-20"></span>
+              <i class="ti ti-watch text-slate-400 text-2xl z-10"></i>
+            </div>
+            <div class="flex flex-col truncate flex-1">
+              <span class="text-xs font-bold truncate text-slate-800">Aurelius Leather Tote</span>
+              <span class="text-[11px] text-slate-400 font-semibold mt-0.5">Classic Black / Standard</span>
+            </div>
+            <span class="text-xs font-bold text-slate-900">$2,450.00</span>
+          </div>
+
+          <!-- Item 2 -->
+          <div class="flex gap-4 items-center">
+            <div class="thumb-placeholder relative overflow-hidden">
+              <span class="absolute inset-0 bg-gradient-to-br from-amber-400 to-orange-500 opacity-20"></span>
+              <i class="ti ti-watch text-slate-400 text-2xl z-10"></i>
+            </div>
+            <div class="flex flex-col truncate flex-1">
+              <span class="text-xs font-bold truncate text-slate-800">Vertex Titanium Chrono</span>
+              <span class="text-[11px] text-slate-400 font-semibold mt-0.5">Titanium Edition / 42mm</span>
+            </div>
+            <span class="text-xs font-bold text-slate-900">$8,900.00</span>
+          </div>
+        </div>
+
+        <!-- Invoice sheet -->
+        <div class="flex flex-col gap-2.5 border-t border-slate-100 pt-5 text-xs font-semibold text-slate-450">
+          <div class="flex justify-between">
+            <span>Subtotal</span>
+            <span class="text-slate-800">$11,350.00</span>
+          </div>
+          <div class="flex justify-between items-center">
+            <span>Shipping</span>
+            <span class="text-emerald-500 font-bold uppercase tracking-wider text-[10px]">Complimentary</span>
+          </div>
+          <div class="flex justify-between">
+            <span>Estimated Taxes</span>
+            <span class="text-slate-800">$908.00</span>
+          </div>
+        </div>
+
+        <div class="flex justify-between items-center border-t border-slate-100 pt-4 text-sm font-extrabold text-slate-900">
+          <span>Total Balance Due</span>
+          <span class="text-base">$12,258.00</span>
+        </div>
+
+        <button class="complete-btn mt-2">
+          COMPLETE PURCHASE
+        </button>
+
+        <p class="text-[10px] text-slate-400 text-center leading-relaxed">
+          BY CLICKING THE BUTTON ABOVE, YOU AGREE TO OUR TERMS OF SERVICE AND PRIVACY POLICY.
+        </p>
+      </div>
+    </div>
+  </main>
+
+  <!-- SECURITY BAR -->
+  <div class="security-bar">
+    <div class="security-item">
+      <i class="ti ti-shield-check text-slate-400"></i>
+      <span>Secure SSL Encryption</span>
+    </div>
+    <div class="security-item">
+      <i class="ti ti-credit-card text-slate-400"></i>
+      <span>PCI DSS Compliant</span>
+    </div>
+    <div class="security-item">
+      <i class="ti ti-lock text-slate-400"></i>
+      <span>Data Protection Certified</span>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="premium-footer">
+    <div class="max-w-6xl mx-auto grid grid-cols-12 gap-8 border-b border-slate-100 pb-16">
+      <div class="col-span-12 md:col-span-4 flex flex-col gap-4">
+        <span class="text-base font-extrabold tracking-tight uppercase">LUXE</span>
+        <p class="text-xs font-semibold text-slate-400 leading-relaxed max-w-xs">Defining the pinnacle of digital luxury through precision design and uncompromising quality.</p>
+      </div>
+      
+      <div class="col-span-12 md:col-span-2">
+        <h4 class="text-[11px] font-bold text-slate-900 uppercase tracking-widest mb-4">Concierge</h4>
+        <ul class="flex flex-col gap-3 list-none p-0 m-0">
+          <li><a href="#" class="text-xs font-semibold text-slate-400 hover:text-black transition-colors">Contact Us</a></li>
+          <li><a href="#" class="text-xs font-semibold text-slate-400 hover:text-black transition-colors">Shipping & Returns</a></li>
+          <li><a href="#" class="text-xs font-semibold text-slate-400 hover:text-black transition-colors">Bespoke Orders</a></li>
+        </ul>
+      </div>
+
+      <div class="col-span-12 md:col-span-2">
+        <h4 class="text-[11px] font-bold text-slate-900 uppercase tracking-widest mb-4">Legal</h4>
+        <ul class="flex flex-col gap-3 list-none p-0 m-0">
+          <li><a href="#" class="text-xs font-semibold text-slate-400 hover:text-black transition-colors">Privacy Policy</a></li>
+          <li><a href="#" class="text-xs font-semibold text-slate-400 hover:text-black transition-colors">Terms of Service</a></li>
+          <li><a href="#" class="text-xs font-semibold text-slate-400 hover:text-black transition-colors">Cookie settings</a></li>
+        </ul>
+      </div>
+
+      <div class="col-span-12 md:col-span-4 flex flex-col gap-4">
+        <h4 class="text-[11px] font-bold text-slate-900 uppercase tracking-widest">Journal</h4>
+        <p class="text-xs font-semibold text-slate-400 max-w-xs">Subscribe to receive exclusive collection updates and event notices.</p>
+        
+        <div class="relative max-w-xs">
+          <input type="email" placeholder="Email Address" class="w-full bg-[#f3f4f6] focus:bg-white focus:ring-1 focus:ring-black border-none py-3 pl-4 pr-12 rounded text-xs font-semibold outline-none transition-all">
+          <button class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-800 hover:text-black"><i class="ti ti-arrow-right"></i></button>
+        </div>
+      </div>
+    </div>
+    
+    <div class="max-w-6xl mx-auto pt-8 flex justify-between items-center text-[10px] font-bold text-slate-450 uppercase tracking-wider">
+      <span>© 2026 LUXE INTERNATIONAL. ALL RIGHTS RESERVED.</span>
+      <div class="flex gap-4">
+        <a href="#" class="text-slate-450 hover:text-black"><i class="ti ti-brand-twitter"></i></a>
+        <a href="#" class="text-slate-450 hover:text-black"><i class="ti ti-brand-instagram"></i></a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Selected payment accordion controller
+    function selectPanel(panelId) {
+      const panels = document.querySelectorAll('.payment-accordion');
+      panels.forEach(p => p.classList.remove('active'));
+
+      const activePanel = document.getElementById(panelId);
+      activePanel.classList.add('active');
+      
+      const radio = activePanel.querySelector('input[type="radio"]');
+      if (radio) radio.checked = true;
+    }
+
+    // Card Number Detector
+    const cardInput = document.getElementById('card-number-input');
+    const iconVisa = document.getElementById('icon-visa');
+    const iconMastercard = document.getElementById('icon-mastercard');
+    const iconGeneric = document.getElementById('icon-generic');
+
+    cardInput.addEventListener('input', (e) => {
+      let num = e.target.value.replace(/\s+/g, '').replace(/[^0-9]/gi, '');
+      
+      // Auto spaces formatting
+      let formatted = '';
+      for (let i = 0; i < num.length; i++) {
+        if (i > 0 && i % 4 === 0) formatted += ' ';
+        formatted += num[i];
+      }
+      e.target.value = formatted;
+
+      // Brand Detection
+      iconVisa.classList.remove('active');
+      iconMastercard.classList.remove('active');
+      iconGeneric.classList.add('active');
+
+      if (num.startsWith('4')) {
+        iconVisa.classList.add('active');
+        iconGeneric.classList.remove('active');
+      } else if (num.startsWith('5')) {
+        iconMastercard.classList.add('active');
+        iconGeneric.classList.remove('active');
+      }
+    });
+  </script>
+</body>
+</html>
